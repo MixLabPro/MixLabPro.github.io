@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="在复杂的AI产品上感受到什么样的感觉，不仅仅是使用单个机器学习算法从A映射到B，而且学习算法是更大更复杂的项目或产品的一部分。 我想本周开始讨论buildingcomplex AI产品的两个案例研究。 首先，建立一个智能扬声器，以便您可以开始了解我是否有一天希望在您自己的公司中使用复杂的AI产品。 让我们开始吧。">
+<meta name="keywords" content="ML,DL,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="week3-2 Case study: Smart speaker 案例研究：智能扬声器">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week3-02-case-study-smart-speaker/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="在复杂的AI产品上感受到什么样的感觉，不仅仅是使用单个机器学习算法从A映射到B，而且学习算法是更大更复杂的项目或产品的一部分。 我想本周开始讨论buildingcomplex AI产品的两个案例研究。 首先，建立一个智能扬声器，以便您可以开始了解我是否有一天希望在您自己的公司中使用复杂的AI产品。 让我们开始吧。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-be74623d47a744ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-7ddc936b0a697408.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-4533e9f71df90901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-cc7c1bb0397c2b76.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-04-04T14:53:09.477Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="week3-2 Case study: Smart speaker 案例研究：智能扬声器">
+<meta name="twitter:description" content="在复杂的AI产品上感受到什么样的感觉，不仅仅是使用单个机器学习算法从A映射到B，而且学习算法是更大更复杂的项目或产品的一部分。 我想本周开始讨论buildingcomplex AI产品的两个案例研究。 首先，建立一个智能扬声器，以便您可以开始了解我是否有一天希望在您自己的公司中使用复杂的AI产品。 让我们开始吧。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/910914-be74623d47a744ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week3-02-case-study-smart-speaker/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>week3-2 Case study: Smart speaker 案例研究：智能扬声器 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week3-02-case-study-smart-speaker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">week3-2 Case study: Smart speaker 案例研究：智能扬声器
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-04 11:27:11" itemprop="dateCreated datePublished" datetime="2019-03-04T11:27:11+08:00">2019-03-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-04 22:53:09" itemprop="dateModified" datetime="2019-04-04T22:53:09+08:00">2019-04-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI-For-Everyone/" itemprop="url" rel="index"><span itemprop="name">AI For Everyone</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/04/week3-02-case-study-smart-speaker/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/04/week3-02-case-study-smart-speaker/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/910914-be74623d47a744ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3-2-0.png"></p>
+<p>在复杂的AI产品上感受到什么样的感觉，不仅仅是使用单个机器学习算法从A映射到B，而且学习算法是更大更复杂的项目或产品的一部分。</p>
+<p>我想本周开始讨论buildingcomplex AI产品的两个案例研究。</p>
+<p>首先，建立一个智能扬声器，以便您可以开始了解我是否有一天希望在您自己的公司中使用复杂的AI产品。</p>
+<p>让我们开始吧。</p>
+<a id="more"></a>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-7ddc936b0a697408.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3-2-1.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-4533e9f71df90901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3-2-2.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-cc7c1bb0397c2b76.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3-2-3.png"></p>
+<p>像这样的智能扬声器和语音激活设备正在风靡世界，如果你家里还没有它，也许你有一天会买一个。</p>
+<p>我想通过案例研究来了解如何编写AI软件以让智能扬声器响应口头命令，例如“嘿设备，告诉我一个笑话。“</p>
+<p>对于这个例子，使用Alexa，或者Okay Google，或者Hey Siri，或者Hello Baidu作为唤醒词或触发词，更多的设备不可知，我只是将”嘿设备“作为触发词或唤醒工作。</p>
+<p>醒来说一个聪明的演讲者，让我们说你想告诉你一个笑话。</p>
+<p>那么你如何建立一个人工智能软件来理解命令并在其上执行呢？</p>
+<p>这些是处理命令所需的步骤。</p>
+<p>可以有四个步骤。</p>
+<p>第一步是触发词或唤醒词检测。</p>
+<p>扬声器使用机器学习算法输入音频和输出。</p>
+<p>他们只是唤醒唤醒词或触发词“嘿设备”，所以o加0或1，一旦听到触发词或唤醒词，一旦听到“嘿设备”，它就必须执行第二步，即语音承认。</p>
+<p>所以该软件必须做的是采取“嘿设备”之后的音频并将其映射到“告诉我一个笑话。“</p>
+<p>这也是通过机器学习完成的。</p>
+<p>然而，这里的第一步使用A到B映射来告诉它它听到了触发词。</p>
+<p>这使用了一个不同的A到B映射来将音频映射到你刚才所说的文本转换，在这种情况下是四个字告诉我一个笑话。</p>
+<p>现在，算法必须通过说出这四个单词来弄清楚你真正想要的东西，所以第三步是意图识别。</p>
+<p>这意味着你要说什么，并弄清楚你实际想做什么。</p>
+<p>因此，今天的智能扬声器有一组有限的命令，例如他们可以说出一个笑话，或者他们可以告诉时间。</p>
+<p>所以你可以说“嘿设备是时候了。“</p>
+<p>他们可以播放音乐。</p>
+<p>他们有时可以帮助您拨打电话。</p>
+<p>他们可以告诉你天气是什么，“嘿设备，明天天气怎么样？”所以意图识别的作用是采用四个词，即语音识别的输出，并使用另一个AI软件，另一个A到B的映射输入这四个单词并输出这五个或其他意图中的哪一个。</p>
+<p>因此，在机器学习算法的这种实现中，输入A是文本转录本告知的笑话，输出B是用户刚刚说出的这五种命令中的哪一种。</p>
+<p>当然，你的智能扬声器可能更容易理解甚至更多的命令，在这种情况下，B可以是智能扬声器知道如何执行的五个或20个或100个命令中的任何一个。</p>
+<p>无论你如何要求智能发言人开玩笑，希望意图识别组件能够正确识别你的意图。</p>
+<p>所以你也可以说不只是“嘿设备，告诉我一个笑话”，但也要“嘿设备，你知道任何好话”或“嘿设备，告诉我一些有趣的东西。“</p>
+<p>事实证明，有很多方法可以让一个聪明的演讲者开个玩笑，一个精心设计的意图识别系统应该能够识别出大部分内容。</p>
+<p>最后，现在你的智能音箱已经发现你真的，真的想听一个笑话，最后一步是会有一个软件工程师写了一段代码来随机选择一个笑话并通过扬声器播放笑话。</p>
+<p>换句话说，他们会开玩笑。</p>
+<p>仅仅是为了记录，我最喜欢的笑话是为什么我在AI中有令人震惊的结果，因为人工智能是新的电力，令人震惊的电力，得到它？</p>
+<p>希望你喜欢这个。</p>
+<p>所以，好吧，并且认真地，你可以想到这四个步骤的算法的四个步骤，其中第一步是触发词检测，第二步是语音识别，然后是意图识别，然后最后，执行什么是命令用户要求智能扬声器执行。</p>
+<p>因此，在这个或多个步骤的AI系统中有四个步骤的过程，这有时被称为AI管道，其中有多个AI组件。</p>
+<p>是的，可能的机器学习组件一步一步地处理数据，并且在公司中有四个不同的团队，每个团队关注这个AI管道的一个组件，这并不罕见。</p>
+<p>这就是我们经常在大公司内组织项目的方式。</p>
+<p>现在让我们看一个更复杂的例子。</p>
+<p>你们中的一个发出更复杂的命令，比如“嘿设备，设置计时器10分钟。“</p>
+<p>这些是处理命令所需的步骤。</p>
+<p>第一步，与之前相同的是触发字检测。</p>
+<p>所以输入一个音频，当有人说触发器嘿设备时让我知道。</p>
+<p>然后语音识别，你输入其余的音频和转录其余的声音，其余的音频，设置计时器10分钟，现在，意图识别hasto输入文本和输出你的意图是你想要设置计时器。</p>
+<p>设置计时器10分钟与之前的例子之间的一个区别是告诉我一个笑话，你需要知道实际设置计时器的时间。</p>
+<p>所以在执行步骤中，你实际上需要做两件事。</p>
+<p>一个是提取持续时间。</p>
+<p>这意味着，查看文本，设置计时器10分钟并拉出短语，告诉你实际设置计时器的时间长度，因此如果用户说“嘿设备，让我知道什么时候10分钟”，那么这个提取持续时间步骤必须再次拉出，10分钟的短语权利，当然，有很多方法可以使用10分钟的计时器。</p>
+<p>你也可以说，让我知道，从现在开始10分钟或者10分钟后设置闹钟，希望，意图识别和提取持续时间组件都足够强大，可以识别所有这些都是要求10分钟计时器的不同方式。</p>
+<p>最后，为了执行该命令，智能扬声器中应该有一个专门的软件组件可以启动具有设定持续时间的计时器，并且在它已经提取了你的意图和持续时间之后，它只是启动具有该持续时间的计时器。</p>
+<p>这样警报在10分钟结束时就会消失。</p>
+<p>今天的智能音箱有很多功能。</p>
+<p>除了谈论讲笑话和设置计时器之外，还有一些其他功能，今天许多智能扬声器都可以执行，执行这些命令的键步骤是触发词或唤醒词检测，语音识别以转录命令中的文本，意图识别，确定您希望执行哪些功能或哪些命令，然后执行专门的程序来执行您发出的任何命令。</p>
+<p>智能扬声器世界面临的挑战之一是，如果您希望您的智能扬声器拥有许多不同的功能，例如20种不同的功能，那么您需要软件工程团队才能编写20个专用软件。</p>
+<p>一个播放音乐，一个设置音量，一个拨打电话，一个拨打当前时间，一个用于转换单位，如从一个汤匙到汤匙，或者回答非常简单的问题，等等。</p>
+<p>因此，编写所有这些专用程序以执行您可能希望在第四步执行的所有不同命令实际上要做很多工作，而今天的智能扬声器实际上做了很多事情，许多用户难以直接提示 他们能做什么，不能做什么。</p>
+<p>许多智能扬声器公司已经在用户培训上投入了大量资金，试图让用户知道智能扬声器可以做什么，因为一方面他们无法做到。</p>
+<p>有很多事情你不能问聪明的演讲者，因为请打电话给我所有的三个朋友，看看他们所有人都能见面吃饭。</p>
+<p>因此，智能扬声器的持续过程是向用户解释他们可以做什么和不能做什么。</p>
+<p>尽管如此，通过使用语音来指挥这些扬声器可以让许多人的生活更加便利。</p>
+<p>我希望这段视频让您了解如何构建复杂的AI产品，如智能扬声器。</p>
+<p>为了帮助您更好地了解这些复杂产品的工作原理，让我们继续看看如何拼凑多个AI组件以构建自动驾驶汽车的二次研究。</p>
+<p>让我们继续下一个视频。</p>
+<p>讲师：<a href="https://www.coursera.org/instructor/andrewng" target="_blank" rel="noopener">Andrew Ng</a><br>课程：<a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank" rel="noopener">https://www.coursera.org/learn/ai-for-everyone</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/DL/" rel="tag"># DL</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/week3-01-week-3-introduction/" rel="next" title="week3-1 Week 3 Introduction 第 3 周 简介">
+                <i class="fa fa-chevron-left"></i> week3-1 Week 3 Introduction 第 3 周 简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/week3-03-case-study-self-driving-car/" rel="prev" title="week3-3 Case study: Self-driving car 案例研究：自动驾驶汽车">
+                week3-3 Case study: Self-driving car 案例研究：自动驾驶汽车 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week3-02-case-study-smart-speaker/";
+    this.page.identifier = "2019/03/04/week3-02-case-study-smart-speaker/";
+    this.page.title = 'week3-2 Case study: Smart speaker 案例研究：智能扬声器';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

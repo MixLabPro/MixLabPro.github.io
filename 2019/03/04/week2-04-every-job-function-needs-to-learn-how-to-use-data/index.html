@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="数据正在改变各种不同的工作职能，无论您是在招聘或销售，营销还是制造业或农业，数据可能会改变您的工作职能。 过去几十年发生的事情是我们社会的数字化。 因此，调查更像​​是以数字格式进行调查，或者医生仍然会写一些手写笔记，而医生手写笔记本可能更像是一个数字记录，因此在几乎所有单一的工作职能中，而不是像这样进行报纸调查。 这种数据可用性意味着很有可能通过数据科学或机器学习等工具帮助您的工作职能。 让我">
+<meta name="keywords" content="ML,DL,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="week2-4 Every job function needs to learn how to use data 每个工作职能都需要学习如何使用数据">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-04-every-job-function-needs-to-learn-how-to-use-data/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="数据正在改变各种不同的工作职能，无论您是在招聘或销售，营销还是制造业或农业，数据可能会改变您的工作职能。 过去几十年发生的事情是我们社会的数字化。 因此，调查更像​​是以数字格式进行调查，或者医生仍然会写一些手写笔记，而医生手写笔记本可能更像是一个数字记录，因此在几乎所有单一的工作职能中，而不是像这样进行报纸调查。 这种数据可用性意味着很有可能通过数据科学或机器学习等工具帮助您的工作职能。 让我">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-b821aaa4186a74fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-47e1419dd3b823d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-0beb29b1d32bae46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-7bd416cf0bc67c15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-60859841fab0ba59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-80b3f1f17d55beb2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-04-04T14:53:09.476Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="week2-4 Every job function needs to learn how to use data 每个工作职能都需要学习如何使用数据">
+<meta name="twitter:description" content="数据正在改变各种不同的工作职能，无论您是在招聘或销售，营销还是制造业或农业，数据可能会改变您的工作职能。 过去几十年发生的事情是我们社会的数字化。 因此，调查更像​​是以数字格式进行调查，或者医生仍然会写一些手写笔记，而医生手写笔记本可能更像是一个数字记录，因此在几乎所有单一的工作职能中，而不是像这样进行报纸调查。 这种数据可用性意味着很有可能通过数据科学或机器学习等工具帮助您的工作职能。 让我">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/910914-b821aaa4186a74fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-04-every-job-function-needs-to-learn-how-to-use-data/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>week2-4 Every job function needs to learn how to use data 每个工作职能都需要学习如何使用数据 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-04-every-job-function-needs-to-learn-how-to-use-data/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">week2-4 Every job function needs to learn how to use data 每个工作职能都需要学习如何使用数据
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-04 11:27:05" itemprop="dateCreated datePublished" datetime="2019-03-04T11:27:05+08:00">2019-03-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-04 22:53:09" itemprop="dateModified" datetime="2019-04-04T22:53:09+08:00">2019-04-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI-For-Everyone/" itemprop="url" rel="index"><span itemprop="name">AI For Everyone</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/04/week2-04-every-job-function-needs-to-learn-how-to-use-data/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/04/week2-04-every-job-function-needs-to-learn-how-to-use-data/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/910914-b821aaa4186a74fa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-4-0.png"></p>
+<p>数据正在改变各种不同的工作职能，无论您是在招聘或销售，营销还是制造业或农业，数据可能会改变您的工作职能。</p>
+<p>过去几十年发生的事情是我们社会的数字化。</p>
+<p>因此，调查更像​​是以数字格式进行调查，或者医生仍然会写一些手写笔记，而医生手写笔记本可能更像是一个数字记录，因此在几乎所有单一的工作职能中，而不是像这样进行报纸调查。</p>
+<p>这种数据可用性意味着很有可能通过数据科学或机器学习等工具帮助您的工作职能。</p>
+<p>让我们来看看。</p>
+<a id="more"></a>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-47e1419dd3b823d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-4-1.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-0beb29b1d32bae46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-4-2.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-7bd416cf0bc67c15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-4-3.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-60859841fab0ba59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-4-4-.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-80b3f1f17d55beb2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-4-5.png"></p>
+<p>在这个视频中，我想了解许多不同的工作职能，并讨论数据科学和机器学习如何能够或将会影响不同类型的工作。</p>
+<p>让我们从销售开始吧。</p>
+<p>您已经在最后一个视频中看到了数据科学如何用于优化销售漏斗。</p>
+<p>机器学习怎么样？如果你是一个销售人员，你可能会有一套关于不同人的线索，你可以伸出手来说服他们从你的公司购买东西。</p>
+<p>机器学习可以帮助您优先考虑这些线索。</p>
+<p>因此，您可能希望优先考虑召集大型公司的首席执行官而不是小型公司的实习生，这种类型的自动化潜在客户排序使销售人员更有效率。</p>
+<p>让我们看看更多的例子。</p>
+<p>假设您正在制造直线经理。</p>
+<p>您已经看到数据科学可以帮助您优化生产线。</p>
+<p>机器学习怎么样？这个制造过程的一个步骤是最终检查。</p>
+<p>事实上，在今天，在许多工厂中，可能有数百或数千人使用人类眼球检查物品，也许是咖啡杯，也许是其他人，看看它们是否有划痕或凹痕，这就是所谓的检查。</p>
+<p>因此，机器学习可以接受这样的输入，这样的数据集，并学会自动判断咖啡杯是否有缺陷。</p>
+<p>通过自动查找划痕或凹痕，可以降低人工成本并提高工厂质量。</p>
+<p>这种类型的自动视觉检查是我认为会对制造产生重大影响的技术之一。</p>
+<p>这也是我一直在努力的事情。</p>
+<p>让我们看看更多的例子。</p>
+<p>如何招聘？当招募某人加入贵公司时，可能会有一个非常可预测的步骤，招聘人员或其他人会向候选人发送电子邮件然后与他们打电话，带他们到现场进行面试，然后延长报价并且可以接近报价。</p>
+<p>类似于数据科学如何用于优化销售漏斗，招聘也可以使用数据科学来优化招聘渠道，事实上许多招聘组织今天都这样做。</p>
+<p>例如，如果您发现几乎没有人从手机屏幕步骤到现场采访步骤，那么您可能会得出结论，可能有太多人进入手机屏幕阶段或者可能正在进行电话屏幕的人 太难了，你应该让更多的人进入现场采访阶段。</p>
+<p>这种类型的数据科学已经对招聘产生了影响。</p>
+<p>机器学习项目怎么样？嗯，招聘的一个步骤是筛选大量的简历，以决定谁与你联系。</p>
+<p>所以，你可能不得不看一下简历并说：“是的，让我们给他们发电子邮件”，看一下不同的说法，“不，让我们不要继续前进这个候选人。“</p>
+<p>机器学习正在开始进入自动化的简历筛选。</p>
+<p>是否提出了一些重要的问题，例如确保您的AI软件没有表现出不良形式的偏见并公平对待人们，但机器学习开始进入这一点，我希望可以这样做，同时确保系统符合道德和公平。</p>
+<p>在AI For Everyone课程的最后一周，您还将了解AI中的公平和道德问题。</p>
+<p>如果您从事营销工作会怎么样？优化网站性能的常用方法之一就是AB测试，您可以在其中启动两个版本的网站。</p>
+<p>此处版本A有一个红色按钮，版本B有一个绿色按钮，您可以测量哪些网站会让人们点击更多。</p>
+<p>因此，通过这种类型的数据，数据科学团队可以帮助您获得洞察力并建议优化网站的假设或操作。</p>
+<p>机器学习和营销怎么样？今天很多网站都会提供定制的产品推荐，向您展示您最有可能想要购买的东西，这实际上大大增加了这些网站的销售量。</p>
+<p>例如，一个服装网站在看到我购物之后的路上，希望只是向我推荐蓝色衬衫，因为坦率地说这是我买过的唯一一种类型的衬衫，但也许其他客户会比我的更多样化和更有趣的建议。</p>
+<p>但是今天，这些定制的产品推荐实际上在许多大型在线商务网站上占据了很大比例的销售额。</p>
+<p>完全不同的部门的最后一个例子。</p>
+<p>假设你在农业工作。</p>
+<p>也许你是一个在轻工业农场工作的农民，数据科学如何帮助你？今天农民已经在使用数据科学进行作物分析，你可以在这里获取土壤条件，天气条件，不同作物的存在的数据市场和数据科学团队建议种植什么，何时种植以改善使用，同时保持农场土壤的状况。</p>
+<p>这种类型的数据科学将在农业中发挥越来越大的作用。</p>
+<p>让我们看看机器学习的例子。</p>
+<p>我认为农业最令人兴奋的变化之一就是精准农业。</p>
+<p>这是我用手机拍摄的农场照片。</p>
+<p>在右上方是棉花植物，中间显示的是杂草。</p>
+<p>通过机器学习，我们开始看到可以进入农场的产品，拍摄照片并以非常精确的方式将杂草杀手喷到杂草上，这样它就可以去除杂草，但不必喷洒过多的杂草。杂草杀手。</p>
+<p>这种机器学习技术既有助于农民提高作物产量，又有助于保护环境。</p>
+<p>在这段视频中，您了解了所有这些工作职能，从销售，招聘到营销到制造农业农业，所有这些工作职能如何受到数据，数据科学和机器学习的影响。</p>
+<p>似乎你可以用AI做很多不同的事情。</p>
+<p>但是，你如何选择一个有前途的项目呢？让我们在下一个视频中讨论这个问题。</p>
+<p>讲师：<a href="https://www.coursera.org/instructor/andrewng" target="_blank" rel="noopener">Andrew Ng</a><br>课程：<a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank" rel="noopener">https://www.coursera.org/learn/ai-for-everyone</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/DL/" rel="tag"># DL</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/week2-03-workflow-of-a-data-science-project/" rel="next" title="week2-3 Workflow of a data science project 数据科学项目的工作流程">
+                <i class="fa fa-chevron-left"></i> week2-3 Workflow of a data science project 数据科学项目的工作流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/week2-05-how-to-choose-an-ai-project-part-1/" rel="prev" title="week2-5 How to choose an AI project (Part 1) 如何选择人工智能项目（第1部分）">
+                week2-5 How to choose an AI project (Part 1) 如何选择人工智能项目（第1部分） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-04-every-job-function-needs-to-learn-how-to-use-data/";
+    this.page.identifier = "2019/03/04/week2-04-every-job-function-needs-to-learn-how-to-use-data/";
+    this.page.title = 'week2-4 Every job function needs to learn how to use data 每个工作职能都需要学习如何使用数据';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

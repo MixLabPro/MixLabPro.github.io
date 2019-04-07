@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="TF-IDF原理tf-idf（英语：term frequency–inverse document frequency）是一种用于信息检索与文本挖掘的常用加权技术。tf-idf是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。tf-idf加权的各种形式常被搜索引擎应用，作">
+<meta name="keywords" content="ML,NLP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="任务三-特征选择">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/07/nlp-task3/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="TF-IDF原理tf-idf（英语：term frequency–inverse document frequency）是一种用于信息检索与文本挖掘的常用加权技术。tf-idf是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。tf-idf加权的各种形式常被搜索引擎应用，作">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-04T14:53:09.483Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="任务三-特征选择">
+<meta name="twitter:description" content="TF-IDF原理tf-idf（英语：term frequency–inverse document frequency）是一种用于信息检索与文本挖掘的常用加权技术。tf-idf是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。tf-idf加权的各种形式常被搜索引擎应用，作">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/07/nlp-task3/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>任务三-特征选择 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/07/nlp-task3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">任务三-特征选择
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-07 20:19:15" itemprop="dateCreated datePublished" datetime="2019-03-07T20:19:15+08:00">2019-03-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-04 22:53:09" itemprop="dateModified" datetime="2019-04-04T22:53:09+08:00">2019-04-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NLP实践/" itemprop="url" rel="index"><span itemprop="name">NLP实践</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/07/nlp-task3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/07/nlp-task3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="TF-IDF原理"><a href="#TF-IDF原理" class="headerlink" title="TF-IDF原理"></a>TF-IDF原理</h1><p>tf-idf（英语：term frequency–inverse document frequency）是一种用于信息检索与文本挖掘的常用加权技术。tf-idf是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。tf-idf加权的各种形式常被搜索引擎应用，作为文件与用户查询之间相关程度的度量或评级。除了tf-idf以外，互联网上的搜索引擎还会使用基于链接分析的评级方法，以确定文件在搜索结果中出现的顺序。</p>
+<a id="more"></a>
+<p>在一份给定的文件里，词频（term frequency，tf）指的是某一个给定的词语在该文件中出现的频率。这个数字是对词数（term count）的归一化，以防止它偏向长的文件。（同一个词语在长文件里可能会比短文件有更高的词数，而不管该词语重要与否。）对于在某一特定文件里的词语 $t_{i}$ 来说，它的重要性可表示为：</p>
+<script type="math/tex; mode=display">
+\mathrm{tf}_{\mathrm{i}, \mathrm{j}}=\frac{n_{i, j}}{\sum_{k} n_{k, j}}</script><p>以上式子中 <script type="math/tex">n_{i, j}</script> 是该词在文件 <script type="math/tex">d_{j}</script> 中的出现次数，而分母则是在文件 <script type="math/tex">d_{j}</script> 中所有字词的出现次数之和。<br>逆向文件频率（inverse document frequency，idf）是一个词语普遍重要性的度量。某一特定词语的idf，可以由总文件数目除以包含该词语之文件的数目，再将得到的商取以10为底的对数得到：</p>
+<script type="math/tex; mode=display">
+\mathrm{idf}_{\mathrm{i}}=\lg \frac{|D|}{\left|\left\{j : t_{i} \in d_{j}\right\}\right|}</script><p>其中<br>$|\mathrm{D}|$ : 语料库中的文件总数</p>
+<script type="math/tex; mode=display">\left|\left\{j : t_{i} \in d_{j}\right\}\right|</script><p>包含词语 <script type="math/tex">t_{i}</script> 的文件数目（即 <script type="math/tex">n_{i, j} \neq 0</script> 的文件数目）</p>
+<p>如果词语不在数据中，就导致分母为零，因此一般情况下使用 <script type="math/tex">1+\left|\left\{j \: t_{i} \in d_{j}\right\}\right|</script></p>
+<p>然后</p>
+<script type="math/tex; mode=display">
+\operatorname{tfidf}_{\mathrm{i}, \mathfrak{j}}=\mathrm{t} \mathrm{f}_{\mathrm{i}, \mathrm{j}} \times \mathrm{idf}_{\mathrm{i}}</script><p>某一特定文件内的高词语频率，以及该词语在整个文件集合中的低文件频率，可以产生出高权重的tf-idf。因此，tf-idf倾向于过滤掉常见的词语，保留重要的词语。</p>
+<h1 id="文本矩阵化，使用词袋模型，以TF-IDF特征值为权重。（可以使用Python中TfidfTransformer库）"><a href="#文本矩阵化，使用词袋模型，以TF-IDF特征值为权重。（可以使用Python中TfidfTransformer库）" class="headerlink" title="文本矩阵化，使用词袋模型，以TF-IDF特征值为权重。（可以使用Python中TfidfTransformer库）"></a>文本矩阵化，使用词袋模型，以TF-IDF特征值为权重。（可以使用Python中TfidfTransformer库）</h1><h1 id="互信息的原理"><a href="#互信息的原理" class="headerlink" title="互信息的原理"></a>互信息的原理</h1><p>在<a href="https://zh.wikipedia.org/wiki/%E6%A6%82%E7%8E%87%E8%AE%BA" title="概率论" target="_blank" rel="noopener">概率论</a>和<a href="https://zh.wikipedia.org/wiki/%E4%BF%A1%E6%81%AF%E8%AE%BA" title="信息论" target="_blank" rel="noopener">信息论</a>中，两个<a href="https://zh.wikipedia.org/wiki/%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F" title="随机变量" target="_blank" rel="noopener">随机变量</a>的<strong>互信息</strong>（Mutual Information，简称MI）或<strong>转移信息</strong>（transinformation）是变量间相互依赖性的量度。不同于相关系数，互信息并不局限于实值随机变量，它更加一般且决定着联合分布 p(X,Y) 和分解的边缘分布的乘积 p(X)p(Y) 的相似程度。互信息是<a href="https://zh.wikipedia.org/w/index.php?title=%E7%82%B9%E9%97%B4%E4%BA%92%E4%BF%A1%E6%81%AF&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">点间互信息</a>（PMI）的期望值。互信息最常用的<a href="https://zh.wikipedia.org/wiki/%E8%AE%A1%E9%87%8F%E5%8D%95%E4%BD%8D" title="计量单位" target="_blank" rel="noopener">单位</a>是<a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E5%85%83" title="比特" target="_blank" rel="noopener">bit</a>。</p>
+<p>一般地，两个离散随机变量 <em>X</em> 和 <em>Y</em> 的互信息可以定义为：</p>
+<script type="math/tex; mode=display">
+I(X ; Y)=\sum_{y \in Y} \sum_{x \in X} p(x, y) \log \left(\frac{p(x, y)}{p(x) p(y)}\right)</script><p>其中 <em>p</em>(<em>x</em>,<em>y</em>) 是 <em>X</em> 和 <em>Y</em> 的<a href="https://zh.wikipedia.org/wiki/%E8%81%94%E5%90%88%E5%88%86%E5%B8%83" title="联合分布" target="_blank" rel="noopener">联合概率分布函数</a>，而 $p(x)$  和 $p(x)$ 分别是 <em>X</em> 和 <em>Y</em> 的<a href="https://zh.wikipedia.org/wiki/%E8%BE%B9%E7%BC%98%E6%A6%82%E7%8E%87" title="边缘概率" target="_blank" rel="noopener">边缘概率</a>分布函数。</p>
+<p>在<a href="https://zh.wikipedia.org/wiki/%E8%BF%9E%E7%BB%AD%E5%87%BD%E6%95%B0" title="连续函数" target="_blank" rel="noopener">连续随机变量</a>的情形下，求和被替换成了<a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E9%87%8D%E7%A7%AF%E5%88%86" title="二重积分" target="_blank" rel="noopener">二重定积分</a>：</p>
+<script type="math/tex; mode=display">
+I(X ; Y)=\int_{Y} \int_{X} p(x, y) \log \left(\frac{p(x, y)}{p(x) p(y)}\right) d x d y</script><p>其中 <em>p</em>(<em>x</em>,<em>y</em>) 当前是 <em>X</em> 和 <em>Y</em> 的联合概率<em>密度</em>函数，而 $p(x)$  和 $p(x)$ 分别是 <em>X</em> 和 <em>Y</em> 的边缘概率密度函数。</p>
+<p>如果对数以 2 为基底，互信息的单位是<a href="https://zh.wikipedia.org/wiki/%E4%BD%8D%E5%85%83" title="比特" target="_blank" rel="noopener">bit</a>。</p>
+<p>直观上，互信息度量 <em>X</em> 和 <em>Y</em> 共享的信息：它度量知道这两个变量其中一个，对另一个不确定度减少的程度。例如，如果 <em>X</em> 和 <em>Y</em> 相互独立，则知道 <em>X</em> 不对 <em>Y</em> 提供任何信息，反之亦然，所以它们的互信息为零。在另一个极端，如果 <em>X</em> 是 <em>Y</em> 的一个确定性函数，且 <em>Y</em> 也是 <em>X</em> 的一个确定性函数，那么传递的所有信息被 <em>X</em> 和 <em>Y</em> 共享：知道 <em>X</em> 决定 <em>Y</em> 的值，反之亦然。因此，在此情形互信息与 <em>Y</em>（或 <em>X</em>）单独包含的不确定度相同，称作 <em>Y</em>（或 <em>X</em>）的<a href="https://zh.wikipedia.org/wiki/%E4%BF%A1%E6%81%AF%E7%86%B5" title="信息熵" target="_blank" rel="noopener">熵</a>。而且，这个互信息与 <em>X</em> 的熵和 <em>Y</em> 的熵相同。（这种情形的一个非常特殊的情况是当 <em>X</em> 和 <em>Y</em> 为相同随机变量时。）</p>
+<p>互信息是 <em>X</em> 和 <em>Y</em> 的<a href="https://zh.wikipedia.org/wiki/%E8%81%94%E5%90%88%E5%88%86%E5%B8%83" title="联合分布" target="_blank" rel="noopener">联合分布</a>相对于假定 <em>X</em> 和 <em>Y</em> 独立情况下的联合分布之间的内在依赖性。 于是互信息以下面方式度量依赖性：<em>I</em>(<em>X</em>; <em>Y</em>) = 0 <a href="https://zh.wikipedia.org/wiki/%E5%BD%93%E4%B8%94%E4%BB%85%E5%BD%93" title="当且仅当" target="_blank" rel="noopener">当且仅当</a> <em>X</em> 和 <em>Y</em> 为独立随机变量。从一个方向很容易看出：当 <em>X</em> 和 <em>Y</em> 独立时，<em>p</em>(<em>x</em>,<em>y</em>) = <em>p</em>(<em>x</em>) <em>p</em>(<em>y</em>)，因此：</p>
+<script type="math/tex; mode=display">
+\log \left(\frac{p(x, y)}{p(x) p(y)}\right)=\log 1=0</script><p>此外，互信息是非负的（即 <em>I</em>(<em>X</em>;<em>Y</em>) ≥ 0; 见下文），而且是<a href="https://zh.wikipedia.org/w/index.php?title=%E5%AF%B9%E7%A7%B0%E5%87%BD%E6%95%B0&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">对称的</a>（即 <em>I</em>(<em>X</em>;<em>Y</em>) = <em>I</em>(<em>Y</em>;<em>X</em>)）。</p>
+<h1 id="使用第二步生成的特征矩阵，利用互信息进行特征筛选。"><a href="#使用第二步生成的特征矩阵，利用互信息进行特征筛选。" class="headerlink" title="使用第二步生成的特征矩阵，利用互信息进行特征筛选。"></a>使用第二步生成的特征矩阵，利用互信息进行特征筛选。</h1><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>文本挖掘预处理之TF-IDF：<a href="https://www.cnblogs.com/pinard/p/6693230.html" target="_blank" rel="noopener">文本挖掘预处理之TF-IDF - 刘建平Pinard - 博客园</a></p>
+<p>使用不同的方法计算TF-IDF值：<a href="https://www.jianshu.com/p/f3b92124cd2b" target="_blank" rel="noopener">使用不同的方法计算TF-IDF值 - 简书</a></p>
+<p>sklearn-点互信息和互信息：<a href="https://blog.csdn.net/u013710265/article/details/72848755" target="_blank" rel="noopener">sklearn：点互信息和互信息 - 专注计算机体系结构 - CSDN博客</a></p>
+<p>如何进行特征选择（理论篇）机器学习你会遇到的“坑”：<a href="https://baijiahao.baidu.com/s?id=1604074325918456186&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">如何进行特征选择（理论篇）机器学习你会遇到的“坑”</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/05/basic-task3/" rel="next" title="任务三-决策树算法梳理">
+                <i class="fa fa-chevron-left"></i> 任务三-决策树算法梳理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/09/nlp-task4/" rel="prev" title="任务四-传统机器学习">
+                任务四-传统机器学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TF-IDF原理"><span class="nav-number">1.</span> <span class="nav-text">TF-IDF原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文本矩阵化，使用词袋模型，以TF-IDF特征值为权重。（可以使用Python中TfidfTransformer库）"><span class="nav-number">2.</span> <span class="nav-text">文本矩阵化，使用词袋模型，以TF-IDF特征值为权重。（可以使用Python中TfidfTransformer库）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#互信息的原理"><span class="nav-number">3.</span> <span class="nav-text">互信息的原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用第二步生成的特征矩阵，利用互信息进行特征筛选。"><span class="nav-number">4.</span> <span class="nav-text">使用第二步生成的特征矩阵，利用互信息进行特征筛选。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/03/07/nlp-task3/";
+    this.page.identifier = "2019/03/07/nlp-task3/";
+    this.page.title = '任务三-特征选择';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="你从最后两个视频中看到，一些人工智能产品可能需要一个大型的AI团队，也许你有100名工程师，或者有时甚至超过100人。 我想在这个视频中做的是分享你这样一个大型AI团队的典型角色和职责，这样你就能更好地理解构建这些复杂AI产品所需的工作类型。">
+<meta name="keywords" content="ML,DL,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="week3-4 Example roles of an AI team 人工智能团队的示例角色">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week3-04-example-roles-of-an-ai-team/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="你从最后两个视频中看到，一些人工智能产品可能需要一个大型的AI团队，也许你有100名工程师，或者有时甚至超过100人。 我想在这个视频中做的是分享你这样一个大型AI团队的典型角色和职责，这样你就能更好地理解构建这些复杂AI产品所需的工作类型。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-58ad30e2d7fa0d21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-624450129646f40c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-27d3185c4fabe68b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-c46fa8bdae2dde7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-04-04T14:53:09.478Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="week3-4 Example roles of an AI team 人工智能团队的示例角色">
+<meta name="twitter:description" content="你从最后两个视频中看到，一些人工智能产品可能需要一个大型的AI团队，也许你有100名工程师，或者有时甚至超过100人。 我想在这个视频中做的是分享你这样一个大型AI团队的典型角色和职责，这样你就能更好地理解构建这些复杂AI产品所需的工作类型。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/910914-58ad30e2d7fa0d21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week3-04-example-roles-of-an-ai-team/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>week3-4 Example roles of an AI team 人工智能团队的示例角色 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week3-04-example-roles-of-an-ai-team/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">week3-4 Example roles of an AI team 人工智能团队的示例角色
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-04 11:27:12" itemprop="dateCreated datePublished" datetime="2019-03-04T11:27:12+08:00">2019-03-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-04 22:53:09" itemprop="dateModified" datetime="2019-04-04T22:53:09+08:00">2019-04-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI-For-Everyone/" itemprop="url" rel="index"><span itemprop="name">AI For Everyone</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/04/week3-04-example-roles-of-an-ai-team/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/04/week3-04-example-roles-of-an-ai-team/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/910914-58ad30e2d7fa0d21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3-4-0.png"></p>
+<p>你从最后两个视频中看到，一些人工智能产品可能需要一个大型的AI团队，也许你有100名工程师，或者有时甚至超过100人。</p>
+<p>我想在这个视频中做的是分享你这样一个大型AI团队的典型角色和职责，这样你就能更好地理解构建这些复杂AI产品所需的工作类型。</p>
+<a id="more"></a>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-624450129646f40c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3-4-1.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-27d3185c4fabe68b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3-4-2.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-c46fa8bdae2dde7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3-4-3.png"></p>
+<p>现在，即使您将在一个规模小得多的团队中工作，也许在可预见的未来可能会有一两个或五个人团队，我希望这个视频对您仍然有用，因为我希望它能让您了解不同类型的AIteam可能需要做的工作，即使你最终以更小的团队执行此类工作。</p>
+<p>有一点需要注意，因为AI的发展如此之快，职称和各种责任还没有100％定义，而且他们在不同的公司之间有点不同。</p>
+<p>所以，你的公司可能会以不同于我在这里展示的职位来使用他们的职位，但我想分享一个观点，即如何在许多公司中经常使用工作机会，以便如果你有一天建立自己的AI团队，我们会听到这些角色你至少会对这些职称的含义有一些更深刻的理解。</p>
+<p>那么，让我们开始吧。</p>
+<p>许多AI团队中都会有软件工程师。</p>
+<p>因此，例如，对于智能扬声器，我们需要编写专用软件来执行笑话或设置计时器或回答有关当今天气的问题。</p>
+<p>所以，那些是传统的软件工程任务。</p>
+<p>或者你正在制造一辆自动驾驶汽车，以确保你的自动驾驶汽车软件可靠并且不会崩溃。</p>
+<p>这些是软件工程任务。</p>
+<p>因此，AI团队的扩展分数有时会达到50％，有时远远超过其中50％的软件工程师，这一点并不少见。</p>
+<p>第二个共同角色是机器学习工程师。</p>
+<p>因此，Machine LearningEngineer可能编写负责生成A到B映射器的软件，用于构建产品所需的其他机器学习算法。</p>
+<p>因此，他们可能会收集汽车图片和汽车位置的数据，训练神经网络或训练深度学习算法并迭代工作以确保学习算法具有准确的输出。</p>
+<p>您经常听到的另一个角色是MachineLearning Researcher。</p>
+<p>机器学习研究员的典型行是扩展机器学习的最新技术。</p>
+<p>更广泛的机器学习和人工智能正在迅速发展。</p>
+<p>因此，许多公司为盈利和非营利组织，更多的机器学习研究人员负责扩展最先进的技术。</p>
+<p>一些机器学习研究人员将发表论文，但许多公司也有机器学习研究人员做研究，但不太专注于出版。</p>
+<p>另外还有一个工作岗位，就是应用机器学习科学家，它们介于机器学习工程师和机器学习研究员之间。</p>
+<p>机器学习科学家有点兼顾两者。</p>
+<p>他们经常负责阅读学术文献或研究文献，找到稳定的VR技术，并找到方法使他们适应他们所面临的问题，如如何获得最前沿，触发柳条检测算法的位置，以及适应那些玩具智能扬声器。</p>
+<p>让我们看看其中的更多内容。</p>
+<p>今天，有许多数据科学家在工业中工作。</p>
+<p>数据科学家的角色定义不明确，其意义仍在不断发展。</p>
+<p>我认为数据科学家的主要职责之一是检查数据并提供见解，并向团队或高管提出陈述，以帮助推动业务决策。</p>
+<p>今天还有Data Scientist做其他任务。</p>
+<p>因此，今天还有数据科学家的工作看起来更像机器学习工程师，他们在上一张幻灯片中有描述。</p>
+<p>这个职位的意义今天仍在发展。</p>
+<p>随着大数据的兴起，还有越来越多的数据工程师，其主要作用是帮助您组织数据，这意味着确保您的数据得到保存，并且易于访问，安全且经济高效。</p>
+<p>那么，为什么保存数据是一件大事呢？难道你不能将它们保存在硬盘中并完成它。</p>
+<p>在一些公司中，数据量已经变得如此之大。</p>
+<p>实际上有很多工作要管理它们。</p>
+<p>为了给你一种规模感，在计算机科学中，一个MB可以容纳一兆字节，所以你的音乐播放器上的典型歌曲就像一个典型的MP3文件，可能只有几兆字节，比如五兆字节就是非常不寻常的MP3文件大小。</p>
+<p>1000兆字节被称为千兆字节。</p>
+<p>一百万兆字节被称为1兆字节，十亿兆字节被称为千兆字节。</p>
+<p>凭借今天的硬盘大小，节省几兆字节并不是什么大问题。</p>
+<p>它就像一个MP3文件，但存储1000兆字节，也称为千兆字节，开始有点慢。</p>
+<p>您通过互联网流式传输的典型小时长电话可能超过千兆字节。</p>
+<p>所以，这是非常多的数据。</p>
+<p>为了让您了解规模，自动驾驶汽车每运行一分钟就可以收集数千兆字节的信息。</p>
+<p>因此，就像每一分钟自动驾驶汽车产生足够的数据来存储多个长达一小时的电影一样。</p>
+<p>因此，自动驾驶汽车实际上会产生大量数据并将数据保存数天或数周或数月或数年的运行开始需要严格的数据工程。</p>
+<p>一个太字节比1000倍大，而另一个千兆字节比那些负责每天节省几千兆字节信息的团队大1000倍，但除了相当大的互联网公司之外，一个公司产生多个PB的信息并不常见每天。</p>
+<p>当你将这个规模向下移动到更大的数据集时，确保数据以易于访问，安全且经济高效的方式存储变得更加困难和困难，这就是数据工程师变得越来越重要的原因。</p>
+<p>最后，你也会听到人们提到的AI产品经理，他们的工作是帮助决定建立什么。</p>
+<p>换句话说，它们有助于弄清楚什么是可行和有价值的。</p>
+<p>传统的ProductManager的工作已经决定要建立什么以及其他一些角色，但AI ProductManager现在必须在AI时代这样做，并且他们需要新的技能组合来根据whatAI可以和不能来计算什么是可行的和有价值的今天做。</p>
+<p>因为我们的领域仍在不断发展，所以这些职位都没有完全被钉在石头上，不同的公司将以不同的方式使用这些职业。</p>
+<p>但我希望这能让您了解构建非常复杂的AI产品所需的一些不同类型的工作，以及一些工作职位的演变。</p>
+<p>尽管如此，我还是要再次强调你可以从一个小团队开始。</p>
+<p>您不需要100个人来完成大多数AI项目。</p>
+<p>所以，无论你是只有一个软件工程师，或者只是一个机器学习工程师，或者只是一个数据科学家，或者只有一个数据科学家，或者没有人，但你自己，如果你或与你一起工作的工程师已经参加了一些关于机器学习或深度学习的在线课程或者数据科学，这通常足以让你自己或你和一个工程师开始查看一些较小的数据，开始做出相关的结论或开始交易一些机器学习模型以便开始。</p>
+<p>所以，尽管我已经尝试在这里画出一个大型AI团队可能会是什么样子的愿景，即使你只有一个小型的AI团队，也可能没有人，我仍然鼓励你开始并开始探索你能做的项目做。</p>
+<p>在这个视频中，你看到了AI团队的样子，但是当你看到一个更大的公司时，一个AI团队并不孤立。</p>
+<p>那么，AI团队如何融入更大的公司以帮助整个公司擅长人工智能？您可能还记得在第一周我简要提到了一个AI转型手册，这是一个帮助公司帮助公司的路线图。公司在AI工作得很好。</p>
+<p>既然你已经了解了人工智能，如何进行人工智能项目，甚至公司的AI团队以及能力AI项目和能力可能会是什么样子，那么让我们回到他们的AI转型手册，深入了解手册的各个步骤，这样你就可以了解如何帮助一家公司在未来几年内成为优秀人工智能，并希望在这方面变得更有价值，更有效。</p>
+<p>让我们在下一个视频中进入AI转型手册。</p>
+<p>讲师：<a href="https://www.coursera.org/instructor/andrewng" target="_blank" rel="noopener">Andrew Ng</a><br>课程：<a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank" rel="noopener">https://www.coursera.org/learn/ai-for-everyone</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/DL/" rel="tag"># DL</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/week3-03-case-study-self-driving-car/" rel="next" title="week3-3 Case study: Self-driving car 案例研究：自动驾驶汽车">
+                <i class="fa fa-chevron-left"></i> week3-3 Case study: Self-driving car 案例研究：自动驾驶汽车
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/week3-05-ai-transformation-playbook-part-1/" rel="prev" title="week3-5 AI Transformation Playbook (Part 1) 人工智能转型手册（第1部分）">
+                week3-5 AI Transformation Playbook (Part 1) 人工智能转型手册（第1部分） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week3-04-example-roles-of-an-ai-team/";
+    this.page.identifier = "2019/03/04/week3-04-example-roles-of-an-ai-team/";
+    this.page.title = 'week3-4 Example roles of an AI team 人工智能团队的示例角色';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

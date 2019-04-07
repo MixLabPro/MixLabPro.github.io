@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="AI不仅适用于工程师。如果您希望您的组织更好地使用AI，那么这就是告诉每个人 - 尤其是您的非技术同事 - 的过程。 在本课程中，您将学习： 常见AI术语背后的含义，包括神经网络，机器学习，深度学习和数据科学 人工智能实际上可以 - 和不能 - 做什么 如何发现将AI应用于您自己组织中的问题的机会 构建机器学习和数据科学项目的感觉如何 如何与AI团队合作并在贵公司制定AI策略 如何引导围绕AI的道">
+<meta name="keywords" content="ML,DL,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI For Everyone 适合每个人的人工智能">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/01/ai-for-every-one/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="AI不仅适用于工程师。如果您希望您的组织更好地使用AI，那么这就是告诉每个人 - 尤其是您的非技术同事 - 的过程。 在本课程中，您将学习： 常见AI术语背后的含义，包括神经网络，机器学习，深度学习和数据科学 人工智能实际上可以 - 和不能 - 做什么 如何发现将AI应用于您自己组织中的问题的机会 构建机器学习和数据科学项目的感觉如何 如何与AI团队合作并在贵公司制定AI策略 如何引导围绕AI的道">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-04T14:53:09.472Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AI For Everyone 适合每个人的人工智能">
+<meta name="twitter:description" content="AI不仅适用于工程师。如果您希望您的组织更好地使用AI，那么这就是告诉每个人 - 尤其是您的非技术同事 - 的过程。 在本课程中，您将学习： 常见AI术语背后的含义，包括神经网络，机器学习，深度学习和数据科学 人工智能实际上可以 - 和不能 - 做什么 如何发现将AI应用于您自己组织中的问题的机会 构建机器学习和数据科学项目的感觉如何 如何与AI团队合作并在贵公司制定AI策略 如何引导围绕AI的道">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/01/ai-for-every-one/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>AI For Everyone 适合每个人的人工智能 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/01/ai-for-every-one/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AI For Everyone 适合每个人的人工智能
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-01 12:16:56" itemprop="dateCreated datePublished" datetime="2019-03-01T12:16:56+08:00">2019-03-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-04 22:53:09" itemprop="dateModified" datetime="2019-04-04T22:53:09+08:00">2019-04-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI-For-Everyone/" itemprop="url" rel="index"><span itemprop="name">AI For Everyone</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/01/ai-for-every-one/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/01/ai-for-every-one/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>AI不仅适用于工程师。如果您希望您的组织更好地使用AI，那么这就是告诉每个人 - 尤其是您的非技术同事 - 的过程。</p>
+<h2 id="在本课程中，您将学习："><a href="#在本课程中，您将学习：" class="headerlink" title="在本课程中，您将学习："></a>在本课程中，您将学习：</h2><ul>
+<li>常见AI术语背后的含义，包括神经网络，机器学习，深度学习和数据科学</li>
+<li>人工智能实际上可以 - 和不能 - 做什么</li>
+<li>如何发现将AI应用于您自己组织中的问题的机会</li>
+<li>构建机器学习和数据科学项目的感觉如何</li>
+<li>如何与AI团队合作并在贵公司制定AI策略</li>
+<li>如何引导围绕AI的道德和社会讨论</li>
+</ul>
+<p>虽然本课程主要是非技术性的，但工程师也可以通过本课程学习人工智能的业务方面。</p>
+<a id="more"></a>
+<h2 id="您将获得的技能"><a href="#您将获得的技能" class="headerlink" title="您将获得的技能"></a>您将获得的技能</h2><ul>
+<li>机器学习项目的工作流程</li>
+<li>AI术语</li>
+<li>AI策略</li>
+<li>数据科学项目的工作流程</li>
+</ul>
+<h1 id="教学大纲-您将从这门课程中学到什么"><a href="#教学大纲-您将从这门课程中学到什么" class="headerlink" title="教学大纲 - 您将从这门课程中学到什么"></a>教学大纲 - 您将从这门课程中学到什么</h1><h2 id="第-1-周-什么是人工智能？"><a href="#第-1-周-什么是人工智能？" class="headerlink" title="第 1 周 什么是人工智能？"></a>第 1 周 什么是人工智能？</h2><p>完成时间为 2 小时</p>
+<p>9 个视频 （总计 69 分钟）, 1 个测验</p>
+<h3 id="9-个视频"><a href="#9-个视频" class="headerlink" title="9 个视频"></a>9 个视频</h3><ol>
+<li>第 1 周 简介<br>7分钟</li>
+<li>机器学习<br>6分钟</li>
+<li>什么是数据？<br>11分钟</li>
+<li>人工智能术语<br>9分钟</li>
+<li>是什么让一家公司擅长人工智能？<br>7分钟</li>
+<li>机器学习能做什么，不能做什么<br>7分钟</li>
+<li>机器学习能做什么和不能做什么的更多例子<br>8分钟</li>
+<li>深度学习的非技术性解释（第1部分，可选）<br>7分钟</li>
+<li>深度学习的非技术性解释（第2部分，可选）<br>3分钟</li>
+</ol>
+<h3 id="1-个练习"><a href="#1-个练习" class="headerlink" title="1 个练习"></a>1 个练习</h3><ul>
+<li>第 1 周 测验<br>30分钟</li>
+</ul>
+<h2 id="第-2-周-建立AI项目"><a href="#第-2-周-建立AI项目" class="headerlink" title="第 2 周 建立AI项目"></a>第 2 周 建立AI项目</h2><p>完成时间为 1 小时</p>
+<p>8 个视频 （总计 52 分钟）, 1 个测验</p>
+<h3 id="8-个视频"><a href="#8-个视频" class="headerlink" title="8 个视频"></a>8 个视频</h3><ol>
+<li>第 2 周 简介<br>1分钟</li>
+<li>机器学习项目的工作流程<br>6分钟</li>
+<li>数据科学项目的工作流程<br>6分钟</li>
+<li>每个工作职能都需要学习如何使用数据<br>6分钟</li>
+<li>如何选择AI项目（第1部分）<br>7分钟</li>
+<li>如何选择AI项目（第2部分）<br>8分钟</li>
+<li>与AI团队合作<br>8分钟</li>
+<li>AI团队的技术工具（可选）<br>6分钟</li>
+</ol>
+<h3 id="1-个练习-1"><a href="#1-个练习-1" class="headerlink" title="1 个练习"></a>1 个练习</h3><ul>
+<li>第 2 周 测验<br>30分钟</li>
+</ul>
+<h2 id="第-3-周-在您的公司中建立AI"><a href="#第-3-周-在您的公司中建立AI" class="headerlink" title="第 3 周 在您的公司中建立AI"></a>第 3 周 在您的公司中建立AI</h2><p>完成时间为 2 小时</p>
+<p>10 个视频 （总计 90 分钟）, 1 个测验</p>
+<h3 id="10-个视频"><a href="#10-个视频" class="headerlink" title="10 个视频"></a>10 个视频</h3><ol>
+<li>第 3 周 简介<br>2分钟</li>
+<li>案例研究：智能扬声器<br>9分钟</li>
+<li>案例研究：自动驾驶汽车<br>6分钟</li>
+<li>AI团队的示例角色<br>8分钟</li>
+<li>AI转型手册（第1部分）<br>10分钟</li>
+<li>AI转型手册（第2部分）<br>14分钟</li>
+<li>要避免的AI陷阱<br>2分钟</li>
+<li>迈出AI的第一步<br>4分钟</li>
+<li>AI主要应用领域调查（可选）<br>17分钟</li>
+<li>AI主要技术调查（可选）<br>15分钟</li>
+</ol>
+<h3 id="1-个练习-2"><a href="#1-个练习-2" class="headerlink" title="1 个练习"></a>1 个练习</h3><ul>
+<li>第 3 周 测验<br>30分钟</li>
+</ul>
+<h3 id="第-4-周-人工智能和社会"><a href="#第-4-周-人工智能和社会" class="headerlink" title="第 4 周 人工智能和社会"></a>第 4 周 人工智能和社会</h3><p>完成时间为 1 小时</p>
+<p>8 个视频 （总计 50 分钟）, 1 个测验</p>
+<h3 id="8-个视频-1"><a href="#8-个视频-1" class="headerlink" title="8 个视频"></a>8 个视频</h3><ol>
+<li>第 4 周 简介<br>2分钟</li>
+<li>AI的现实观点<br>7分钟</li>
+<li>歧视/偏见<br>9分钟</li>
+<li>对人工智能的对抗性攻击<br>7分钟</li>
+<li>人工智能的不利用途<br>4分钟</li>
+<li>AI和发展中经济体<br>7分钟</li>
+<li>人工智能和工作<br>7分钟</li>
+<li>结论<br>3分钟</li>
+</ol>
+<h4 id="1-个练习-3"><a href="#1-个练习-3" class="headerlink" title="1 个练习"></a>1 个练习</h4><ul>
+<li>第 4 周 测验<br>30分钟</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/DL/" rel="tag"># DL</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/01/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/01/markdown/" rel="prev" title="markdown">
+                markdown <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在本课程中，您将学习："><span class="nav-number">1.</span> <span class="nav-text">在本课程中，您将学习：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#您将获得的技能"><span class="nav-number">2.</span> <span class="nav-text">您将获得的技能</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#教学大纲-您将从这门课程中学到什么"><span class="nav-number"></span> <span class="nav-text">教学大纲 - 您将从这门课程中学到什么</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第-1-周-什么是人工智能？"><span class="nav-number">1.</span> <span class="nav-text">第 1 周 什么是人工智能？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-个视频"><span class="nav-number">1.1.</span> <span class="nav-text">9 个视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-个练习"><span class="nav-number">1.2.</span> <span class="nav-text">1 个练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-2-周-建立AI项目"><span class="nav-number">2.</span> <span class="nav-text">第 2 周 建立AI项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-个视频"><span class="nav-number">2.1.</span> <span class="nav-text">8 个视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-个练习-1"><span class="nav-number">2.2.</span> <span class="nav-text">1 个练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-3-周-在您的公司中建立AI"><span class="nav-number">3.</span> <span class="nav-text">第 3 周 在您的公司中建立AI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-个视频"><span class="nav-number">3.1.</span> <span class="nav-text">10 个视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-个练习-2"><span class="nav-number">3.2.</span> <span class="nav-text">1 个练习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第-4-周-人工智能和社会"><span class="nav-number">3.3.</span> <span class="nav-text">第 4 周 人工智能和社会</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-个视频-1"><span class="nav-number">3.4.</span> <span class="nav-text">8 个视频</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-个练习-3"><span class="nav-number">3.4.1.</span> <span class="nav-text">1 个练习</span></a></li></ol></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/03/01/ai-for-every-one/";
+    this.page.identifier = "2019/03/01/ai-for-every-one/";
+    this.page.title = 'AI For Everyone 适合每个人的人工智能';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

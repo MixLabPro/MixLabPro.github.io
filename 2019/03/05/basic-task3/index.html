@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="信息论基础（熵 联合熵 条件熵 信息增益 基尼不纯度）熵本是热力学中表征物质状态的参量之一，用符号S表示，其物理意义是体系混乱程度的度量。对于机器学习算法来说，熵指代香农熵，是一种不确定性度量。它是表示随机变量不确定的度量，是对所有可能发生的事件产生的信息量的期望。 联合熵联合熵就是度量一个联合分布的随机系统的不确定度。 条件熵条件熵H(Y|X)表示在已知随机变量X的条件下随机变量Y的不确定性。">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="任务三-决策树算法梳理">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/05/basic-task3/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="信息论基础（熵 联合熵 条件熵 信息增益 基尼不纯度）熵本是热力学中表征物质状态的参量之一，用符号S表示，其物理意义是体系混乱程度的度量。对于机器学习算法来说，熵指代香农熵，是一种不确定性度量。它是表示随机变量不确定的度量，是对所有可能发生的事件产生的信息量的期望。 联合熵联合熵就是度量一个联合分布的随机系统的不确定度。 条件熵条件熵H(Y|X)表示在已知随机变量X的条件下随机变量Y的不确定性。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-04T14:53:09.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="任务三-决策树算法梳理">
+<meta name="twitter:description" content="信息论基础（熵 联合熵 条件熵 信息增益 基尼不纯度）熵本是热力学中表征物质状态的参量之一，用符号S表示，其物理意义是体系混乱程度的度量。对于机器学习算法来说，熵指代香农熵，是一种不确定性度量。它是表示随机变量不确定的度量，是对所有可能发生的事件产生的信息量的期望。 联合熵联合熵就是度量一个联合分布的随机系统的不确定度。 条件熵条件熵H(Y|X)表示在已知随机变量X的条件下随机变量Y的不确定性。">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/05/basic-task3/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>任务三-决策树算法梳理 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/05/basic-task3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">任务三-决策树算法梳理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 21:26:11" itemprop="dateCreated datePublished" datetime="2019-03-05T21:26:11+08:00">2019-03-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-04 22:53:09" itemprop="dateModified" datetime="2019-04-04T22:53:09+08:00">2019-04-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/初级算法梳理/" itemprop="url" rel="index"><span itemprop="name">初级算法梳理</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/05/basic-task3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/05/basic-task3/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="信息论基础（熵-联合熵-条件熵-信息增益-基尼不纯度）"><a href="#信息论基础（熵-联合熵-条件熵-信息增益-基尼不纯度）" class="headerlink" title="信息论基础（熵 联合熵 条件熵 信息增益 基尼不纯度）"></a>信息论基础（熵 联合熵 条件熵 信息增益 基尼不纯度）</h1><h2 id="熵"><a href="#熵" class="headerlink" title="熵"></a>熵</h2><p>本是热力学中表征物质状态的参量之一，用符号S表示，其物理意义是体系混乱程度的度量。对于机器学习算法来说，熵指代香农熵，是一种不确定性度量。它是表示随机变量不确定的度量，是对所有可能发生的事件产生的信息量的期望。</p>
+<h2 id="联合熵"><a href="#联合熵" class="headerlink" title="联合熵"></a>联合熵</h2><p>联合熵就是度量一个联合分布的随机系统的不确定度。</p>
+<h2 id="条件熵"><a href="#条件熵" class="headerlink" title="条件熵"></a>条件熵</h2><p>条件熵H(Y|X)表示在已知随机变量X的条件下随机变量Y的不确定性。</p>
+<h2 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h2><p>表示特征X使得类Y的不确定性减少的程度。（分类后的专一性，希望分类后的结果是同类在一起）<br>其中 I 为不纯度的度量，关于 N 的计算是划分后的个数加权。<br>I 为熵（Entropy）的时候，Delta 为信息增益。</p>
+<h2 id="基尼不存度"><a href="#基尼不存度" class="headerlink" title="基尼不存度"></a>基尼不存度</h2><p>基尼不存度是指来自集合的某种结果随机应用于集合中某一数据的预期误差。（如果集合中所有结果属于同一类，则误差为0）</p>
+<a id="more"></a>
+<h1 id="决策树的不同分类算法（ID3算法、C4-5、CART分类树）的原理及应用场景"><a href="#决策树的不同分类算法（ID3算法、C4-5、CART分类树）的原理及应用场景" class="headerlink" title="决策树的不同分类算法（ID3算法、C4.5、CART分类树）的原理及应用场景"></a>决策树的不同分类算法（ID3算法、C4.5、CART分类树）的原理及应用场景</h1><h2 id="ID3算法"><a href="#ID3算法" class="headerlink" title="ID3算法"></a>ID3算法</h2><p>内部使用信息熵以及<em>信息增益</em>来进行构建,每次迭代选择信息增益最大的特征属性作为分割属性。只支持离散的特征属性</p>
+<ul>
+<li>优点：决策树构建速度快，实现简单</li>
+<li>缺点：算法依赖样本中出现次数较多的特征属性,但是出现次数最多的属性并不一定最优</li>
+</ul>
+<h2 id="C4-5算法"><a href="#C4-5算法" class="headerlink" title="C4.5算法"></a>C4.5算法</h2><p>使用<em>信息增益率</em>来构建,在树的构建过程中会进行剪枝操作的优化,能够自动完成对连续属性的离散化处理。选择信息增益率大的属性进行分割</p>
+<ul>
+<li>优点：准确率较高,实现简单</li>
+<li>缺点：对数据集需要进行多次顺序扫描和排序,效率较低。</li>
+</ul>
+<h2 id="CART算法"><a href="#CART算法" class="headerlink" title="CART算法"></a>CART算法</h2><p>使用<em>基尼系数</em>作为数据纯度的量化指标来构建,选择<em>GINI增益率</em>来分割，越大的即作为当前数据集的分割属性.可用于分类和回归。（二叉树构建）</p>
+<h1 id="回归树原理"><a href="#回归树原理" class="headerlink" title="回归树原理"></a>回归树原理</h1><h1 id="决策树防止过拟合手段"><a href="#决策树防止过拟合手段" class="headerlink" title="决策树防止过拟合手段"></a>决策树防止过拟合手段</h1><p>剪枝是决策树学习算法对付过拟合的主要手段。决策树剪枝的基本策略有“预剪枝”和“后剪枝”。</p>
+<h2 id="预剪枝"><a href="#预剪枝" class="headerlink" title="预剪枝"></a>预剪枝</h2><p>指在决策树生成过程中，对每个结点在划分前先进行估计，若当前结点的划分不能带来决策树泛化性能提升，则停止划分并将当前结点标记为叶节点。</p>
+<h2 id="后剪枝"><a href="#后剪枝" class="headerlink" title="后剪枝"></a>后剪枝</h2><p>指先从训练集生成一颗完整的决策树，然后自底向上地对非结点进行考察，若讲该结点对应的子树替换成叶节点能带来决策树泛化性能的提升，则将该子树替换成叶节点。</p>
+<h1 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h1><p>自助法（bootstrap）：<br>训练集是对于原数据集的有放回抽样，如果原始数据集N，可以证明，大小为N的自助样本大约包含原数据63.2%的记录。当N充分大的时候，1-（1-1/N）^(N) 概率逼近 1-e^(-1)=0.632。抽样 b 次，产生 b 个bootstrap样本，则，总准确率为（accs为包含所有样本计算的准确率。</p>
+<p>准确度的区间估计：<br>将分类问题看做二项分布，则有：<br>令 X 为模型正确分类，p 为准确率，X 服从均值 Np、方差 Np（1-p）的二项分布。acc=X/N为均值 p，方差 p（1-p）/N 的二项分布。acc 的置信区间：</p>
+<h1 id="sklearn参数详解，Python绘制决策树"><a href="#sklearn参数详解，Python绘制决策树" class="headerlink" title="sklearn参数详解，Python绘制决策树"></a>sklearn参数详解，Python绘制决策树</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DecisionTreeRegressor(criterion=“mse”,</span><br><span class="line">            splitter=“best”,</span><br><span class="line">            max_depth=<span class="literal">None</span>,</span><br><span class="line">            min_samples_split=<span class="number">2</span>,</span><br><span class="line">            min_samples_leaf=<span class="number">1</span>,</span><br><span class="line">            min_weight_fraction_leaf=<span class="number">0.</span>,</span><br><span class="line">            max_features=<span class="literal">None</span>,</span><br><span class="line">            random_state=<span class="literal">None</span>,</span><br><span class="line">            max_leaf_nodes=<span class="literal">None</span>,</span><br><span class="line">            min_impurity_decrease=<span class="number">0.</span>,</span><br><span class="line">            min_impurity_split=<span class="literal">None</span>,</span><br><span class="line">            presort=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="参数含义"><a href="#参数含义" class="headerlink" title="参数含义"></a>参数含义</h2><h3 id="criterion-string-optional-default-“mse”"><a href="#criterion-string-optional-default-“mse”" class="headerlink" title="criterion:string, optional (default=“mse”)"></a>criterion:string, optional (default=“mse”)</h3><p>它指定了切分质量的评价准则。默认为’mse’(mean squared error)。</p>
+<h3 id="splitter-string-optional-default-“best”"><a href="#splitter-string-optional-default-“best”" class="headerlink" title="splitter:string, optional (default=“best”)"></a>splitter:string, optional (default=“best”)</h3><p>它指定了在每个节点切分的策略。有两种切分策咯：</p>
+<ol>
+<li>splitter=‘best’:表示选择最优的切分特征和切分点。</li>
+<li>splitter=‘random’:表示随机切分。</li>
+</ol>
+<h3 id="max-depth-int-or-None-optional-default-None"><a href="#max-depth-int-or-None-optional-default-None" class="headerlink" title="max_depth:int or None, optional (default=None)"></a>max_depth:int or None, optional (default=None)</h3><p>指定树的最大深度。如果为None，则表示树的深度不限，直到<br>每个叶子都是纯净的，即叶节点中所有样本都属于同一个类别，<br>或者叶子节点中包含小于min_samples_split个样本。</p>
+<h3 id="min-samples-split-int-float-optional-default-2"><a href="#min-samples-split-int-float-optional-default-2" class="headerlink" title="min_samples_split:int, float, optional (default=2)"></a>min_samples_split:int, float, optional (default=2)</h3><p>整数或者浮点数，默认为2。它指定了分裂一个内部节点(非叶子节点)</p>
+<p>需要的最小样本数。如果为浮点数(0到1之间)，最少样本分割数为ceil(min_samples_split * n_samples)</p>
+<h3 id="min-samples-leaf-int-float-optional-default-1"><a href="#min-samples-leaf-int-float-optional-default-1" class="headerlink" title="min_samples_leaf:int, float, optional (default=1)"></a>min_samples_leaf:int, float, optional (default=1)</h3><p>整数或者浮点数，默认为1。它指定了每个叶子节点包含的最少样本数。</p>
+<p>如果为浮点数(0到1之间)，每个叶子节点包含的最少样本数为ceil(min_samples_leaf * n_samples)</p>
+<h3 id="min-weight-fraction-leaf-float-optional-default-0"><a href="#min-weight-fraction-leaf-float-optional-default-0" class="headerlink" title="min_weight_fraction_leaf:float, optional (default=0.)"></a>min_weight_fraction_leaf:float, optional (default=0.)</h3><p>它指定了叶子节点中样本的最小权重系数。默认情况下样本有相同的权重。</p>
+<h3 id="max-feature-int-float-string-or-None-optional-default-None"><a href="#max-feature-int-float-string-or-None-optional-default-None" class="headerlink" title="max_feature:int, float, string or None, optional (default=None)"></a>max_feature:int, float, string or None, optional (default=None)</h3><p>可以是整数，浮点数，字符串或者None。默认为None。</p>
+<ol>
+<li>如果是整数，则每次节点分裂只考虑max_feature个特征。</li>
+<li>如果是浮点数(0到1之间)，则每次分裂节点的时候只考虑int(max_features * n_features)个特征。</li>
+<li>如果是字符串’auto’,max_features=n_features。</li>
+<li>如果是字符串’sqrt’,max_features=sqrt(n_features)。</li>
+<li>如果是字符串’log2’,max_features=log2(n_features)。</li>
+<li>如果是None，max_feature=n_feature。</li>
+</ol>
+<h3 id="random-state-int-RandomState-instance-or-None-optional-default-None"><a href="#random-state-int-RandomState-instance-or-None-optional-default-None" class="headerlink" title="random_state:int, RandomState instance or None, optional (default=None)"></a>random_state:int, RandomState instance or None, optional (default=None)</h3><ol>
+<li>如果为整数，则它指定了随机数生成器的种子。</li>
+<li>如果为RandomState实例，则指定了随机数生成器。</li>
+<li>如果为None，则使用默认的随机数生成器。</li>
+</ol>
+<h3 id="max-leaf-nodes-int-or-None-optional-default-None"><a href="#max-leaf-nodes-int-or-None-optional-default-None" class="headerlink" title="max_leaf_nodes:int or None, optional (default=None)"></a>max_leaf_nodes:int or None, optional (default=None)</h3><ol>
+<li>如果为None，则叶子节点数量不限。</li>
+<li>如果不为None，则max_depth被忽略。</li>
+</ol>
+<h3 id="min-impurity-decrease-float-optional-default-0"><a href="#min-impurity-decrease-float-optional-default-0" class="headerlink" title="min_impurity_decrease:float, optional (default=0.)"></a>min_impurity_decrease:float, optional (default=0.)</h3><p>如果节点的分裂导致不纯度的减少(分裂后样本比分裂前更加纯净)大于或等于min_impurity_decrease，则分裂该节点。</p>
+<h3 id="min-impurity-split-float"><a href="#min-impurity-split-float" class="headerlink" title="min_impurity_split:float"></a>min_impurity_split:float</h3><p>树生长过程中早停止的阈值。如果当前节点的不纯度高于阈值，节点将分裂，否则它是叶子节点。<br>这个参数已经被弃用。用min_impurity_decrease代替了min_impurity_split。</p>
+<h3 id="presort：-bool-optional-default-False"><a href="#presort：-bool-optional-default-False" class="headerlink" title="presort： bool, optional (default=False)"></a>presort： bool, optional (default=False)</h3><p>指定是否需要提前排序数据从而加速寻找最优切分的过程。设置为True时，对于大数据集<br>会减慢总体的训练过程；但是对于一个小数据集或者设定了最大深度的情况下，会加速训练过程。</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><h3 id="feature-importances-array-of-shape-n-features"><a href="#feature-importances-array-of-shape-n-features" class="headerlink" title="feature_importances: array of shape = [n_features]"></a>feature_importances: array of shape = [n_features]</h3><p>特征重要性。该值越高，该特征越重要。<br>特征的重要性为该特征导致的评价准则的（标准化的）总减少量。它也被称为基尼的重要性</p>
+<h3 id="maxfeature-int"><a href="#maxfeature-int" class="headerlink" title="maxfeature: int"></a>max<em>feature</em>: int</h3><p>max_features推断值。</p>
+<h3 id="nfeatures：int"><a href="#nfeatures：int" class="headerlink" title="nfeatures：int"></a>n<em>features</em>：int</h3><p>执行fit的时候，特征的数量。</p>
+<h3 id="noutputs-int"><a href="#noutputs-int" class="headerlink" title="noutputs : int"></a>n<em>outputs</em> : int</h3><p>执行fit的时候，输出的数量。</p>
+<blockquote>
+<p>Notes</p>
+</blockquote>
+<p>控制树大小的参数的默认值（例如max_depth，min_samples_leaf等）导致完全成长和未剪枝的树，<br>这些树在某些数据集上可能表现很好。为减少内存消耗，应通过设置这些参数值来控制树的复杂度和大小。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="decision-path-X"><a href="#decision-path-X" class="headerlink" title="decision_path(X)"></a>decision_path(X)</h3><p>返回X的决策路径</p>
+<h3 id="fit-X-y"><a href="#fit-X-y" class="headerlink" title="fit(X, y)"></a>fit(X, y)</h3><p>在数据集(X,y)上使用决策树模型</p>
+<h3 id="get-params-deep"><a href="#get-params-deep" class="headerlink" title="get_params([deep])"></a>get_params([deep])</h3><p>获取模型的参数</p>
+<h3 id="predict-X"><a href="#predict-X" class="headerlink" title="predict(X)"></a>predict(X)</h3><p>预测数据值X的标签</p>
+<h3 id="predict-log-proba-X"><a href="#predict-log-proba-X" class="headerlink" title="predict_log_proba(X)"></a>predict_log_proba(X)</h3><p>返回每个类别的概率值的对数</p>
+<h3 id="predict-proba-X"><a href="#predict-proba-X" class="headerlink" title="predict_proba(X)"></a>predict_proba(X)</h3><p>返回每个类别的概率值（有几类就返回几列值）</p>
+<h3 id="score-X-y"><a href="#score-X-y" class="headerlink" title="score(X,y)"></a>score(X,y)</h3><p>返回给定测试集和对应标签的平均准确率</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>西瓜书</p>
+<p>cs229吴恩达机器学习课程</p>
+<p>李航统计学习</p>
+<p>谷歌搜索</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/05/nlp-task2/" rel="next" title="任务二-特征提取">
+                <i class="fa fa-chevron-left"></i> 任务二-特征提取
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/07/nlp-task3/" rel="prev" title="任务三-特征选择">
+                任务三-特征选择 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#信息论基础（熵-联合熵-条件熵-信息增益-基尼不纯度）"><span class="nav-number">1.</span> <span class="nav-text">信息论基础（熵 联合熵 条件熵 信息增益 基尼不纯度）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#熵"><span class="nav-number">1.1.</span> <span class="nav-text">熵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联合熵"><span class="nav-number">1.2.</span> <span class="nav-text">联合熵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件熵"><span class="nav-number">1.3.</span> <span class="nav-text">条件熵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息增益"><span class="nav-number">1.4.</span> <span class="nav-text">信息增益</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基尼不存度"><span class="nav-number">1.5.</span> <span class="nav-text">基尼不存度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树的不同分类算法（ID3算法、C4-5、CART分类树）的原理及应用场景"><span class="nav-number">2.</span> <span class="nav-text">决策树的不同分类算法（ID3算法、C4.5、CART分类树）的原理及应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ID3算法"><span class="nav-number">2.1.</span> <span class="nav-text">ID3算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C4-5算法"><span class="nav-number">2.2.</span> <span class="nav-text">C4.5算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CART算法"><span class="nav-number">2.3.</span> <span class="nav-text">CART算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回归树原理"><span class="nav-number">3.</span> <span class="nav-text">回归树原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#决策树防止过拟合手段"><span class="nav-number">4.</span> <span class="nav-text">决策树防止过拟合手段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预剪枝"><span class="nav-number">4.1.</span> <span class="nav-text">预剪枝</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后剪枝"><span class="nav-number">4.2.</span> <span class="nav-text">后剪枝</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型评估"><span class="nav-number">5.</span> <span class="nav-text">模型评估</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sklearn参数详解，Python绘制决策树"><span class="nav-number">6.</span> <span class="nav-text">sklearn参数详解，Python绘制决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参数含义"><span class="nav-number">6.1.</span> <span class="nav-text">参数含义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#criterion-string-optional-default-“mse”"><span class="nav-number">6.1.1.</span> <span class="nav-text">criterion:string, optional (default=“mse”)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splitter-string-optional-default-“best”"><span class="nav-number">6.1.2.</span> <span class="nav-text">splitter:string, optional (default=“best”)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#max-depth-int-or-None-optional-default-None"><span class="nav-number">6.1.3.</span> <span class="nav-text">max_depth:int or None, optional (default=None)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#min-samples-split-int-float-optional-default-2"><span class="nav-number">6.1.4.</span> <span class="nav-text">min_samples_split:int, float, optional (default=2)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#min-samples-leaf-int-float-optional-default-1"><span class="nav-number">6.1.5.</span> <span class="nav-text">min_samples_leaf:int, float, optional (default=1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#min-weight-fraction-leaf-float-optional-default-0"><span class="nav-number">6.1.6.</span> <span class="nav-text">min_weight_fraction_leaf:float, optional (default=0.)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#max-feature-int-float-string-or-None-optional-default-None"><span class="nav-number">6.1.7.</span> <span class="nav-text">max_feature:int, float, string or None, optional (default=None)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#random-state-int-RandomState-instance-or-None-optional-default-None"><span class="nav-number">6.1.8.</span> <span class="nav-text">random_state:int, RandomState instance or None, optional (default=None)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#max-leaf-nodes-int-or-None-optional-default-None"><span class="nav-number">6.1.9.</span> <span class="nav-text">max_leaf_nodes:int or None, optional (default=None)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#min-impurity-decrease-float-optional-default-0"><span class="nav-number">6.1.10.</span> <span class="nav-text">min_impurity_decrease:float, optional (default=0.)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#min-impurity-split-float"><span class="nav-number">6.1.11.</span> <span class="nav-text">min_impurity_split:float</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#presort：-bool-optional-default-False"><span class="nav-number">6.1.12.</span> <span class="nav-text">presort： bool, optional (default=False)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">6.2.</span> <span class="nav-text">属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#feature-importances-array-of-shape-n-features"><span class="nav-number">6.2.1.</span> <span class="nav-text">feature_importances: array of shape = [n_features]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maxfeature-int"><span class="nav-number">6.2.2.</span> <span class="nav-text">maxfeature: int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nfeatures：int"><span class="nav-number">6.2.3.</span> <span class="nav-text">nfeatures：int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#noutputs-int"><span class="nav-number">6.2.4.</span> <span class="nav-text">noutputs : int</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">6.3.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#decision-path-X"><span class="nav-number">6.3.1.</span> <span class="nav-text">decision_path(X)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fit-X-y"><span class="nav-number">6.3.2.</span> <span class="nav-text">fit(X, y)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-params-deep"><span class="nav-number">6.3.3.</span> <span class="nav-text">get_params([deep])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#predict-X"><span class="nav-number">6.3.4.</span> <span class="nav-text">predict(X)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#predict-log-proba-X"><span class="nav-number">6.3.5.</span> <span class="nav-text">predict_log_proba(X)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#predict-proba-X"><span class="nav-number">6.3.6.</span> <span class="nav-text">predict_proba(X)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#score-X-y"><span class="nav-number">6.3.7.</span> <span class="nav-text">score(X,y)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/03/05/basic-task3/";
+    this.page.identifier = "2019/03/05/basic-task3/";
+    this.page.title = '任务三-决策树算法梳理';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

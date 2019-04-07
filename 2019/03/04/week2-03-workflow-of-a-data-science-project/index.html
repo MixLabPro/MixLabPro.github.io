@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="与机器学习项目不同，数据科学项目的输出通常是一组可操作的见解，一组可能导致您以不同方式执行操作的见解。 因此，数据科学项目的工作流程与机器学习项目不同。 让我们来看看数据科学项目的一个步骤。">
+<meta name="keywords" content="ML,DL,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="week2-3 Workflow of a data science project 数据科学项目的工作流程">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-03-workflow-of-a-data-science-project/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="与机器学习项目不同，数据科学项目的输出通常是一组可操作的见解，一组可能导致您以不同方式执行操作的见解。 因此，数据科学项目的工作流程与机器学习项目不同。 让我们来看看数据科学项目的一个步骤。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-0e774d4914a9b922.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-25ffbc723918b6dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-982894314d192972.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-a311d8c3a3d0ee31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-04-04T14:53:09.476Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="week2-3 Workflow of a data science project 数据科学项目的工作流程">
+<meta name="twitter:description" content="与机器学习项目不同，数据科学项目的输出通常是一组可操作的见解，一组可能导致您以不同方式执行操作的见解。 因此，数据科学项目的工作流程与机器学习项目不同。 让我们来看看数据科学项目的一个步骤。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/910914-0e774d4914a9b922.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-03-workflow-of-a-data-science-project/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>week2-3 Workflow of a data science project 数据科学项目的工作流程 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-03-workflow-of-a-data-science-project/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">week2-3 Workflow of a data science project 数据科学项目的工作流程
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-04 11:27:04" itemprop="dateCreated datePublished" datetime="2019-03-04T11:27:04+08:00">2019-03-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-04 22:53:09" itemprop="dateModified" datetime="2019-04-04T22:53:09+08:00">2019-04-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI-For-Everyone/" itemprop="url" rel="index"><span itemprop="name">AI For Everyone</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/04/week2-03-workflow-of-a-data-science-project/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/04/week2-03-workflow-of-a-data-science-project/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/910914-0e774d4914a9b922.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-3-0.png"></p>
+<p>与机器学习项目不同，数据科学项目的输出通常是一组可操作的见解，一组可能导致您以不同方式执行操作的见解。</p>
+<p>因此，数据科学项目的工作流程与机器学习项目不同。</p>
+<p>让我们来看看数据科学项目的一个步骤。</p>
+<a id="more"></a>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-25ffbc723918b6dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-3-1.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-982894314d192972.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-3-2.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-a311d8c3a3d0ee31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-3-3.png"></p>
+<p>作为我们的运行示例，假设您想要优化销售渠道。</p>
+<p>假设您经营电子商务或在线购物网站销售咖啡杯，以便用户向您购买咖啡杯，通常会有一系列步骤。</p>
+<p>首先，他们会看到我们的网站，看看不同的咖啡杯报价，然后最终，他们必须进入产品页面，然后他们将不得不穿上他们的购物车，然后去购物车页面，然后他们终于要结账了。</p>
+<p>因此，如果您想优化销售渠道以确保尽可能多的人了解这些步骤，您如何使用数据科学来帮助解决这个问题？</p>
+<p>让我们看看数据科学项目的关键步骤。</p>
+<p>第一步是收集数据。</p>
+<p>因此，在我们看到的网站上，您可能拥有一个数据集，用于存储不同用户何时访问不同的网页。</p>
+<p>在这个简单的例子中，我假设你可以找出用户来自的国家，例如，通过查看计算机的地址，称为IP地址，并弄清楚他们来自哪个国家。</p>
+<p>但实际上，您通常可以获得有关用户的更多数据，而不仅仅是他们来自的国家。</p>
+<p>第二步是分析数据。</p>
+<p>您的数据科学团队可能会对影响销售渠道绩效的因素有很多想法。</p>
+<p>例如，他们可能会认为海外客户会被国际运输成本吓跑，这就是为什么很多人都会去结账页面而不是实际结账的原因。</p>
+<p>如果这是真的，那么您可能会考虑是否将运输成本的部分纳入实际产品成本，或者您的数据科学团队可能会认为数据中存在明显的假期。</p>
+<p>也许更多的人会在假日购物，因为他们正在购买礼物，或者更少的人会在假期购物，因为他们待在家里，而不是有时从他们的工作电脑购物。</p>
+<p>在一些国家，可能会有一些时间的情况，在那里观察午睡，所以休息时间就像下午休息一样，在线购物者可能会减少，而且大豆的销售可能会下降。</p>
+<p>然后，他们可能会建议您在午睡期间减少广告费用，因为那时人们会更少上网购买。</p>
+<p>因此，一个优秀的数据科学团队可能会有很多想法，所以他们会尝试很多想法，或者会说多次迭代以获得良好的见解。</p>
+<p>最后，数据科学团队将这些见解提炼到较少数量的假设，这些假设是关于哪些方面可能进展顺利，哪些方面可能会变得很糟糕，以及少数建议的行动，例如将运输成本纳入产品成本而不是将其纳入产品成本单独的订单项。</p>
+<p>当您采取一些建议的操作并将这些更改部署到您的网站时，您就会开始获取新数据，因为用户在午睡时不同地宣传或者有不同的检查策略时会表现出不同的行为。</p>
+<p>然后，您的数据科学团队可以继续收集数据，我们会定期分析新数据，看看他们是否能够提出更好的假设，以及随着时间的推移采取更好的行动。</p>
+<p>因此，数据科学项目的关键步骤是收集数据，分析数据，然后建议假设和行动，然后继续获取数据并定期重新分析数据。</p>
+<p>让我们采用这个框架并将其应用于一个新问题，以优化制造生产线。</p>
+<p>因此，我们将采取这三个步骤，并在下一张幻灯片中使用它们。</p>
+<p>假设您经营的工厂每月生产数千个咖啡杯，您希望优化生产线。</p>
+<p>因此，这些是制造咖啡杯的关键步骤。</p>
+<p>第一步是混合粘土，所以要确保加入适量的水。</p>
+<p>第二步是采用这种粘土来塑造杯子。</p>
+<p>然后你必须添加釉料，所以添加着色，保护盖。</p>
+<p>然后你必须加热这个杯子，我们称之为烧窑。</p>
+<p>最后，你会检查马克杯，以确保马克杯中没有凹痕，并且在将它送给顾客之前它没有破裂。</p>
+<p>因此，一个常见的问题制造是优化该生产线的产量，以确保尽可能少的损坏的咖啡杯生产，因为那些是你扔掉的咖啡杯，导致时间和材料浪费。</p>
+<p>数据科学项目的第一步是什么？</p>
+<p>我希望你记得从最后一张幻灯片开始，第一步是收集数据。</p>
+<p>因此，例如，您可以保存关于您混合的不同批次粘土的数据，例如谁提供粘土以及混合了多长时间，或者粘土中含有多少水分，您添加了多少水。</p>
+<p>您可能还会收集有关您制作的不同批次杯子的数据。</p>
+<p>那批次的湿度是多少？</p>
+<p>窑内的温度是多少？你在窑里烧了多久？</p>
+<p>鉴于所有这些数据，您将要求数据科学团队分析数据，他们将像以前一样，迭代许多时间以获得良好的见解。</p>
+<p>所以，他们可能会发现，例如，每当湿度太低而且温度太高以至于杯子里有裂缝，或者他们可能会发现因为下午的温暖，你需要调整湿度和温度，这取决于一天中的时间。</p>
+<p>根据您的数据科学团队的见解，您可以获得关于如何改变操作和生产线以提高生产线生产率的假设和行动的建议。</p>
+<p>部署更改后，您将获得可以重新分析的新数据，以便他们可以继续优化您的生产线的性能。</p>
+<p>总而言之，数据科学项目的关键步骤是收集数据，分析数据，然后建议假设和行动。</p>
+<p>在这个视频和最后一个视频中，您看到了一些机器学习项目和数据科学项目的例子。</p>
+<p>事实证明，机器学习和数据科学正在影响几乎所有单一的工作职能。</p>
+<p>我想在下一个视频中做的是向您展示这些想法如何影响许多工作职能，包括您的工作职能，当然也包括您的许多同事。</p>
+<p>让我们继续下一个视频。</p>
+<p>讲师：<a href="https://www.coursera.org/instructor/andrewng" target="_blank" rel="noopener">Andrew Ng</a><br>课程：<a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank" rel="noopener">https://www.coursera.org/learn/ai-for-everyone</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/DL/" rel="tag"># DL</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/week2-02-workflow-of-a-machine-learning-project/" rel="next" title="week2-2 Workflow of a machine learning project 机器学习项目的工作流程">
+                <i class="fa fa-chevron-left"></i> week2-2 Workflow of a machine learning project 机器学习项目的工作流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/week2-04-every-job-function-needs-to-learn-how-to-use-data/" rel="prev" title="week2-4 Every job function needs to learn how to use data 每个工作职能都需要学习如何使用数据">
+                week2-4 Every job function needs to learn how to use data 每个工作职能都需要学习如何使用数据 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-03-workflow-of-a-data-science-project/";
+    this.page.identifier = "2019/03/04/week2-03-workflow-of-a-data-science-project/";
+    this.page.title = 'week2-3 Workflow of a data science project 数据科学项目的工作流程';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

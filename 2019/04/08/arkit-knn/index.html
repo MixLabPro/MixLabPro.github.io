@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARKit+Swift 实现机器学习算法 k-NN">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/04/08/arkit-knn/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-b07109e3217bbb05.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-f04577d955ab8874.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-19864d7b9029285b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-4e95b990e8373f8b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-f2b1b066c35a523f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-04-07T16:20:41.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ARKit+Swift 实现机器学习算法 k-NN">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/910914-b07109e3217bbb05.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/04/08/arkit-knn/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ARKit+Swift 实现机器学习算法 k-NN | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/04/08/arkit-knn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ARKit+Swift 实现机器学习算法 k-NN
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-08 00:19:31 / 修改时间：00:20:41" itemprop="dateCreated datePublished" datetime="2019-04-08T00:19:31+08:00">2019-04-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/04/08/arkit-knn/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/08/arkit-knn/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/910914-b07109e3217bbb05.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="kNN-Swift-2.png"></p>
+<a id="more"></a>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-f04577d955ab8874.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="k.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-19864d7b9029285b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ARKit-KNN-2.png"></p>
+<h1 id="维基介绍"><a href="#维基介绍" class="headerlink" title="维基介绍"></a>维基介绍</h1><p>在<a href="https://zh.wikipedia.org/wiki/%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB" title="模式识别" target="_blank" rel="noopener">模式识别</a>领域中，<strong>最近邻居法</strong>（<strong>KNN</strong>算法，又译<strong>K-近邻算法</strong>）是一种用于<a href="https://zh.wikipedia.org/wiki/%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98" title="分类问题" target="_blank" rel="noopener">分类</a>和<a href="https://zh.wikipedia.org/wiki/%E8%BF%B4%E6%AD%B8%E5%88%86%E6%9E%90" title="回归分析" target="_blank" rel="noopener">回归</a>的<a href="https://zh.wikipedia.org/wiki/%E7%84%A1%E6%AF%8D%E6%95%B8%E7%B5%B1%E8%A8%88" title="非参数统计" target="_blank" rel="noopener">非参数统计</a>方法<sup><a href="https://zh.wikipedia.org/wiki/%E6%9C%80%E8%BF%91%E9%84%B0%E5%B1%85%E6%B3%95#cite_note-1" target="_blank" rel="noopener">[1]</a></sup>。在这两种情况下，输入包含<a href="https://zh.wikipedia.org/w/index.php?title=%E7%89%B9%E5%BE%B5%E7%A9%BA%E9%96%93(%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92" target="_blank" rel="noopener">特征空间（Feature Space）</a>&amp;action=edit&amp;redlink=1)中的<strong><em>k</em></strong>个最接近的训练样本。</p>
+<ul>
+<li><p>在<em>k-NN分类</em>中，输出是一个分类族群。一个对象的分类是由其邻居的“多数表决”确定的，<em>k</em>个最近邻居（<em>k</em>为正<a href="https://zh.wikipedia.org/wiki/%E6%95%B4%E6%95%B0" title="整数" target="_blank" rel="noopener">整数</a>，通常较小）中最常见的分类决定了赋予该对象的类别。若<em>k</em> = 1，则该对象的类别直接由最近的一个节点赋予。</p>
+</li>
+<li><p>在<em>k-NN回归</em>中，输出是该对象的属性值。该值是其<em>k</em>个最近邻居的值的平均值。</p>
+</li>
+</ul>
+<p>最近邻居法采用向量空间模型来分类，概念为相同类别的案例，彼此的相似度高，而可以借由计算与已知类别案例之相似度，来评估未知类别案例可能的分类。</p>
+<p>K-NN是一种<a href="https://zh.wikipedia.org/w/index.php?title=%E5%9F%BA%E4%BA%8E%E5%AE%9E%E4%BE%8B%E7%9A%84%E5%AD%A6%E4%B9%A0&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">基于实例的学习</a>，或者是局部近似和将所有计算推迟到分类之后的<a href="https://zh.wikipedia.org/w/index.php?title=%E6%83%B0%E6%80%A7%E5%AD%A6%E4%B9%A0&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">惰性学习</a>。k-近邻算法是所有的<a href="https://zh.wikipedia.org/wiki/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0" title="机器学习" target="_blank" rel="noopener">机器学习</a>算法中最简单的之一。</p>
+<p>无论是分类还是回归，衡量邻居的权重都非常有用，使较近邻居的权重比较远邻居的权重大。例如，一种常见的加权方案是给每个邻居权重赋值为1/ d，其中d是到邻居的距离。<sup><a href="https://zh.wikipedia.org/wiki/%E6%9C%80%E8%BF%91%E9%84%B0%E5%B1%85%E6%B3%95#cite_note-2" target="_blank" rel="noopener">[注 1]</a></sup></p>
+<p>邻居都取自一组已经正确分类（在回归的情况下，指属性值正确）的对象。虽然没要求明确的训练步骤，但这也可以当作是此算法的一个训练样本集。</p>
+<p>k-近邻算法的缺点是对数据的局部结构非常敏感。本算法与<a href="https://zh.wikipedia.org/wiki/K-%E5%B9%B3%E5%9D%87%E7%AE%97%E6%B3%95" title="K-平均算法" target="_blank" rel="noopener">K-平均算法</a>（另一流行的机器学习技术）没有任何关系，请勿与之混淆。</p>
+<h1 id="ARKit-Swift-k-NN-实现"><a href="#ARKit-Swift-k-NN-实现" class="headerlink" title="ARKit + Swift + k-NN 实现"></a>ARKit + Swift + k-NN 实现</h1><p>创建 KNN 类（结构体 <code>struct</code> 也行，我是为了 与 <code>sklearn</code> 尽量一致）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/// KNN</span><br><span class="line">public struct KNN&lt;Feature, Label: Hashable&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>属性</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// Number of neighbors to use by default for :meth:`kneighbors` queries</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> k: <span class="type">Int</span></span><br><span class="line"><span class="comment">/// Data set</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> <span class="type">X</span> = [<span class="type">Feature</span>]()</span><br><span class="line"><span class="comment">/// Target values</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">var</span> y = [<span class="type">Label</span>]()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/// distance</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">let</span> distanceMetric: (<span class="number">_</span> x1: <span class="type">Feature</span>, <span class="number">_</span> x2: <span class="type">Feature</span>) -&gt; <span class="type">Double</span></span><br><span class="line"><span class="comment">/// draw radius for debug</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">var</span> debugRadiusCallback: (([<span class="type">Double</span>]) -&gt; ())? = <span class="literal">nil</span></span><br></pre></td></tr></table></figure>
+<p>数据：</p>
+<ul>
+<li><code>k</code>: 指定取 k 个最接近的训练样本</li>
+<li><code>X</code>: 样本特征 （数组）一般要传数组的数组</li>
+<li><code>y</code>: 样本标签 （数组）</li>
+</ul>
+<p>辅助：</p>
+<ul>
+<li><code>distanceMetric</code>: 用来计算距离的函数</li>
+<li><code>debugRadiusCallback</code>: 调度时候用，主要是画出最近的 k 个样本范围</li>
+</ul>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// constructorLabels for xTest</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// - Parameters:</span></span><br><span class="line"><span class="comment">///   - k: k</span></span><br><span class="line"><span class="comment">///   - distanceMetric: distance</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">init</span> (k: <span class="type">Int</span>, distanceMetric: @escaping (<span class="number">_</span> x1: <span class="type">Feature</span>, <span class="number">_</span> x2: <span class="type">Feature</span>) -&gt; <span class="type">Double</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/// train</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// - Parameters:</span></span><br><span class="line"><span class="comment">///   - X: Training set</span></span><br><span class="line"><span class="comment">///   - y: Target values</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">fit</span><span class="params">(X: [Feature], y: [Label])</span></span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/// Labels for xTest</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// - Parameter XTest: Test set</span></span><br><span class="line"><span class="comment">/// - Returns: Target values</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">predict</span><span class="params">(XTest: [Feature])</span></span> -&gt; [<span class="type">Label</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>init()</code>: 构造函数 需要预先决定 <code>k</code> 和距离计算方法</li>
+<li><code>fit()</code>: 拟合目标函数，kNN 不需要拟合，只要记下数据即可</li>
+<li><code>predict()</code>: 预测给定的特征，返回对应的标签</li>
+</ul>
+<h2 id="距离计算"><a href="#距离计算" class="headerlink" title="距离计算"></a>距离计算</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">struct</span> <span class="title">Distance</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/// Helper function to calculate euclidian distance</span></span><br><span class="line">    <span class="comment">///</span></span><br><span class="line">    <span class="comment">/// - Parameters:</span></span><br><span class="line">    <span class="comment">///   - x0: source coordinate</span></span><br><span class="line">    <span class="comment">///   - x1: target coordinate</span></span><br><span class="line">    <span class="comment">/// - Returns: euclidian distance</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">euclideanDistance</span><span class="params">(<span class="number">_</span> x0: [Double], <span class="number">_</span> x1: [Double])</span></span> -&gt; <span class="type">Double</span> </span><br><span class="line"></span><br><span class="line">    <span class="comment">// Convenience</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">euclideanDistance</span><span class="params">()</span></span> -&gt; (([<span class="type">Double</span>], [<span class="type">Double</span>]) -&gt; <span class="type">Double</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123; <span class="keyword">self</span>.euclideanDistance($<span class="number">0</span>, $<span class="number">1</span>) &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这里使用 欧式距离（Euclidean Distance）</p>
+<p>KNN 使用：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testKNN</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> kNN = <span class="type">KNN</span>&lt;<span class="type">Double</span>, <span class="type">Int</span>&gt;(k: <span class="number">3</span>)</span><br><span class="line">    <span class="keyword">let</span> <span class="type">X</span> = [[<span class="number">1.0</span>], [<span class="number">2</span>], [<span class="number">3</span>], [<span class="number">4</span>]]</span><br><span class="line">    <span class="keyword">let</span> y = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]</span><br><span class="line">    kNN.fit(<span class="type">X</span>, y)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> label = kNN.predict([[<span class="number">1.2</span>], [<span class="number">3</span>]])</span><br><span class="line">    </span><br><span class="line">    <span class="type">XCTAssertEqual</span>([<span class="number">0</span>, <span class="number">1</span>], label)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="显示-2-维"><a href="#显示-2-维" class="headerlink" title="显示 2 维"></a>显示 2 维</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">MLStep</span>: <span class="title">Int</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> train</span><br><span class="line">    <span class="keyword">case</span> predict</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">GeometryType</span>: <span class="title">Int</span>  </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> box</span><br><span class="line">    <span class="keyword">case</span> pyramid</span><br><span class="line">    <span class="keyword">case</span> sphere</span><br><span class="line">    <span class="keyword">case</span> cylinder</span><br><span class="line">    <span class="keyword">case</span> cone</span><br><span class="line">    <span class="keyword">case</span> tube</span><br><span class="line">    <span class="keyword">case</span> torus</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>MLStep</code>： 分成 训练 和 预测 ，训练一次，可以一直预测。</li>
+<li><code>GeometryType</code>： 定义几种形状，这里定义给 <code>ARKIT</code> 使用的</li>
+</ul>
+<h2 id="KNNViewController"><a href="#KNNViewController" class="headerlink" title="KNNViewController"></a>KNNViewController</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KNNViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> radius: <span class="type">CGFloat</span> = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> <span class="type">X</span>: [[<span class="type">Double</span>]] = []</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> y: [<span class="type">GeometryType</span>] = []</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> <span class="type">XTest</span>: [[<span class="type">Double</span>]] = []</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> yTest: [<span class="type">GeometryType</span>] = []</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> radiuses: [<span class="type">Double</span>] = [] &#123;</span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (center, r) <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="type">XTest</span>, radiuses) &#123;</span><br><span class="line">                drawCircle(center: <span class="type">CGPoint</span>(x: center[<span class="number">0</span>], y: center[<span class="number">1</span>]), radius: <span class="type">CGFloat</span>(r))</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">var</span> predictLayers: [<span class="type">CALayer</span>] = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> model = <span class="type">KNN</span>&lt;[<span class="type">Double</span>], <span class="type">GeometryType</span>&gt;(k: <span class="number">1</span>, distanceMetric: <span class="type">Distance</span>.euclideanDistance())</span><br><span class="line"></span><br><span class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> kNNPickerView: <span class="type">UIPickerView!</span></span><br><span class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> panelView: <span class="type">UIView!</span></span><br><span class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> trainBarButtonItem: <span class="type">UIBarButtonItem!</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> mlStep = <span class="type">MLStep</span>.train &#123;</span><br><span class="line">        <span class="keyword">didSet</span> &#123;</span><br><span class="line">            <span class="keyword">switch</span> mlStep &#123;</span><br><span class="line">            <span class="keyword">case</span> .train:</span><br><span class="line">                trainBarButtonItem.title = <span class="string">"train"</span></span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                trainBarButtonItem.title = <span class="string">"predict"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加 <code>Layer</code> 到 <code>panelView</code> 上实现类别，2D 只分了三个类别，分别用 方形（红），三角形（蓝），花形（绿）表示。</p>
+<p>使用 <code>alpha</code> 表示预测类别，以预测样本为中心画一个圈，圈内为最近的 <code>k</code> 个样本。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">drawCircle</span><span class="params">(center: CGPoint, radius: CGFloat, alpha: CGFloat = <span class="number">0.1</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> r = <span class="keyword">self</span>.radius + radius</span><br><span class="line">    <span class="keyword">let</span> kNNCircleLayer = <span class="type">CAShapeLayer</span>()</span><br><span class="line">    kNNCircleLayer.path = <span class="type">UIBezierPath</span>(roundedRect: <span class="type">CGRect</span>(x: center.x - r, y: center.y - r, width: r * <span class="number">2</span>, height: r * <span class="number">2</span>), cornerRadius: r).cgPath</span><br><span class="line">    kNNCircleLayer.fillColor = <span class="type">UIColor</span>(red: <span class="number">0.1</span>, green: <span class="number">0.1</span>, blue: <span class="number">0.1</span>, alpha: alpha).cgColor</span><br><span class="line">    kNNCircleLayer.borderColor = <span class="type">UIColor</span>(red: <span class="number">0.8</span>, green: <span class="number">0.8</span>, blue: <span class="number">0.8</span>, alpha: <span class="number">1</span>).cgColor</span><br><span class="line">    kNNCircleLayer.borderWidth = <span class="number">1</span></span><br><span class="line">    panelView.layer.addSublayer(kNNCircleLayer)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>圆内为 <code>k</code> 个样本。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-4e95b990e8373f8b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="kNN-Swift-1.png"></p>
+<h1 id="ARKit-实现"><a href="#ARKit-实现" class="headerlink" title="ARKit 实现"></a>ARKit 实现</h1><p>能 3D 展示多好，别急，下面就是用 <code>ARKit</code> 实现的 3D 版本。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ARKNNViewController</span>: <span class="title">UIViewController</span></span></span><br></pre></td></tr></table></figure>
+<p>基本实现和 <code>ARKNNViewController</code> 类似。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">drawSphere</span><span class="params">(center: SCNVector3, radius: Float)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> geometry = <span class="type">SCNSphere</span>(radius: <span class="type">CGFloat</span>(radius) + <span class="keyword">self</span>.radius)</span><br><span class="line">  </span><br><span class="line">    geometry.firstMaterial?.diffuse.contents = <span class="type">UIColor</span>(red: <span class="number">0.1</span>, green: <span class="number">0.1</span>, blue: <span class="number">0.8</span>, alpha: <span class="number">0.7</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> node = <span class="type">SCNNode</span>()</span><br><span class="line">    node.geometry = geometry</span><br><span class="line">    node.position = center</span><br><span class="line">    sceneView.scene.rootNode.addChildNode(node)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是画最外面的范围球体，球体内为 <code>k</code> 个样本。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-f2b1b066c35a523f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ARKit-KNN-1.png"></p>
+<h1 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h1><p>b站视频：<a href="https://www.bilibili.com/video/av48647681/" target="_blank" rel="noopener">https://www.bilibili.com/video/av48647681/</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/04/mldemos/" rel="next" title="机器学习算法的开源可视化工具: MLDemos">
+                <i class="fa fa-chevron-left"></i> 机器学习算法的开源可视化工具: MLDemos
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#维基介绍"><span class="nav-number">1.</span> <span class="nav-text">维基介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARKit-Swift-k-NN-实现"><span class="nav-number">2.</span> <span class="nav-text">ARKit + Swift + k-NN 实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法"><span class="nav-number">3.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#距离计算"><span class="nav-number">3.1.</span> <span class="nav-text">距离计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示-2-维"><span class="nav-number">3.2.</span> <span class="nav-text">显示 2 维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KNNViewController"><span class="nav-number">3.3.</span> <span class="nav-text">KNNViewController</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARKit-实现"><span class="nav-number">4.</span> <span class="nav-text">ARKit 实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视频"><span class="nav-number">5.</span> <span class="nav-text">视频</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/04/08/arkit-knn/";
+    this.page.identifier = "2019/04/08/arkit-knn/";
+    this.page.title = 'ARKit+Swift 实现机器学习算法 k-NN';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

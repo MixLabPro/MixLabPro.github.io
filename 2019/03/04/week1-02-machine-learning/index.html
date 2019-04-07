@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="人工智能的兴起在很大程度上是由人工智能学中的一种工具驱动的。 在本视频中，您将了解什么是机器学习，因此最终，您希望我们将开始思考如何将机器学习应用于您的公司或行业。 最常用的机器学习类型是一种学习A到B或输入到输出映射的AI。 这称为监督学习。 我们来看一些例子。">
+<meta name="keywords" content="ML,DL,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="week1-2 Machine Learning 机器学习">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week1-02-machine-learning/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="人工智能的兴起在很大程度上是由人工智能学中的一种工具驱动的。 在本视频中，您将了解什么是机器学习，因此最终，您希望我们将开始思考如何将机器学习应用于您的公司或行业。 最常用的机器学习类型是一种学习A到B或输入到输出映射的AI。 这称为监督学习。 我们来看一些例子。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-da328347a3b0f5d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-63b04d26f0df08ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-1c605082bfe2793e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-a9a47034fe49b2fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-04-04T14:53:09.474Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="week1-2 Machine Learning 机器学习">
+<meta name="twitter:description" content="人工智能的兴起在很大程度上是由人工智能学中的一种工具驱动的。 在本视频中，您将了解什么是机器学习，因此最终，您希望我们将开始思考如何将机器学习应用于您的公司或行业。 最常用的机器学习类型是一种学习A到B或输入到输出映射的AI。 这称为监督学习。 我们来看一些例子。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/910914-da328347a3b0f5d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week1-02-machine-learning/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>week1-2 Machine Learning 机器学习 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week1-02-machine-learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">week1-2 Machine Learning 机器学习
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-04 11:26:55" itemprop="dateCreated datePublished" datetime="2019-03-04T11:26:55+08:00">2019-03-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-04 22:53:09" itemprop="dateModified" datetime="2019-04-04T22:53:09+08:00">2019-04-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI-For-Everyone/" itemprop="url" rel="index"><span itemprop="name">AI For Everyone</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/04/week1-02-machine-learning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/04/week1-02-machine-learning/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/910914-da328347a3b0f5d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1-2-0.png"></p>
+<p>人工智能的兴起在很大程度上是由人工智能学中的一种工具驱动的。</p>
+<p>在本视频中，您将了解什么是机器学习，因此最终，您希望我们将开始思考如何将机器学习应用于您的公司或行业。</p>
+<p>最常用的机器学习类型是一种学习A到B或输入到输出映射的AI。</p>
+<p>这称为监督学习。</p>
+<p>我们来看一些例子。</p>
+<a id="more"></a>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-63b04d26f0df08ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1-2-1.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-1c605082bfe2793e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1-2-2.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-a9a47034fe49b2fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1-2-3.png"></p>
+<p>如果输入A是电子邮件而输出B是否是垃圾邮件，则为零。</p>
+<p>然后，这是用于构建垃圾邮件过滤器的核心AI。</p>
+<p>或者，如果输入是音频剪辑，并且AI的工作是输出文本记录，则这是语音识别。</p>
+<p>更多的例子，如果你想输入英语并输出不同的语言，中文，西班牙语等等，那就是机器翻译。</p>
+<p>或者最有利可图的监督学习形式，这种类型的机器学习可能是在线广告，其中所有大型广告平台都有一块人工智能输入关于广告的一些信息，以及一些关于你的信息，并试图弄明白，你点击这个广告了吗？</p>
+<p>通过向您展示您最有可能点击的广告，这可能非常有利可图。</p>
+<p>也许不是最具启发性的应用程序，但今天肯定会产生巨大的经济影响。</p>
+<p>或者，如果你想建造一辆自动驾驶汽车，人工智能的关键部分之一就是在人工智能中输入图像，从雷达或其他传感器获取一些信息，并输出其他汽车的位置，这样你的自我驾驶carcan避开其他车。</p>
+<p>或者在制造业。</p>
+<p>我实际上已经在制造业中做了很多工作，你可以把你刚刚制造的东西的图片作为输入，例如手机装配线上的照片。</p>
+<p>这是一张手机的照片，而不是手机拍的照片，你想要输出，是否存在刮痕，或者是否存在凹痕，或者是否有任何其他缺陷？</p>
+<p>这是视觉检查，它帮助制造商减少或防止他们正在制造的东西中的缺陷。</p>
+<p>这组AI称为监督学习，只是学习输出到输出，或A到B映射。</p>
+<p>一方面，输入到输出，A到B似乎非常有限。</p>
+<p>但是，当您找到正确的应用场景时，这可能非常有价值。</p>
+<p>现在，监督学习的想法已存在了数十年。</p>
+<p>但它在过去几年里真的兴起了。</p>
+<p>为什么是这样？</p>
+<p>好吧，我的朋友问道，“嘿Andrew，为什么现在监督学习兴起了？”有一张图片我为他们画画。</p>
+<p>我现在想向你展示这张照片，你也可以为那些问你同样问题的人提供这张照片。</p>
+<p>让我们说在水平轴上绘制一个任务的数据量。</p>
+<p>因此，对于语音识别，这可能是您拥有的音频数据和转录的数量。</p>
+<p>在许多行业中，在过去的几十年中，数据量的增长确实增长了。</p>
+<p>由于互联网的兴起，计算机的兴起。</p>
+<p>现在，许多曾经说过纸张的东西都被记录在数字计算机上。</p>
+<p>所以，我们刚收到越来越多的数据。</p>
+<p>现在，让我们说在纵轴上绘制AI系统的性能。</p>
+<p>事实证明，如果你使用传统的AI系统，那么性能就会像这样增长，因为当你输入更多数据时，性能会变得更好。</p>
+<p>但是超过某一点它没有那么好。</p>
+<p>因此，就好像你的语言识别系统没有那么准确，或者你的在线广告系统没有那么准确地表示最相关的广告，即使你展示了更多的数据。</p>
+<p>由于神经网络的兴起和深度学习，人工智能最近真正兴起。</p>
+<p>我将在后面的视频中更准确地定义这些术语，所以不要太担心它现在意味着什么。</p>
+<p>但是对于现代AI，神经网络和深度学习，我们看到的是，如果你使用小型神经网络，那么性能就像这样，在你为它们提供更多数据时，性能会持续更长时间。</p>
+<p>如果你训练一个甚至更大的神经网络，比如中型神经网络，那么性能可能就是这样。</p>
+<p>如果你训练一个非常大的神经网络，那么表现就会越来越好。</p>
+<p>对于应用程序喜欢语音识别，在线广告，构建自动驾驶汽车，具有高性能，高度准确，说语音识别系统很重要，使这些AI系统更好，并使语音识别产品更容易被用户接受，对公司和用户更有价值。</p>
+<p>现在，这个数字的几个例子。</p>
+<p>如果你想要最好的性能水平，你的性能在这里，达到这个级别的性能，那么你需要两件事：一个是，它确实有助于拥有大量数据。</p>
+<p>这就是为什么有时你会听到大数据的原因。</p>
+<p>拥有更多的数据总是有帮助的。</p>
+<p>第二件事是，你希望能够训练一个非常大的神经网络。</p>
+<p>因此，包括摩尔定律在内的快速计算机的兴起，以及图形处理单元或GPU等专用处理器的兴起，您将在后来的视频中听到更多，这使得许多公司，而不仅仅是一家大型科技公司，许多其他公司能够在足够大的数据量上训练大型神经网络，以获得非常好的性能和商业价值。</p>
+<p>AI中最重要的思想是机器学习，基本上是监督学习，即A到B，或输入到输出映射。</p>
+<p>使数据更好地工作的是数据。</p>
+<p>在下一个视频中，让我们来看看数据是什么以及数据可能已经有了什么？</p>
+<p>以及如何考虑将其馈入AI系统。</p>
+<p>让我们继续下一个视频。</p>
+<p>讲师：<a href="https://www.coursera.org/instructor/andrewng" target="_blank" rel="noopener">Andrew Ng</a><br>课程：<a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank" rel="noopener">https://www.coursera.org/learn/ai-for-everyone</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/DL/" rel="tag"># DL</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/week1-01-week-1-introduction/" rel="next" title="week1-1 Week 1 Introduction 第 1 周 简介">
+                <i class="fa fa-chevron-left"></i> week1-1 Week 1 Introduction 第 1 周 简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/week1-03-what-is-data/" rel="prev" title="week1-3 What is data? 什么是数据？">
+                week1-3 What is data? 什么是数据？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week1-02-machine-learning/";
+    this.page.identifier = "2019/03/04/week1-02-machine-learning/";
+    this.page.title = 'week1-2 Machine Learning 机器学习';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

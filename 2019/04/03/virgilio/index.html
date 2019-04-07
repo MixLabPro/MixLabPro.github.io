@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="项目地址：https://github.com/clone95/virgilio 目前为止： [7,128] star [1,303] fork，希望你看到之后能给它添加一个 star 。 这个项目首次提交在 2019 年 3 月 12 日，原名叫https://github.com/clone95/Data-Science-Study-Paths-March-2019，一个月的时间就有 6k+">
+<meta name="keywords" content="ML,NLP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github 2019 年最值得关注的数据科学项目 Virgilio(维吉尔) 中文版">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/04/03/virgilio/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="项目地址：https://github.com/clone95/virgilio 目前为止： [7,128] star [1,303] fork，希望你看到之后能给它添加一个 star 。 这个项目首次提交在 2019 年 3 月 12 日，原名叫https://github.com/clone95/Data-Science-Study-Paths-March-2019，一个月的时间就有 6k+">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-f0bb8c983a0d0229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-fb93e12e799573a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-7b8f1e9c7a6f5a0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-8bb6d9ce6ef9eca3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://raw.githubusercontent.com/iOSDevLog/AIDevLog/master/images/AIDevLog.jpg">
+<meta property="og:updated_time" content="2019-04-07T16:18:51.103Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Github 2019 年最值得关注的数据科学项目 Virgilio(维吉尔) 中文版">
+<meta name="twitter:description" content="项目地址：https://github.com/clone95/virgilio 目前为止： [7,128] star [1,303] fork，希望你看到之后能给它添加一个 star 。 这个项目首次提交在 2019 年 3 月 12 日，原名叫https://github.com/clone95/Data-Science-Study-Paths-March-2019，一个月的时间就有 6k+">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/910914-f0bb8c983a0d0229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/04/03/virgilio/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Github 2019 年最值得关注的数据科学项目 Virgilio(维吉尔) 中文版 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/04/03/virgilio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Github 2019 年最值得关注的数据科学项目 Virgilio(维吉尔) 中文版
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-03 20:25:15" itemprop="dateCreated datePublished" datetime="2019-04-03T20:25:15+08:00">2019-04-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-08 00:18:51" itemprop="dateModified" datetime="2019-04-08T00:18:51+08:00">2019-04-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/DS/" itemprop="url" rel="index"><span itemprop="name">DS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/04/03/virgilio/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/04/03/virgilio/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>项目地址：<a href="https://github.com/clone95/virgilio">https://github.com/clone95/virgilio</a></p>
+<p>目前为止： [7,128] <a href="https://github.com/clone95/Virgilio">star</a> [1,303] <a href="https://github.com/clone95/Virgilio/fork">fork</a>，希望你看到之后能给它添加一个 <a href="https://github.com/clone95/Virgilio">star</a> 。</p>
+<p>这个项目首次提交在 2019 年 3 月 12 日，原名叫<a href="https://github.com/clone95/Data-Science-Study-Paths-March-2019">https://github.com/clone95/Data-Science-Study-Paths-March-2019</a>，一个月的时间就有 <strong>6k+</strong> 个 star，经常排在 <a href="http://github.com/explorer">http://github.com/explorer</a> 的前几位。当然最近被榜单被  <a href="https://github.com/996icu/996.ICU">996icu</a> 占了。</p>
+<a id="more"></a>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-f0bb8c983a0d0229.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="map.png"></p>
+<p>关于项目改名：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-fb93e12e799573a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Virgilio.png"></p>
+<p>项目作者把项目名改成<a href="https://zh.wikipedia.org/wiki/%E7%BB%B4%E5%90%89%E5%B0%94" target="_blank" rel="noopener">维吉尔(Virgilio)</a>，这是 13 世纪末意大利诗人但丁所著长诗《神曲》中旦丁的导师。</p>
+<h2 id="这是什么地方？"><a href="#这是什么地方？" class="headerlink" title="这是什么地方？"></a>这是什么地方？</h2><p>通过互联网进行学习意味着在无限的混乱信息丛林中游泳，在快速变化的创新领域更是如此。</p>
+<p>当你试图接近一个没有真正 “路径” 的新主题时，你有没有感到不知所措？你是否妨碍获得深厚的知识和应用它的能力？</p>
+<p>嗨，我是 <a href="https://zh.wikipedia.org/wiki/%E7%BB%B4%E5%90%89%E5%B0%94" target="_blank" rel="noopener">维吉尔(Virgilio)</a> 。</p>
+<p>就像几年前我和 但丁(Dante) 一样，在你的互联网旅程中，我将成为你的导师和参考点，为你提供完整的有机学习途径，包括多个领域，工具，技能等。</p>
+<h2 id="我是怎么做到的？"><a href="#我是怎么做到的？" class="headerlink" title="我是怎么做到的？"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%88%91%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E5%88%B0%E7%9A%84"></a>我是怎么做到的？</h2><p>我试图简明扼要，以避免信息开销。</p>
+<p>我按层次结构和复杂程度组织了内容，以便你对事物的运作方式有一个连贯的想法。</p>
+<p>你将学习如何通过实践项目理解和应用理论，并仔细遵循我的提示和技巧，你将从头开始掌握新技能。</p>
+<p>你不需要任何先前的主题知识，但对编程和高中数学有信心，以理解和实现大多数概念。</p>
+<p>此处列出的每个来源都是免费或开源的。</p>
+<p>我最感兴趣的是数据科学，因为我试图预测耶路撒冷的陨落，但是你知道，那时我们没有那么多的计算能力！</p>
+<h2 id="你能在这里找到什么？"><a href="#你能在这里找到什么？" class="headerlink" title="你能在这里找到什么？"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E4%BD%A0%E8%83%BD%E5%9C%A8%E8%BF%99%E9%87%8C%E6%89%BE%E5%88%B0%E4%BB%80%E4%B9%88"></a>你能在这里找到什么？</h2><p>我为你打包了几种类型的指南：</p>
+<ul>
+<li>职业：完整的学习路径，指导你从头开始掌握新技能。</li>
+<li>主题：关于由子领域组织的特定主题，方法和现实应用的综合指南。</li>
+<li>专业化：个人技能的垂直指南。</li>
+<li>工具：单一工具或技术的深入指南。</li>
+<li>研究：对最新论文和技术文件的最新审查和解释。</li>
+<li>元(Meta)：这些主要是关于如何学习和接近新概念的指南。</li>
+</ul>
+<p>如果你发现此 <em>repo</em> 有用，我请你 <em>star</em> 一下，与你的朋友和同事分享，然后点击 <em>watch</em>，因为每天都会有更新！</p>
+<h2 id="我的目的是什么？"><a href="#我的目的是什么？" class="headerlink" title="我的目的是什么？"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%88%91%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88"></a>我的目的是什么？</h2><p>我的目标主要是帮助人们开始使用创新的领域和技术，即使你从未尝试过编写代码，或者你需要深入的数学评介，我也会给你这样的基础。因此，你可以成为一名学生，另一个领域的工作人员或经理，你将在这里找到你需要做好准备，以应对未来几年肯定会发生的破坏性和不可预测的市场和社会转型。</p>
+<p>我的价格：我在这里等你，免费。如果你发现我在某种程度上有所帮助，我只要求你留下一个 <em>star</em> ，点击 <em>watch</em>，每次你有机会时请分享我。让我们开始我们的旅程！</p>
+<h1 id="新接触数据科学？"><a href="#新接触数据科学？" class="headerlink" title="新接触数据科学？"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%96%B0%E6%8E%A5%E8%A7%A6%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6"></a>新接触数据科学？</h1><h3 id="基础-Python"><a href="#基础-Python" class="headerlink" title="基础 Python"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E5%9F%BA%E7%A1%80-python"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/NewToDataScience/PythonBasic.md">基础 Python</a></h3><h3 id="基础数学-即将推出"><a href="#基础数学-即将推出" class="headerlink" title="基础数学 - 即将推出"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6---%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA"></a>基础数学 - 即将推出</h3><h3 id="高级-Python-即将推出"><a href="#高级-Python-即将推出" class="headerlink" title="高级 Python - 即将推出"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E9%AB%98%E7%BA%A7-python---%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA"></a>高级 Python - 即将推出</h3><h3 id="高级数学-即将推出"><a href="#高级数学-即将推出" class="headerlink" title="高级数学 - 即将推出"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E9%AB%98%E7%BA%A7%E6%95%B0%E5%AD%A6---%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA"></a>高级数学 - 即将推出</h3><h3 id="Python-数据科学"><a href="#Python-数据科学" class="headerlink" title="Python 数据科学"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#python-%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/NewToDataScience/PythonDataScience.ipynb">Python 数据科学</a></h3><h3 id="数学数据科学-即将推出"><a href="#数学数据科学-即将推出" class="headerlink" title="数学数据科学 - 即将推出"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%95%B0%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6---%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA"></a>数学数据科学 - 即将推出</h3><h1 id="完整的学习路径"><a href="#完整的学习路径" class="headerlink" title="完整的学习路径"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E5%AE%8C%E6%95%B4%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84"></a>完整的学习路径</h1><h2 id="机器学习研究路径"><a href="#机器学习研究路径" class="headerlink" title="机器学习研究路径"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%A0%94%E7%A9%B6%E8%B7%AF%E5%BE%84"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/LearningPaths/Machine%20Learning%20Engineer%20Career%20Path">机器学习研究路径</a></h2><h2 id="商业智能研究路径-即将推出"><a href="#商业智能研究路径-即将推出" class="headerlink" title="商业智能研究路径 - 即将推出"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E5%95%86%E4%B8%9A%E6%99%BA%E8%83%BD%E7%A0%94%E7%A9%B6%E8%B7%AF%E5%BE%84---%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA"></a>商业智能研究路径 - 即将推出</h2><h2 id="云计算研究路径-即将推出"><a href="#云计算研究路径-即将推出" class="headerlink" title="云计算研究路径 - 即将推出"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E4%BA%91%E8%AE%A1%E7%AE%97%E7%A0%94%E7%A9%B6%E8%B7%AF%E5%BE%84---%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA"></a>云计算研究路径 - 即将推出</h2><h1 id="专业化"><a href="#专业化" class="headerlink" title="专业化"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E4%B8%93%E4%B8%9A%E5%8C%96"></a>专业化</h1><h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/Specializations/HardSkills/DataPreprocessing.md">数据预处理</a></h2><h2 id="数据收集-即将推出-下一步"><a href="#数据收集-即将推出-下一步" class="headerlink" title="数据收集 [即将推出 - 下一步]"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86-%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA---%E4%B8%8B%E4%B8%80%E6%AD%A5"></a>数据收集 [即将推出 - 下一步]</h2><h2 id="数据可视化-即将推出"><a href="#数据可视化-即将推出" class="headerlink" title="数据可视化 [即将推出]"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96-%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA"></a>数据可视化 [即将推出]</h2><h2 id="有效沟通-即将推出"><a href="#有效沟通-即将推出" class="headerlink" title="有效沟通 [即将推出]"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%9C%89%E6%95%88%E6%B2%9F%E9%80%9A-%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA"></a>有效沟通 [即将推出]</h2><h2 id="有效陈述-新"><a href="#有效陈述-新" class="headerlink" title="有效陈述 - 新"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%9C%89%E6%95%88%E9%99%88%E8%BF%B0---%E6%96%B0"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/Specializations/SoftSkills/ImpactfulPresentations.md">有效陈述 - <strong>新</strong></a></h2><h2 id="实用决策-即将推出"><a href="#实用决策-即将推出" class="headerlink" title="实用决策 [即将推出]"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E5%AE%9E%E7%94%A8%E5%86%B3%E7%AD%96-%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA"></a>实用决策 [即将推出]</h2><h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E5%B7%A5%E5%85%B7"></a>工具</h1><h3 id="Latex"><a href="#Latex" class="headerlink" title="Latex"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#latex"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/Tools/Latex.md">Latex</a></h3><h3 id="Wolfram-Alpha"><a href="#Wolfram-Alpha" class="headerlink" title="Wolfram Alpha"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#wolfram-alpha"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/Tools/WolframAlpha.md">Wolfram Alpha</a></h3><h3 id="GeoGebra"><a href="#GeoGebra" class="headerlink" title="GeoGebra"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#geogebra"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/Tools/GeoGebra.md">GeoGebra</a></h3><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/Tools/Regex.ipynb">正则表达式</a></h3><h3 id="即将推出"><a href="#即将推出" class="headerlink" title="即将推出"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA"></a>即将推出</h3><h1 id="主题"><a href="#主题" class="headerlink" title="主题"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E4%B8%BB%E9%A2%98"></a>主题</h1><h3 id="DialogFlow-和-Flask-打造-ChatBot"><a href="#DialogFlow-和-Flask-打造-ChatBot" class="headerlink" title="DialogFlow 和 Flask 打造 ChatBot"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#dialogflow-%E5%92%8C-flask-%E6%89%93%E9%80%A0-chatbot"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/Topics/DialogFlow.md">DialogFlow 和 Flask 打造 ChatBot</a></h3><h1 id="研究"><a href="#研究" class="headerlink" title="研究"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E7%A0%94%E7%A9%B6"></a>研究</h1><h3 id="Zotero"><a href="#Zotero" class="headerlink" title="Zotero"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#zotero"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/Research/Zotero.md">Zotero</a></h3><h3 id="最新论文-即将推出"><a href="#最新论文-即将推出" class="headerlink" title="最新论文 [即将推出]"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E6%9C%80%E6%96%B0%E8%AE%BA%E6%96%87-%E5%8D%B3%E5%B0%86%E6%8E%A8%E5%87%BA"></a>最新论文 [即将推出]</h3><h1 id="关于专业化"><a href="#关于专业化" class="headerlink" title="关于专业化"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E5%85%B3%E4%BA%8E%E4%B8%93%E4%B8%9A%E5%8C%96"></a>关于专业化</h1><p>你可以按顺序选择它们或选择最适合你的那个，但我建议你至少要一次把它们都看完。</p>
+<p>我计划了两种类型的专业化：硬技能和软技能</p>
+<p>前者是关于技术流程，是每个处理数据的人的核心工具包。使用数据是一种艺术形式，经验法则和最佳实践将帮助你了解处理它们的方式。你需要对如何处理数据产生一种 “感觉”，这种 “感觉” 主要是由情况和经验驱动的。因此，这些专业将强烈关注练习和练习。</p>
+<p>后者是关于… 所有未写在技术书籍中的东西。使用和掌握它们，因为它们是你真正的价值促成者。你可以成为世界上最好的开发人员或工程师，但如果你无法向受众传达你的建议和发现，或者使用数据来建议现实世界中的实际行动，那么你对公司来说就毫无用处。</p>
+<h1 id="关于主题"><a href="#关于主题" class="headerlink" title="关于主题"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E5%85%B3%E4%BA%8E%E4%B8%BB%E9%A2%98"></a>关于主题</h1><p>单个主题将按字段分割，它们可以触及实际应用程序，方法，技术栈，最佳实践等。</p>
+<h1 id="关于工具"><a href="#关于工具" class="headerlink" title="关于工具"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E5%85%B3%E4%BA%8E%E5%B7%A5%E5%85%B7"></a>关于工具</h1><p>“工具” 部分将提供有关你需要了解的特定技术 / 语言 / 方法的所有指南！它们将为你提供彻底探索和掌握手头工具的方法。</p>
+<h1 id="订阅我们新闻发布和更新的FACEBOOK组"><a href="#订阅我们新闻发布和更新的FACEBOOK组" class="headerlink" title="订阅我们新闻发布和更新的FACEBOOK组"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E8%AE%A2%E9%98%85%E6%88%91%E4%BB%AC%E6%96%B0%E9%97%BB%E5%8F%91%E5%B8%83%E5%92%8C%E6%9B%B4%E6%96%B0%E7%9A%84facebook%E7%BB%84"></a><a href="https://www.facebook.com/groups/mathfordatascience/" target="_blank" rel="noopener">订阅我们新闻发布和更新的FACEBOOK组</a></h1><h1 id="翻译人员"><a href="#翻译人员" class="headerlink" title="翻译人员"></a><a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/README.md#%E7%BF%BB%E8%AF%91%E4%BA%BA%E5%91%98"></a>翻译人员</h1><p><a href="https://github.com/iOSDevLog">@jiaxianhua</a> (iOSDevLog)</p>
+<p>在我准备翻译之前就已经有中国人准备翻译成中文，后来共有 4 个中国人想要翻译成中文。</p>
+<p>我们重新建了一个 <a href="https://telegram.org/" target="_blank" rel="noopener">https://telegram.org/</a> 中文聊天群 Virgilio_cn，并把 @Clone95 拉进群，准备我们的翻译计划。</p>
+<p>一开始人打算可以使用有团队协作功能的  <a href="https://leanote.com/" target="_blank" rel="noopener">蚂蚁笔记 Leanote</a>，它具有以下特性。</p>
+<ul>
+<li>Markdown 编辑器<br>实时同步预览，你只需使用键盘专注于书写文本内容，就可以生成印刷级的排版格式。</li>
+<li>详细历史纪录<br>每次保存都在后端备份，轻松查找，一键恢复。</li>
+<li>实时同步 － 云协作版<br>丰富的团队权限管理完整的文档树型结构<br>支持Docker，私有云部署实时IM群聊讨论</li>
+</ul>
+<p>最重要的是它是开源的：<a href="https://github.com/leanote">https://github.com/leanote</a></p>
+<p>于是我把它部署在服务器。</p>
+<p>后来 @Clone95 找到了 <a href="https://docs.weblate.org/en/latest/about.html" target="_blank" rel="noopener">WebLate</a>。</p>
+<p>Weblate 是一个基于网络自由软件持续本地化系统。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-7b8f1e9c7a6f5a0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="WebLate"></p>
+<p>这个也是开源的，我把它也部署在服务器上<a href="http://67.218.132.50/" target="_blank" rel="noopener">http://67.218.132.50/</a>。</p>
+<p>部署过程：<a href="https://www.jianshu.com/p/f3cd7dfd48d1" target="_blank" rel="noopener">https://www.jianshu.com/p/f3cd7dfd48d1</a></p>
+<p>Weblate 支持多种翻译格式，我选择把 md 文件改换成 xliff 再上传。</p>
+<p>Weblate 还支持机器翻译<a href="https://docs.weblate.org/en/latest/admin/machine.html" target="_blank" rel="noopener">https://docs.weblate.org/en/latest/admin/machine.html</a>。</p>
+<p>大多数翻译 API 要收费，也包括流行的 Google Translate。最终我选用了 Baidu API machine translation ，每月翻译字符数低于200万，享免费服务；超过200万字符，需按照49元人民币/百万字符支付当月全部翻译字符数费用（包括之前免费的200万字符）。</p>
+<p>转换几个文件后，翻译群里的小伙伴们就开始翻译。之后又发现 Xliff 要把 md 文件里的 “<a href></a>&lt;&gt;&amp;” 这些符号替换成占位符。好麻烦，还不如直接用 json 格式。</p>
+<p> 转换方式：<a href="https://www.jianshu.com/p/323a5d033767" target="_blank" rel="noopener">https://www.jianshu.com/p/323a5d033767</a></p>
+<p>最终还是用 google translate api 直接翻译 md 文件。</p>
+<p>转换过程：<a href="https://www.jianshu.com/p/5835eb34cbb1" target="_blank" rel="noopener">https://www.jianshu.com/p/5835eb34cbb1</a></p>
+<p>用 vscode 一边英文，一边中文对照着改通顺。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-8bb6d9ce6ef9eca3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="vscode.png"></p>
+<p>翻译中肯定有许多不专业的地方，特别是 <a href="https://github.com/clone95/Virgilio/blob/master/zh-CN/Tools/WolframAlpha.md">WolframAlpha</a> 的翻译，请大家将不准确的地方提出，或者加入我们的 Telegram / 微信翻译群。</p>
+<p>微信公众号：AI开发日志(AIDevLog)</p>
+<p><img src="https://raw.githubusercontent.com/iOSDevLog/AIDevLog/master/images/AIDevLog.jpg" alt="AI开发日志"></p>
+<p>最后还是请大家 <strong>star</strong> 并分享给你的好友们！</p>
+<p><a href="https://github.com/clone95/virgilio">https://github.com/clone95/virgilio</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/21/nlp-task10/" rel="next" title="任务十-BERT">
+                <i class="fa fa-chevron-left"></i> 任务十-BERT
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/04/mldemos/" rel="prev" title="机器学习算法的开源可视化工具: MLDemos">
+                机器学习算法的开源可视化工具: MLDemos <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#这是什么地方？"><span class="nav-number">1.</span> <span class="nav-text">这是什么地方？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我是怎么做到的？"><span class="nav-number">2.</span> <span class="nav-text">我是怎么做到的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你能在这里找到什么？"><span class="nav-number">3.</span> <span class="nav-text">你能在这里找到什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的目的是什么？"><span class="nav-number">4.</span> <span class="nav-text">我的目的是什么？</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#新接触数据科学？"><span class="nav-number"></span> <span class="nav-text">新接触数据科学？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础-Python"><span class="nav-number">0.1.</span> <span class="nav-text">基础 Python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础数学-即将推出"><span class="nav-number">0.2.</span> <span class="nav-text">基础数学 - 即将推出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级-Python-即将推出"><span class="nav-number">0.3.</span> <span class="nav-text">高级 Python - 即将推出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级数学-即将推出"><span class="nav-number">0.4.</span> <span class="nav-text">高级数学 - 即将推出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-数据科学"><span class="nav-number">0.5.</span> <span class="nav-text">Python 数据科学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数学数据科学-即将推出"><span class="nav-number">0.6.</span> <span class="nav-text">数学数据科学 - 即将推出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整的学习路径"><span class="nav-number"></span> <span class="nav-text">完整的学习路径</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器学习研究路径"><span class="nav-number">1.</span> <span class="nav-text">机器学习研究路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#商业智能研究路径-即将推出"><span class="nav-number">2.</span> <span class="nav-text">商业智能研究路径 - 即将推出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#云计算研究路径-即将推出"><span class="nav-number">3.</span> <span class="nav-text">云计算研究路径 - 即将推出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#专业化"><span class="nav-number"></span> <span class="nav-text">专业化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据预处理"><span class="nav-number">1.</span> <span class="nav-text">数据预处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据收集-即将推出-下一步"><span class="nav-number">2.</span> <span class="nav-text">数据收集 [即将推出 - 下一步]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据可视化-即将推出"><span class="nav-number">3.</span> <span class="nav-text">数据可视化 [即将推出]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有效沟通-即将推出"><span class="nav-number">4.</span> <span class="nav-text">有效沟通 [即将推出]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有效陈述-新"><span class="nav-number">5.</span> <span class="nav-text">有效陈述 - 新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实用决策-即将推出"><span class="nav-number">6.</span> <span class="nav-text">实用决策 [即将推出]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-number"></span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Latex"><span class="nav-number">0.1.</span> <span class="nav-text">Latex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wolfram-Alpha"><span class="nav-number">0.2.</span> <span class="nav-text">Wolfram Alpha</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GeoGebra"><span class="nav-number">0.3.</span> <span class="nav-text">GeoGebra</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式"><span class="nav-number">0.4.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#即将推出"><span class="nav-number">0.5.</span> <span class="nav-text">即将推出</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主题"><span class="nav-number"></span> <span class="nav-text">主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DialogFlow-和-Flask-打造-ChatBot"><span class="nav-number">0.1.</span> <span class="nav-text">DialogFlow 和 Flask 打造 ChatBot</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#研究"><span class="nav-number"></span> <span class="nav-text">研究</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Zotero"><span class="nav-number">0.1.</span> <span class="nav-text">Zotero</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最新论文-即将推出"><span class="nav-number">0.2.</span> <span class="nav-text">最新论文 [即将推出]</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于专业化"><span class="nav-number"></span> <span class="nav-text">关于专业化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于主题"><span class="nav-number"></span> <span class="nav-text">关于主题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于工具"><span class="nav-number"></span> <span class="nav-text">关于工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#订阅我们新闻发布和更新的FACEBOOK组"><span class="nav-number"></span> <span class="nav-text">订阅我们新闻发布和更新的FACEBOOK组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#翻译人员"><span class="nav-number"></span> <span class="nav-text">翻译人员</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/04/03/virgilio/";
+    this.page.identifier = "2019/04/03/virgilio/";
+    this.page.title = 'Github 2019 年最值得关注的数据科学项目 Virgilio(维吉尔) 中文版';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

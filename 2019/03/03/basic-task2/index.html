@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="逻辑回归与线性回归的联系与区别">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="任务二-逻辑回归算法梳理">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/03/basic-task2/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="逻辑回归与线性回归的联系与区别">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-04T14:53:09.473Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="任务二-逻辑回归算法梳理">
+<meta name="twitter:description" content="逻辑回归与线性回归的联系与区别">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/03/basic-task2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>任务二-逻辑回归算法梳理 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/03/basic-task2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">任务二-逻辑回归算法梳理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-03 19:32:00" itemprop="dateCreated datePublished" datetime="2019-03-03T19:32:00+08:00">2019-03-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-04 22:53:09" itemprop="dateModified" datetime="2019-04-04T22:53:09+08:00">2019-04-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/初级算法梳理/" itemprop="url" rel="index"><span itemprop="name">初级算法梳理</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/03/basic-task2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/03/basic-task2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="逻辑回归与线性回归的联系与区别"><a href="#逻辑回归与线性回归的联系与区别" class="headerlink" title="逻辑回归与线性回归的联系与区别"></a>逻辑回归与线性回归的联系与区别</h1><a id="more"></a>
+<ol>
+<li>逻辑回归是一个非线性模型，sigmoid函数又称逻辑回归函数。</li>
+<li>线性回归要求变量服从正态分布，logistic回归对变量分布没有要求。线性回归要求因变量是连续性数值变量，logistic回归要求因变量是分类型变量。线性回归要求自变量和因变量呈线性关系，而logistic回归不要求自变量和因变量呈线性关系。</li>
+<li>线性回归中使用的是最小化平方误差损失函数，对偏离真实值越远的数据惩罚越严重；逻辑回归使用对数似然函数进行参数估计，使用交叉熵作为损失函数，对预测错误的惩罚是随着输出的增大，逐渐逼近一个常数</li>
+<li>逻辑回归以及线性回归同属于广义线性模型(generalized linear model)，不同的就是因变量不同，如果是连续的，就是多重线性回归，如果是二项分布，就是logistic回归。logistic回归的因变量可以使二分类的，也可是多分类的。</li>
+</ol>
+<h1 id="逻辑回归的原理"><a href="#逻辑回归的原理" class="headerlink" title="逻辑回归的原理"></a>逻辑回归的原理</h1><p>线性回归可以预测连续值，但是不能解决分类问题，我们需要根据预测的结果判定其属于正类还是负类。所以逻辑回归就是将线性回归的(−∞,+∞) 的结果通过 sigmiod 函数映射到0与1之间从而实现分类。</p>
+<h1 id="逻辑回归损失函数推导及优化"><a href="#逻辑回归损失函数推导及优化" class="headerlink" title="逻辑回归损失函数推导及优化"></a>逻辑回归损失函数推导及优化</h1><p><strong>逻辑回归</strong>：</p>
+<p>$h(x)  = \frac{1} {1 + e^{-(w^Tx+b)}}$<br>设$y_i$=1的概率为$p_i$，$y_i$=0的概率为$1-p_i$<br>则观测概率：<br>$p(y_i) = p_i^{y_i}(1-p_i)^{1-y_i}$<br>概率由逻辑回归公式求解，带进去得到极大似然函数：<br>$\prod_i^N h(x_i)^{y_i} * (1-h(x_i))^{1-y_i}$</p>
+<h1 id="正则化与模型评估指标"><a href="#正则化与模型评估指标" class="headerlink" title="正则化与模型评估指标"></a>正则化与模型评估指标</h1><h2 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h2><p>正则化就是在损失函数后加上一个正则化项（惩罚项），其实就是常说的结构风险最小化策略，即经验风险（损失函数）加上正则化。一般模型越复杂，正则化值越大。<br>正则化是用来对模型中某些参数进行约束，目的是防止过拟合。</p>
+<h2 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h2><h3 id="分类模型"><a href="#分类模型" class="headerlink" title="分类模型"></a>分类模型</h3><ol>
+<li>准确率（Accuracy）</li>
+<li>精确率（Precision）</li>
+<li>召回率（Recall）</li>
+<li>$F_1$-score(精确率和召回率的调和平均)</li>
+<li>AUC（ROC曲线下面积）</li>
+</ol>
+<h3 id="回归模型"><a href="#回归模型" class="headerlink" title="回归模型"></a>回归模型</h3><ol>
+<li>平方根误差（RMSE）</li>
+<li>误差分位数（Quantiles of Errors）</li>
+</ol>
+<h1 id="逻辑回归的优缺点"><a href="#逻辑回归的优缺点" class="headerlink" title="逻辑回归的优缺点"></a>逻辑回归的优缺点</h1><ul>
+<li><p>优点：</p>
+<ol>
+<li>适合二分类问题</li>
+<li>计算代价不高，容易理解实现。可用于分布式计算</li>
+<li>LR对于数据中小噪声的鲁棒性很好，并且不会受到轻微的多重共线性的特别影响。（L2正则化可帮助解决）</li>
+</ol>
+</li>
+<li><p>缺点：</p>
+<ol>
+<li>容易欠拟合，分类精度不高。</li>
+<li>数据特征有缺失或者特征空间很大时表现效果并不好。</li>
+<li>只能解决二分类问题（softmax除外）</li>
+</ol>
+</li>
+</ul>
+<h1 id="样本不均衡问题解决办法"><a href="#样本不均衡问题解决办法" class="headerlink" title="样本不均衡问题解决办法"></a>样本不均衡问题解决办法</h1><h2 id="过采样"><a href="#过采样" class="headerlink" title="过采样"></a>过采样</h2><p>将稀有类别的样本进行复制，通过增加此稀有类样本的数量来平衡数据集。该方法适用于数据量较小的情况。</p>
+<h3 id="欠采样"><a href="#欠采样" class="headerlink" title="欠采样"></a>欠采样</h3><p>从丰富类别的样本中随机选取和稀有类别相同数目的样本，通过减少丰富类的样本量啦平衡数据集。该方法适用于数据量较大的情况。</p>
+<h3 id="SMOTE构造采样"><a href="#SMOTE构造采样" class="headerlink" title="SMOTE构造采样"></a>SMOTE构造采样</h3><p>基于距离度量的方式计算两个或多个稀有类样本之间的相似性。然后选择其中的一个样本作为基础样本，再在邻居样本中随机选取一定数量的样本对那个基础样本的一个属性进行噪声。每次处理一个属性，通过这样的方式产生新生数据。</p>
+<h3 id="对原数据的权值进行改变"><a href="#对原数据的权值进行改变" class="headerlink" title="对原数据的权值进行改变"></a>对原数据的权值进行改变</h3><p>通过改变多数类样本和少数类样本数据在训练时的权重来解决样本不均衡的问题，是指在训练分类器时，为少数类样本赋予更大的权值，为多数类样本赋予较小的权值。  </p>
+<h3 id="通过组合集成方法解决"><a href="#通过组合集成方法解决" class="headerlink" title="通过组合集成方法解决"></a>通过组合集成方法解决</h3><p>将多数类数据随机分成少数类数据的量N份，每一份与全部的少数类数据一起训练成为一个分类器，这样反复训练会生成很多的分类器。最后再用组合的方式(bagging或者boosting)对分类器进行组合，得到更好的预测效果。简单来说若是分类问题可采用投票法，预测问题可以采用平均值。这个解决方式需要很强的计算能力以及时间，但效果较好，相当于结合了组合分类器的优势。</p>
+<h3 id="通过特征选择"><a href="#通过特征选择" class="headerlink" title="通过特征选择"></a>通过特征选择</h3><p>在样本数据较为不均衡，某一类别数据较少的情况下，通常会出现特征分布很不均衡的情况。例如文本分类中，有大量的特征可以选择。因此我们可以选择具有显著区分能力的特征进行训练，也能在一定程度上提高模型的泛化效果。</p>
+<h1 id="sklearn参数"><a href="#sklearn参数" class="headerlink" title="sklearn参数"></a>sklearn参数</h1><p><strong>Sklearn.linear_model.</strong><br>penalty:’l1’ or ‘l2’ ,默认’l2’ #惩罚</p>
+<p>dual:bool 默认False ‘双配方仅用于利用liblinear解算器的l2惩罚。’</p>
+<p>tol: float, 默认: 1e-4 ‘公差停止标准’</p>
+<p>C:float 默认:1.0 正则化强度， 与支持向量机一样，较小的值指定更强的正则化。</p>
+<p>fit_intercept: bool 默认:True 指定是否应将常量（a.k.a. bias或intercept）添加到决策函数中。</p>
+<p>intercept_scaling:float ,默认:1 仅在使用求解器“liblinear”且self.fit_intercept设置为True时有用。 在这种情况下，x变为[x，self.intercept_scaling]，即具有等于intercept_scaling的常数值的“合成”特征被附加到实例矢量。 截距变为intercept_scaling * synthetic_feature_weight</p>
+<p>class_weight: dict or ‘balanced’ 默认:None</p>
+<p> 与{class_label：weight}形式的类相关联的权重。 如果没有给出，所有类都应该有一个权重。“平衡”模式使用y的值自动调整与输入数据中的类频率成反比的权重，如n_samples /（n_classes * np.bincount（y））。请注意，如果指定了sample_weight，这些权重将与sample_weight（通过fit方法传递）相乘。</p>
+<p>random_state:int,RandomState实例或None，可选，默认值：None</p>
+<p>在随机数据混洗时使用的伪随机数生成器的种子。 如果是int，则random_state是随机数生成器使用的种子; 如果是RandomState实例，则random_state是随机数生成器; 如果为None，则随机数生成器是np.random使用的RandomState实例。 在求解器==’sag’或’liblinear’时使用。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>西瓜书</p>
+<p>cs229吴恩达机器学习课程</p>
+<p>李航统计学习</p>
+<p>谷歌搜索</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/02/ppt/" rel="next" title="AI For Everyone 课件">
+                <i class="fa fa-chevron-left"></i> AI For Everyone 课件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/03/nlp-task1/" rel="prev" title="任务一-数据集探索">
+                任务一-数据集探索 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归与线性回归的联系与区别"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归与线性回归的联系与区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归的原理"><span class="nav-number">2.</span> <span class="nav-text">逻辑回归的原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归损失函数推导及优化"><span class="nav-number">3.</span> <span class="nav-text">逻辑回归损失函数推导及优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则化与模型评估指标"><span class="nav-number">4.</span> <span class="nav-text">正则化与模型评估指标</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#正则化"><span class="nav-number">4.1.</span> <span class="nav-text">正则化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#评估指标"><span class="nav-number">4.2.</span> <span class="nav-text">评估指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分类模型"><span class="nav-number">4.2.1.</span> <span class="nav-text">分类模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回归模型"><span class="nav-number">4.2.2.</span> <span class="nav-text">回归模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归的优缺点"><span class="nav-number">5.</span> <span class="nav-text">逻辑回归的优缺点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#样本不均衡问题解决办法"><span class="nav-number">6.</span> <span class="nav-text">样本不均衡问题解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#过采样"><span class="nav-number">6.1.</span> <span class="nav-text">过采样</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#欠采样"><span class="nav-number">6.1.1.</span> <span class="nav-text">欠采样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMOTE构造采样"><span class="nav-number">6.1.2.</span> <span class="nav-text">SMOTE构造采样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对原数据的权值进行改变"><span class="nav-number">6.1.3.</span> <span class="nav-text">对原数据的权值进行改变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过组合集成方法解决"><span class="nav-number">6.1.4.</span> <span class="nav-text">通过组合集成方法解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过特征选择"><span class="nav-number">6.1.5.</span> <span class="nav-text">通过特征选择</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sklearn参数"><span class="nav-number">7.</span> <span class="nav-text">sklearn参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">8.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/03/03/basic-task2/";
+    this.page.identifier = "2019/03/03/basic-task2/";
+    this.page.title = '任务二-逻辑回归算法梳理';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

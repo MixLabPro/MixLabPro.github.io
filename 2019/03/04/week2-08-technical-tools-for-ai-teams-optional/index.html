@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="当您与AI团队合作时，您可能会听到他们使用的工具来构建这些AI系统。 在本视频中，我想与您分享最常用的AI工具的一些细节和名称，以便您能够更好地了解这些AI工程师正在做什么。 我们很幸运，今天的AIworld非常开放，许多团队将公开分享彼此的想法。 有很多机器学习开源框架，许多团队将使用它们来构建他们的系统。 所以，如果你听说过这些：TensorFlow，PyTorch，Keras，MXNet，">
+<meta name="keywords" content="ML,DL,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="week2-8 Technical tools for AI teams (optional) 人工智能团队的技术工具（可选）">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-08-technical-tools-for-ai-teams-optional/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="当您与AI团队合作时，您可能会听到他们使用的工具来构建这些AI系统。 在本视频中，我想与您分享最常用的AI工具的一些细节和名称，以便您能够更好地了解这些AI工程师正在做什么。 我们很幸运，今天的AIworld非常开放，许多团队将公开分享彼此的想法。 有很多机器学习开源框架，许多团队将使用它们来构建他们的系统。 所以，如果你听说过这些：TensorFlow，PyTorch，Keras，MXNet，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-790311b2b33cb1d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-8737efdc221ab7c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-496cf4b2b928bff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-7277888d2f2ea234.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-15ce7830b80a09a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-04-04T14:53:09.477Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="week2-8 Technical tools for AI teams (optional) 人工智能团队的技术工具（可选）">
+<meta name="twitter:description" content="当您与AI团队合作时，您可能会听到他们使用的工具来构建这些AI系统。 在本视频中，我想与您分享最常用的AI工具的一些细节和名称，以便您能够更好地了解这些AI工程师正在做什么。 我们很幸运，今天的AIworld非常开放，许多团队将公开分享彼此的想法。 有很多机器学习开源框架，许多团队将使用它们来构建他们的系统。 所以，如果你听说过这些：TensorFlow，PyTorch，Keras，MXNet，">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/910914-790311b2b33cb1d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-08-technical-tools-for-ai-teams-optional/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>week2-8 Technical tools for AI teams (optional) 人工智能团队的技术工具（可选） | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-08-technical-tools-for-ai-teams-optional/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">week2-8 Technical tools for AI teams (optional) 人工智能团队的技术工具（可选）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-04 11:27:09" itemprop="dateCreated datePublished" datetime="2019-03-04T11:27:09+08:00">2019-03-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-04 22:53:09" itemprop="dateModified" datetime="2019-04-04T22:53:09+08:00">2019-04-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI-For-Everyone/" itemprop="url" rel="index"><span itemprop="name">AI For Everyone</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/04/week2-08-technical-tools-for-ai-teams-optional/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/04/week2-08-technical-tools-for-ai-teams-optional/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/910914-790311b2b33cb1d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-8-0.png"></p>
+<p>当您与AI团队合作时，您可能会听到他们使用的工具来构建这些AI系统。</p>
+<p>在本视频中，我想与您分享最常用的AI工具的一些细节和名称，以便您能够更好地了解这些AI工程师正在做什么。</p>
+<p>我们很幸运，今天的AIworld非常开放，许多团队将公开分享彼此的想法。</p>
+<p>有很多机器学习开源框架，许多团队将使用它们来构建他们的系统。</p>
+<p>所以，如果你听说过这些：TensorFlow，PyTorch，Keras，MXNet，CNTK，Caffe，PaddlePaddle，Scikit-learn，R或Weka，所有这些都是开源的机器学习框架，帮助AI团队在写作方面更有效率软件。</p>
+<a id="more"></a>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-8737efdc221ab7c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-8-1.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-496cf4b2b928bff3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-8-2.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-7277888d2f2ea234.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-8-3.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-15ce7830b80a09a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2-8-4.png"></p>
+<p>与AI技术一起，在这个名为<a href="https://arxiv.org" target="_blank" rel="noopener">Arxiv</a>的网站上也可以在互联网上免费发布突破。</p>
+<p>像这样拼写。</p>
+<p>我希望其他学术界也可以自由地分享他们的研究，因为我已经亲眼目睹了在整个人工智能领域加速进步的程度。</p>
+<p>最后，许多团队还将在互联网上免费分享他们的代码，最常见的是在名为GitHub的网站上。</p>
+<p>这已经成为AI和AI其他领域开源软件的事实上的存储库。</p>
+<p>通过使用适当的开源软件，许多团队可以比从头开始构建所有东西的速度快得多。</p>
+<p>因此，例如，如果我在GitHub上在线搜索面部识别软件，您可能会找到这样的网页。</p>
+<p>如果你向下滚动，这实际上有一个非常好的，非常易读的软件描述，可以在这个网站上找到识别人脸，甚至找到人脸的部分。</p>
+<p>只有一吨软件可以免费下载，可以在互联网上做各种各样的事情，只需仔细检查许可证，或者AI团队会在产品中使用之前仔细检查许可证，但很多这些软件都是开源的，或者非常允许任何人使用的许可。</p>
+<p>虽然GitHub是一个为工程师建立的技术网站，但如果你想要，你应该随意玩GitHub，看看人们在网上发布的人工智能软件的类型。</p>
+<p>除了这些开源技术工具之外，您还经常听到AI工程师谈论CPU和GPU。</p>
+<p>以下是这些术语的含义。</p>
+<p>CPU是计算机中的计算机处理器，无论是您的桌面，笔记本电脑还是云中的计算机服务器。</p>
+<p>CPU代表中央处理器，CPU由Intel，AMD和其他几家公司制造。</p>
+<p>这在您的计算机中进行了大量的计算。</p>
+<p>GPU代表图形处理单元。</p>
+<p>从历史上看，GPU是用来处理图片的。</p>
+<p>所以，如果你玩视频游戏，它可能是一个正在绘制花哨图形的GPU。</p>
+<p>但是我们几年前发现的是，最初为处理图形而构建的硬件对于构建大型神经网络而言非常非常强大。</p>
+<p>所以非常大的学习算法。</p>
+<p>鉴于需要构建非常大的深度学习或非常大的神经网络系统，人工智能社区已经对越来越多的计算能力进行了无法满足的渴望，以培养更大和更大的神经网络。</p>
+<p>事实证明，GPU非常适合我们需要用来训练超大神经网络的这种类型的计算。</p>
+<p>因此，这就是为什么GPU在深度学习的兴起中扮演重要角色的原因。</p>
+<p>而视频就是出售许多GPU的公司。</p>
+<p>但包括高通在内的其他公司，以及制造自己的CPU的谷歌正在越来越多地制造专用硬件来为这些超大型神经网络供电。</p>
+<p>最后，您可能会听到有关云计算与内部部署或简称的本地部署。</p>
+<p>如果您从Amazon的AWS，Microsoft的Azure或Google的GCP租用计算服务器，以便使用其他人的服务来进行计算，则云部署需要参考。</p>
+<p>然而，本地部署意味着购买您自己的计算服务器并在您自己的公司本地运行服务。</p>
+<p>详细探讨这两个选项的优缺点超出了本视频的范围。</p>
+<p>世界上很多人正在转向云部署。</p>
+<p>无论您是在线搜索，都可以找到许多文章，讨论云与本地部署的优缺点。</p>
+<p>您可能会听到最后一个术语，即Edge部署。</p>
+<p>如果您正在构建自动驾驶汽车，则没有足够的时间将数据从自动驾驶汽车发送到云服务器以决定是否应该停止汽车，然后将该消息发送到自动驾驶汽车。</p>
+<p>因此，计算必须通常发生在汽车内部的计算机中。</p>
+<p>这称为边缘部署，您可以将处理器放在收集数据的位置，以便您可以快速处理数据并做出决策，而无需通过Internet传输数据以在其他地方进行处理。</p>
+<p>如果你看看你家里的一些智能扬声器，这也是一个边缘部署，其中一些，而不是全部，但一些语音识别任务是由一个处理器完成的，该处理器就在你家里面的智能语言中。 。</p>
+<p>Edge部署的主要优点是它可以增加系统的响应时间，还可以减少发送网络所需的数据量。</p>
+<p>但是，有关Edgeversus Cloud和本地部署的优点和缺点，您还可以在线搜索以了解更多信息。</p>
+<p>感谢在AI工程师使用的技术工具上完成这个可选视频。</p>
+<p>希望当你听到他们提到这些工具时，你会开始对他们的意思有所了解。</p>
+<p>我期待下周为你服务。</p>
+<p>讲师：<a href="https://www.coursera.org/instructor/andrewng" target="_blank" rel="noopener">Andrew Ng</a><br>课程：<a href="https://www.coursera.org/learn/ai-for-everyone" target="_blank" rel="noopener">https://www.coursera.org/learn/ai-for-everyone</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/DL/" rel="tag"># DL</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/week2-07-working-with-an-ai-team/" rel="next" title="week2-7 Working with an AI team 与人工智能团队合作">
+                <i class="fa fa-chevron-left"></i> week2-7 Working with an AI team 与人工智能团队合作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/week3-01-week-3-introduction/" rel="prev" title="week3-1 Week 3 Introduction 第 3 周 简介">
+                week3-1 Week 3 Introduction 第 3 周 简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/03/04/week2-08-technical-tools-for-ai-teams-optional/";
+    this.page.identifier = "2019/03/04/week2-08-technical-tools-for-ai-teams-optional/";
+    this.page.title = 'week2-8 Technical tools for AI teams (optional) 人工智能团队的技术工具（可选）';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
