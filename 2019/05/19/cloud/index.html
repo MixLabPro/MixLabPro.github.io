@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="有没有觉得一台笔记本电脑不够强大，无法运行你的模型？忘记它吧，来使用 云 GPU 来更快更、更便宜地训练你的模型！">
+<meta name="keywords" content="ML,DL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云端深度学习">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/19/cloud/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="有没有觉得一台笔记本电脑不够强大，无法运行你的模型？忘记它吧，来使用 云 GPU 来更快更、更便宜地训练你的模型！">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-18T16:10:28.414Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="云端深度学习">
+<meta name="twitter:description" content="有没有觉得一台笔记本电脑不够强大，无法运行你的模型？忘记它吧，来使用 云 GPU 来更快更、更便宜地训练你的模型！">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/19/cloud/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>云端深度学习 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">MixLabPro</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/19/cloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">云端深度学习
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-19 00:09:38 / 修改时间：00:10:28" itemprop="dateCreated datePublished" datetime="2019-05-19T00:09:38+08:00">2019-05-19</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/05/19/cloud/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/19/cloud/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>有没有觉得一台笔记本电脑不够强大，无法运行你的模型？忘记它吧，来使用 <strong>云 GPU</strong> 来更快更、更便宜地训练你的模型！</p>
+<a id="more"></a>
+<ul>
+<li><p>你还可以了解在哪里可以 <a href="https://github.com/zszazi/Deep-learning-in-cloud/blob/master/README.md#deploy-your-model-as-a-web-app"><strong>部署</strong></a> 你为数百万人服务的模型</p>
+</li>
+<li><p>查看 <strong>免费积分</strong> 和 <a href="https://github.com/zszazi/Deep-learning-in-cloud/blob/master/README.md#perks-and-offers"><strong>优惠</strong></a> 部分获得一些免费的 gpu 小时</p>
+</li>
+</ul>
+<p>最后更新时间：2019 年 4 月 20 日</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>云供应商</th>
+<th>网站</th>
+<th>价格</th>
+<th>免费试用 / 免费积分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Google Colaboratory❤️</td>
+<td><a href="https://colab.research.google.com" target="_blank" rel="noopener">https://colab.research.google.com</a></td>
+<td>免费</td>
+<td>永久免费*</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Kaggle Kernels</td>
+<td><a href="https://www.kaggle.com" target="_blank" rel="noopener">https://www.kaggle.com</a></td>
+<td>免费</td>
+<td>永久免费*</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Tensorpad</td>
+<td><a href="https://www.tensorpad.com" target="_blank" rel="noopener">https://www.tensorpad.com</a></td>
+<td>1080ti at $0.49/hour</td>
+<td>5 free GPU hours</td>
+</tr>
+<tr>
+<td>4</td>
+<td>FloydHub</td>
+<td><a href="https://www.floydhub.com" target="_blank" rel="noopener">https://www.floydhub.com</a></td>
+<td><a href="https://www.floydhub.com/pricing" target="_blank" rel="noopener">https://www.floydhub.com/pricing</a></td>
+<td>free 2 GPU powerups in 14 days <a href="https://docs.floydhub.com/faqs/plans/#what-is-in-the-trial-plan" target="_blank" rel="noopener">trial plan</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Onepanel</td>
+<td><a href="https://www.onepanel.io" target="_blank" rel="noopener">https://www.onepanel.io</a></td>
+<td><a href="https://www.onepanel.io/pricing" target="_blank" rel="noopener">https://www.onepanel.io/pricing</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Nimblebox</td>
+<td><a href="https://nimblebox.ai" target="_blank" rel="noopener">https://nimblebox.ai</a></td>
+<td><a href="https://nimblebox.ai/plans" target="_blank" rel="noopener">https://nimblebox.ai/plans</a></td>
+<td>free $5 worth of cloud credits</td>
+</tr>
+<tr>
+<td>7</td>
+<td>paperspace</td>
+<td><a href="https://www.paperspace.com" target="_blank" rel="noopener">https://www.paperspace.com</a></td>
+<td><a href="https://www.paperspace.com/pricing" target="_blank" rel="noopener">https://www.paperspace.com/pricing</a></td>
+<td>$10 credits</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Overture</td>
+<td><a href="https://www.overture.ai" target="_blank" rel="noopener">https://www.overture.ai</a></td>
+<td>-</td>
+<td>free credits on signup</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Dataiku</td>
+<td><a href="https://www.dataiku.com" target="_blank" rel="noopener">https://www.dataiku.com</a></td>
+<td>-</td>
+<td><a href="https://www.dataiku.com/dss/trynow/free-edition" target="_blank" rel="noopener">Free Plans</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Cloudalize</td>
+<td><a href="https://www.cloudalize.com" target="_blank" rel="noopener">https://www.cloudalize.com</a></td>
+<td><a href="https://www.cloudalize.com/pricing/" target="_blank" rel="noopener">https://www.cloudalize.com/pricing/</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Deepcognition</td>
+<td><a href="https://deepcognition.ai" target="_blank" rel="noopener">https://deepcognition.ai</a></td>
+<td><a href="https://deepcognition.ai/products" target="_blank" rel="noopener">https://deepcognition.ai/products</a></td>
+<td>Desktop version <a href="https://deepcognition.ai/products/desktop/" target="_blank" rel="noopener">free</a> to use</td>
+</tr>
+<tr>
+<td>12</td>
+<td>GPUeater</td>
+<td><a href="https://gpueater.com" target="_blank" rel="noopener">https://gpueater.com</a></td>
+<td><a href="https://gpueater.com/#pricing" target="_blank" rel="noopener">https://gpueater.com/#pricing</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Vast.ai</td>
+<td><a href="https://vast.ai" target="_blank" rel="noopener">https://vast.ai</a></td>
+<td><a href="https://vast.ai/console/create/" target="_blank" rel="noopener">https://vast.ai/console/create/</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Clusterone</td>
+<td><a href="https://clusterone.com" target="_blank" rel="noopener">https://clusterone.com</a></td>
+<td><a href="https://clusterone.com/pricing" target="_blank" rel="noopener">https://clusterone.com/pricing</a></td>
+<td>$25 Sign up credit</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Snark</td>
+<td><a href="https://snark.ai" target="_blank" rel="noopener">https://snark.ai</a></td>
+<td><a href="https://scale.snark.ai/pricing" target="_blank" rel="noopener">https://scale.snark.ai/pricing</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Crestle</td>
+<td><a href="https://crestle.ai" target="_blank" rel="noopener">https://crestle.ai</a></td>
+<td><a href="https://crestle.ai/#pricing" target="_blank" rel="noopener">https://crestle.ai/#pricing</a></td>
+<td>1 hour of free GPU usage on sign up <a href="https://course.fast.ai/start_crestle.html#pricing" target="_blank" rel="noopener">fast.ai</a></td>
+</tr>
+<tr>
+<td>17</td>
+<td>Vector Dash(gaming)</td>
+<td><a href="https://vectordash.com" target="_blank" rel="noopener">https://vectordash.com</a></td>
+<td>-</td>
+<td>free 7 day plan</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Spell</td>
+<td><a href="https://spell.run/developers" target="_blank" rel="noopener">https://spell.run/developers</a></td>
+<td><a href="https://spell.run/pricing" target="_blank" rel="noopener">https://spell.run/pricing</a></td>
+<td>$10 GPU credit on signup</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Rapid Switch</td>
+<td><a href="https://www.rapidswitch.com" target="_blank" rel="noopener">https://www.rapidswitch.com</a></td>
+<td><a href="https://www.rapidswitch.com/dedicated-servers/low-price-guarantee/" target="_blank" rel="noopener">pricing</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Salamander</td>
+<td><a href="https://salamander.ai" target="_blank" rel="noopener">https://salamander.ai</a></td>
+<td><a href="https://salamander.ai" target="_blank" rel="noopener">https://salamander.ai</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Leadergpu</td>
+<td><a href="https://www.leadergpu.com" target="_blank" rel="noopener">https://www.leadergpu.com</a></td>
+<td><a href="https://www.leadergpu.com" target="_blank" rel="noopener">https://www.leadergpu.com</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>22</td>
+<td>vscaler</td>
+<td><a href="https://www.vscaler.com" target="_blank" rel="noopener">https://www.vscaler.com</a></td>
+<td><a href="https://www.vscaler.com/private-cloud-appliance/" target="_blank" rel="noopener">on request</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>23</td>
+<td>AWS Sagemaker</td>
+<td><a href="https://aws.amazon.com/sagemaker/" target="_blank" rel="noopener">https://aws.amazon.com/sagemaker/</a></td>
+<td><a href="https://aws.amazon.com/sagemaker/pricing/" target="_blank" rel="noopener">pricing</a></td>
+<td><a href="https://aws.amazon.com/free/" target="_blank" rel="noopener">Free plans</a></td>
+</tr>
+<tr>
+<td>24</td>
+<td>Exoscale</td>
+<td><a href="https://www.exoscale.com/gpu/" target="_blank" rel="noopener">https://www.exoscale.com/gpu/</a></td>
+<td><a href="https://www.exoscale.com/pricing/#/gpu/small" target="_blank" rel="noopener">pricing</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Cirrascale</td>
+<td><a href="http://www.cirrascale.com" target="_blank" rel="noopener">http://www.cirrascale.com</a></td>
+<td><a href="http://www.cirrascale.com/pricing_waas.php" target="_blank" rel="noopener">Work station</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>26</td>
+<td>Alibaba cloud</td>
+<td><a href="https://alibabacloud.com" target="_blank" rel="noopener">https://alibabacloud.com</a></td>
+<td><a href="https://www.alibabacloud.com/product/gpu/pricing" target="_blank" rel="noopener">pay as you go</a></td>
+<td>$300 <a href="https://www.alibabacloud.com/campaign/free-trial" target="_blank" rel="noopener">credits</a></td>
+</tr>
+<tr>
+<td>27</td>
+<td>IBM Cloud</td>
+<td><a href="https://www.ibm.com/cloud/gpu" target="_blank" rel="noopener">https://www.ibm.com/cloud/gpu</a></td>
+<td><a href="https://www.alibabacloud.com/product/gpu/pricing" target="_blank" rel="noopener">pay as you go</a></td>
+<td>$200 <a href="https://console.bluemix.net/registration/free" target="_blank" rel="noopener">credits</a></td>
+</tr>
+<tr>
+<td>28</td>
+<td>Google Cloud Platform</td>
+<td><a href="https://cloud.google.com/gpu/" target="_blank" rel="noopener">https://cloud.google.com/gpu/</a></td>
+<td><a href="https://cloud.google.com/pricing/" target="_blank" rel="noopener">https://cloud.google.com/pricing/</a></td>
+<td>$300 <a href="https://cloud.google.com/free/" target="_blank" rel="noopener">credits</a></td>
+</tr>
+<tr>
+<td>29</td>
+<td>Valohai</td>
+<td><a href="https://valohai.com" target="_blank" rel="noopener">https://valohai.com</a></td>
+<td><a href="https://valohai.com/pricing/" target="_blank" rel="noopener">https://valohai.com/pricing/</a></td>
+<td>free trial avaliable</td>
+</tr>
+<tr>
+<td>30</td>
+<td>Nvidia cloud</td>
+<td><a href="https://www.nvidia.com/en-us/data-center/gpu-cloud-computing/" target="_blank" rel="noopener">https://www.nvidia.com/en-us/data-center/gpu-cloud-computing/</a></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>31</td>
+<td>One stop System</td>
+<td><a href="https://www.onestopsystems.com" target="_blank" rel="noopener">https://www.onestopsystems.com</a></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>32</td>
+<td>Azure</td>
+<td><a href="https://azure.microsoft.com/en-in/services/machine-learning-studio/" target="_blank" rel="noopener">https://azure.microsoft.com/en-in/services/machine-learning-studio/</a></td>
+<td><a href="https://azure.microsoft.com/en-in/pricing/" target="_blank" rel="noopener">pricing</a></td>
+<td>$200 <a href="https://azure.microsoft.com/en-us/free/" target="_blank" rel="noopener">credits</a></td>
+</tr>
+<tr>
+<td>33</td>
+<td>Omnisci</td>
+<td><a href="https://www.omnisci.com" target="_blank" rel="noopener">https://www.omnisci.com</a></td>
+<td><a href="https://www.omnisci.com/cloud" target="_blank" rel="noopener">https://www.omnisci.com/cloud</a></td>
+<td>14 day free trial</td>
+</tr>
+<tr>
+<td>34</td>
+<td>Rendsolve</td>
+<td><a href="https://rendsolve.com" target="_blank" rel="noopener">https://rendsolve.com</a></td>
+<td><a href="https://rendsolve.com/pricing" target="_blank" rel="noopener">https://rendsolve.com/pricing</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>35</td>
+<td>Golem</td>
+<td><a href="https://golem.network" target="_blank" rel="noopener">https://golem.network</a></td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="将模型部署为-Web-应用"><a href="#将模型部署为-Web-应用" class="headerlink" title="将模型部署为 Web 应用"></a>将模型部署为 Web 应用</h1><p>有一个想法, 并希望服务于世界 🌎, 创建一个 Webapp, 并将其部署为 flask , Django 等</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>供应商</th>
+<th>网站</th>
+<th>价格</th>
+<th>免费试用 / 免费积分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Render</td>
+<td><a href="https://render.com" target="_blank" rel="noopener">https://render.com</a></td>
+<td><a href="https://render.com/pricing" target="_blank" rel="noopener">https://render.com/pricing</a></td>
+<td>-</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Heroku</td>
+<td><a href="https://www.heroku.com" target="_blank" rel="noopener">https://www.heroku.com</a></td>
+<td><a href="https://www.heroku.com/pricing" target="_blank" rel="noopener">https://www.heroku.com/pricing</a></td>
+<td><a href="https://www.heroku.com/free" target="_blank" rel="noopener">Free plan</a> (model&lt;500MB)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Digtal Ocean</td>
+<td><a href="https://www.digitalocean.com" target="_blank" rel="noopener">https://www.digitalocean.com</a></td>
+<td><a href="https://www.digitalocean.com/pricing/" target="_blank" rel="noopener">pay as you go</a></td>
+<td>free $100 credits with <a href="https://education.github.com/pack" target="_blank" rel="noopener">github student pack</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Glitch</td>
+<td><a href="https://glitch.com" target="_blank" rel="noopener">https://glitch.com</a></td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Zeit</td>
+<td><a href="https://zeit.co" target="_blank" rel="noopener">https://zeit.co</a></td>
+<td><a href="https://zeit.co/pricing" target="_blank" rel="noopener">https://zeit.co/pricing</a></td>
+<td>Free plan available</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="优惠"><a href="#优惠" class="headerlink" title="优惠"></a>优惠</h1><p>如果你是学生或研究人员, 你可以获得额外的积分, 请联系提供商</p>
+<ul>
+<li>Paperspace 提供 10 美元的免费 Gradient° 积分 <a href="https://course.fast.ai/start_gradient.html#promotional-credit" target="_blank" rel="noopener">fast.ai 链接</a></li>
+<li>你是否有一个 GPU 躺在你的机器使用 <a href="https://vast.ai/console/host/setup/" target="_blank" rel="noopener">Vast.ai</a> 租来赚钱？</li>
+<li>试驾 Nvidia GPU <a href="https://www.nvidia.com/en-us/data-center/tesla/gpu-test-drive/" target="_blank" rel="noopener">链接</a></li>
+<li>Google Cloud Research 计划 - 提供 <strong>$5000+ 积分</strong> <a href="https://lp.google-mkto.com/gcp-research-credits-FAQ.html" target="_blank" rel="noopener">链接</a></li>
+<li>用于研究的 AWS 云积分 -  <a href="https://aws.amazon.com/research-credits/" target="_blank" rel="noopener">链接</a></li>
+<li><p>Nvidia GPU Grant 计划 -  <a href="https://developer.nvidia.com/academic_gpu_seeding" target="_blank" rel="noopener">链接</a></p>
+</li>
+<li><p><strong>如果您是初创公司</strong>，那么谷歌已经为您提供了启动计划，为您提供 <strong>1000-100000</strong>  美元的积分 -  <a href="https://cloud.google.com/developers/startups/" target="_blank" rel="noopener">链接</a></p>
+</li>
+<li>Google 向研究人员提供 <strong>1000 TPU 的集群</strong> 总的来说，这个集群总共提供超过 <strong>180 petaflops 的初始计算能力</strong> <a href="https://techcrunch.com/2017/05/17/the-tensorflow-research-cloud-program-gives-the-latest-cloud-tpus-to-scientists/" target="_blank" rel="noopener">techcrunch 链接</a> -  <a href="https://www.tensorflow.org/tfrc/" target="_blank" rel="noopener">应用程序链接</a></li>
+<li>Google 云教育资助 -  <a href="https://cloud.google.com/edu/" target="_blank" rel="noopener">链接</a></li>
+<li>Github 教育包 - 以及许多优惠，最高可获得 110 美元的 AWS 积分 -  <a href="https://education.github.com/pack" target="_blank" rel="noopener">链接</a></li>
+<li>注意 <a href="https://forums.fast.ai" target="_blank" rel="noopener">fast.ai 论坛</a> 获取免费积分的优惠券代码</li>
+<li>Valohai 为学生和研究人员提供 <a href="https://valohai.com/research-license/" target="_blank" rel="noopener">研究员许可证</a></li>
+<li>想要使用 <strong>超级计算机</strong> 但还没有，去 Golem  -  <a href="https://golem.network" target="_blank" rel="noopener">Golem</a> 是一个 <em>分散的计算能力市场</em>。它能够在 P2P 使用 CPU 和 GPU ，使应用程序所有者和个人用户能够从其他用户机器中租用资源，因此 turbo 会为您的下一次模型培训收费。</li>
+</ul>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ul>
+<li>Google colab 和 Kaggle 内核的会话时间有限</li>
+<li>大多数 gpu 提供程序运行在 AWS，GCP 等之上，因此可能与后者具有或多或少相同的定价</li>
+<li>上面给出的信息最适合我的搜索能力，您可以与提供商重新检查定价和其他信息</li>
+<li><a href="https://github.com/zszazi/Deep-learning-in-cloud/blob/master/LICENSE">许可证</a></li>
+</ul>
+<hr>
+<p>作者：<em>zszazi</em><br>原文：<a href="https://github.com/virgili0/Virgilio/blob/master/zh-CN/Topics/Deep%20learning%20in%20cloud/README.md">https://github.com/virgili0/Virgilio/blob/master/zh-CN/Topics/Deep%20learning%20in%20cloud/README.md</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/DL/" rel="tag"># DL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/09/raywenderlich/" rel="next" title="下载 raywenderlich.com 上的 iOS/Android/Unity 视频、源码">
+                <i class="fa fa-chevron-left"></i> 下载 raywenderlich.com 上的 iOS/Android/Unity 视频、源码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">62</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://github.com/MixLabPro" title="GitHub &rarr; http://github.com/MixLabPro"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#将模型部署为-Web-应用"><span class="nav-number">1.</span> <span class="nav-text">将模型部署为 Web 应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优惠"><span class="nav-number">2.</span> <span class="nav-text">优惠</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#备注"><span class="nav-number">2.1.</span> <span class="nav-text">备注</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/05/19/cloud/";
+    this.page.identifier = "2019/05/19/cloud/";
+    this.page.title = '云端深度学习';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
