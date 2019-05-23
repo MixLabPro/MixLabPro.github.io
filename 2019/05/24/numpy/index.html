@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Numpy 简介 Numpy 库是 Python 中科学计算的核心库。它提供了高性能的多维数组对象以及用于处理这些数组的工具。 使用以下约定导入 Numpy 1import numpy as np Numpy 数组">
+<meta name="keywords" content="ML,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Numpy 基础">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/24/numpy/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="Numpy 简介 Numpy 库是 Python 中科学计算的核心库。它提供了高性能的多维数组对象以及用于处理这些数组的工具。 使用以下约定导入 Numpy 1import numpy as np Numpy 数组">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.numpy.org/_static/numpy_logo.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/2400/1*Ikn1J6siiiCSk4ivYUhdgw.png">
+<meta property="og:updated_time" content="2019-05-23T16:13:47.543Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Numpy 基础">
+<meta name="twitter:description" content="Numpy 简介 Numpy 库是 Python 中科学计算的核心库。它提供了高性能的多维数组对象以及用于处理这些数组的工具。 使用以下约定导入 Numpy 1import numpy as np Numpy 数组">
+<meta name="twitter:image" content="http://www.numpy.org/_static/numpy_logo.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/24/numpy/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Numpy 基础 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">AIDevLog</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/24/numpy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Numpy 基础
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-24 00:12:08 / 修改时间：00:13:47" itemprop="dateCreated datePublished" datetime="2019-05-24T00:12:08+08:00">2019-05-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/05/24/numpy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/24/numpy/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Numpy-简介"><a href="#Numpy-简介" class="headerlink" title="Numpy 简介"></a>Numpy 简介</h2><p><img src="http://www.numpy.org/_static/numpy_logo.png" alt="Numpy"></p>
+<p>Numpy 库是 Python 中科学计算的核心库。它提供了高性能的多维数组对象以及用于处理这些数组的工具。</p>
+<p>使用以下约定导入 Numpy</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+<p>Numpy 数组</p>
+<p><img src="https://cdn-images-1.medium.com/max/2400/1*Ikn1J6siiiCSk4ivYUhdgw.png" alt="Numpy Array"></p>
+<a id="more"></a>
+<h2 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.info(np.ndarray.dtype)</span><br></pre></td></tr></table></figure>
+<h2 id="创建数组"><a href="#创建数组" class="headerlink" title="创建数组"></a>创建数组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">b = np.array([(<span class="number">1.5</span>,<span class="number">2</span>,<span class="number">3</span>), (<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)], dtype = float)</span><br><span class="line">c = np.array([[(<span class="number">1.5</span>,<span class="number">2</span>,<span class="number">3</span>), (<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)], [(<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>), (<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)]],</span><br><span class="line">dtype = float)</span><br></pre></td></tr></table></figure>
+<h3 id="初始占位符"><a href="#初始占位符" class="headerlink" title="初始占位符"></a>初始占位符</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个零数组</span></span><br><span class="line">np.zeros((<span class="number">3</span>,<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+<p>array([[0., 0., 0., 0.],<br>[0., 0., 0., 0.],<br>[0., 0., 0., 0.]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个数组</span></span><br><span class="line">np.ones((<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), dtype=np.int16)</span><br></pre></td></tr></table></figure>
+<p>array([[[1, 1, 1, 1],<br>[1, 1, 1, 1],<br>[1, 1, 1, 1]],</p>
+<p>[[1, 1, 1, 1],<br>[1, 1, 1, 1],<br>[1, 1, 1, 1]]], dtype=int16)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建均匀间隔值的数组（步长值）</span></span><br><span class="line">d = np.arange(<span class="number">10</span>,<span class="number">25</span>,<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建均匀间隔值的数组（样本数）</span></span><br><span class="line">np.linspace(<span class="number">0</span>,<span class="number">2</span>,<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
+<p>array([0.  , 0.25, 0.5 , 0.75, 1.  , 1.25, 1.5 , 1.75, 2.  ])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建常量数组</span></span><br><span class="line">e = np.full((<span class="number">2</span>,<span class="number">2</span>),<span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建2X2单位矩阵</span></span><br><span class="line">f = np.eye(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建具有随机值的数组</span></span><br><span class="line">np.random.random((<span class="number">2</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>array([[0.64234353, 0.07179718],<br>[0.7937333 , 0.13764298]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个空数组</span></span><br><span class="line">np.empty((<span class="number">3</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>array([[0., 0.],<br>[0., 0.],<br>[0., 0.]])</p>
+<h2 id="文件-I-O"><a href="#文件-I-O" class="headerlink" title="文件 I / O"></a>文件 I / O</h2><h3 id="在磁盘上保存-amp-加载"><a href="#在磁盘上保存-amp-加载" class="headerlink" title="在磁盘上保存 &amp; 加载"></a>在磁盘上保存 &amp; 加载</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">np.save(<span class="string">'my_array'</span>, a)</span><br><span class="line">np.savez(<span class="string">'array.npz'</span>, a, b)</span><br><span class="line">np.load(<span class="string">'my_array.npy'</span>)</span><br></pre></td></tr></table></figure>
+<p>array([1, 2, 3])</p>
+<h3 id="保存-amp-加载文本文件"><a href="#保存-amp-加载文本文件" class="headerlink" title="保存 &amp; 加载文本文件"></a>保存 &amp; 加载文本文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">np.loadtxt(<span class="string">"myfile.txt"</span>)</span><br><span class="line">np.genfromtxt(<span class="string">"my_file.csv"</span>, delimiter=<span class="string">','</span>)</span><br><span class="line">np.savetxt(<span class="string">"myarray.txt"</span>, a, delimiter=<span class="string">" "</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 有符号的64位整数类型</span></span><br><span class="line">np.int64</span><br></pre></td></tr></table></figure>
+<p>numpy.int64</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准双精度浮点复数</span></span><br><span class="line">np.float32</span><br></pre></td></tr></table></figure>
+<p>numpy.float32</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由128浮点数表示的布尔类型</span></span><br><span class="line">np.complex</span><br></pre></td></tr></table></figure>
+<p>complex</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 存储TRUE和FALSE</span></span><br><span class="line">np.bool</span><br></pre></td></tr></table></figure>
+<p>bool</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 值Python对象类型</span></span><br><span class="line">np.object</span><br></pre></td></tr></table></figure>
+<p>object</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 固定长度的字符串类型</span></span><br><span class="line">np.string_</span><br></pre></td></tr></table></figure>
+<p>numpy.bytes_</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 固定长度的unicode类型</span></span><br><span class="line">np.unicode_</span><br></pre></td></tr></table></figure>
+<p>numpy.str_</p>
+<h2 id="检查数组"><a href="#检查数组" class="headerlink" title="检查数组"></a>检查数组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组尺寸</span></span><br><span class="line">a.shape</span><br></pre></td></tr></table></figure>
+<p>(3,)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组长度</span></span><br><span class="line">len(a)</span><br></pre></td></tr></table></figure>
+<p>3</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组维数</span></span><br><span class="line">b.ndim</span><br></pre></td></tr></table></figure>
+<p>2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组元素的数量</span></span><br><span class="line">e.size</span><br></pre></td></tr></table></figure>
+<p>4</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组元素的数据类型</span></span><br><span class="line">b.dtype</span><br></pre></td></tr></table></figure>
+<p>dtype(‘float64’)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据类型的名称</span></span><br><span class="line">b.dtype.name</span><br></pre></td></tr></table></figure>
+<p>‘float64’</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将数组转换为其他类型</span></span><br><span class="line">b.astype(int)</span><br></pre></td></tr></table></figure>
+<p>array([[1, 2, 3],<br>[4, 5, 6]])</p>
+<h2 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h2><h3 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 减法</span></span><br><span class="line">g = a - b</span><br><span class="line">g</span><br></pre></td></tr></table></figure>
+<p>array([[-0.5,  0. ,  0. ],<br>[-3. , -3. , -3. ]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 减法</span></span><br><span class="line">np.subtract(a,b)</span><br></pre></td></tr></table></figure>
+<p>array([[-0.5,  0. ,  0. ],<br>[-3. , -3. , -3. ]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加法</span></span><br><span class="line">b + a</span><br></pre></td></tr></table></figure>
+<p>array([[2.5, 4. , 6. ],<br>[5. , 7. , 9. ]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加法</span></span><br><span class="line">np.add(b,a)</span><br></pre></td></tr></table></figure>
+<p>array([[2.5, 4. , 6. ],<br>[5. , 7. , 9. ]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 乘法</span></span><br><span class="line">a * b</span><br></pre></td></tr></table></figure>
+<p>array([[ 1.5,  4. ,  9. ],<br>[ 4. , 10. , 18. ]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 除法</span></span><br><span class="line">a / b</span><br></pre></td></tr></table></figure>
+<p>array([[0.66666667, 1.        , 1.        ],<br>[0.25      , 0.4       , 0.5       ]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 幂</span></span><br><span class="line">np.multiply(a,b)</span><br></pre></td></tr></table></figure>
+<p>array([[ 1.5,  4. ,  9. ],<br>[ 4. , 10. , 18. ]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 平方根</span></span><br><span class="line">np.sqrt(b)</span><br></pre></td></tr></table></figure>
+<p>array([[1.22474487, 1.41421356, 1.73205081],<br>[2.        , 2.23606798, 2.44948974]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 正弦</span></span><br><span class="line">np.sin(a)</span><br></pre></td></tr></table></figure>
+<p>array([0.84147098, 0.90929743, 0.14112001])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 余弦</span></span><br><span class="line">np.cos(b)</span><br></pre></td></tr></table></figure>
+<p>array([[ 0.0707372 , -0.41614684, -0.9899925 ],<br>[-0.65364362,  0.28366219,  0.96017029]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自然对数</span></span><br><span class="line">np.log(a)</span><br></pre></td></tr></table></figure>
+<p>array([0.        , 0.69314718, 1.09861229])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 点积</span></span><br><span class="line">e.dot(f)</span><br></pre></td></tr></table></figure>
+<p>array([[7., 7.],<br>[7., 7.]])</p>
+<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 元素比较</span></span><br><span class="line">a == b</span><br></pre></td></tr></table></figure>
+<p>array([[False,  True,  True],<br>[False, False, False]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 元素比较</span></span><br><span class="line">a &lt; <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>array([ True, False, False])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组比较</span></span><br><span class="line">np.array_equal(a, b)</span><br></pre></td></tr></table></figure>
+<p>False</p>
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组式和</span></span><br><span class="line">a.sum()</span><br></pre></td></tr></table></figure>
+<p>6</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组最小值</span></span><br><span class="line">a.min()</span><br></pre></td></tr></table></figure>
+<p>1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组行的最大值</span></span><br><span class="line">b.max(axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>array([4., 5., 6.])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 元素的累积总和</span></span><br><span class="line">b.cumsum(axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>array([[ 1.5,  3.5,  6.5],<br>[ 4. ,  9. , 15. ]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 均值</span></span><br><span class="line">a.mean()</span><br></pre></td></tr></table></figure>
+<p>2.0</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 中位数</span></span><br><span class="line">np.median(b)</span><br></pre></td></tr></table></figure>
+<p>3.5</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 相关系数</span></span><br><span class="line">np.corrcoef(a, b)</span><br></pre></td></tr></table></figure>
+<p>array([[1.        , 0.98198051, 1.        ],<br>[0.98198051, 1.        , 0.98198051],<br>[1.        , 0.98198051, 1.        ]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 标准差</span></span><br><span class="line">np.std(b)</span><br></pre></td></tr></table></figure>
+<p>1.5920810978785667</p>
+<h2 id="复制数组"><a href="#复制数组" class="headerlink" title="复制数组"></a>复制数组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用相同的数据创建数组视图</span></span><br><span class="line">h = a.view()</span><br><span class="line">h</span><br></pre></td></tr></table></figure>
+<p>array([1, 2, 3])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建数组的副本</span></span><br><span class="line">np.copy(a)</span><br></pre></td></tr></table></figure>
+<p>array([1, 2, 3])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建数组的深层副本</span></span><br><span class="line">h = a.copy()</span><br><span class="line">h</span><br></pre></td></tr></table></figure>
+<p>array([1, 2, 3])</p>
+<h2 id="排序数组"><a href="#排序数组" class="headerlink" title="排序数组"></a>排序数组</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对数组进行排序</span></span><br><span class="line">a.sort()</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+<p>array([1, 2, 3])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对数组轴的元素进行排序</span></span><br><span class="line">c.sort(axis=<span class="number">0</span>)</span><br><span class="line">c</span><br></pre></td></tr></table></figure>
+<p>array([[[1.5, 2. , 1. ],<br>[4. , 5. , 6. ]],<br>[[3. , 2. , 3. ],<br>[4. , 5. , 6. ]]])</p>
+<h2 id="切片与索引"><a href="#切片与索引" class="headerlink" title="切片与索引"></a>切片与索引</h2><h3 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>3</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b[<span class="number">1</span>,<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>6.0</p>
+<h3 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>array([1, 2])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b[<span class="number">0</span>:<span class="number">2</span>,<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>array([2., 5.])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b[:<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>array([[1.5, 2. , 3. ]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c[<span class="number">1</span>, ...]</span><br></pre></td></tr></table></figure>
+<p>array([[3., 2., 3.],<br>[4., 5., 6.]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[ : :<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<p>array([3, 2, 1])</p>
+<h3 id="布尔索引"><a href="#布尔索引" class="headerlink" title="布尔索引"></a>布尔索引</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[a&lt;<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>array([1])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 花式索引</span></span><br><span class="line">b[[<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>],[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>]]</span><br></pre></td></tr></table></figure>
+<p>array([4. , 2. , 6. , 1.5])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b[[<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]][:,[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>]]</span><br></pre></td></tr></table></figure>
+<p>array([[4. , 5. , 6. , 4. ],<br>[1.5, 2. , 3. , 1.5],<br>[4. , 5. , 6. , 4. ],<br>[1.5, 2. , 3. , 1.5]])</p>
+<h2 id="数组操作"><a href="#数组操作" class="headerlink" title="数组操作"></a>数组操作</h2><h3 id="转置数组"><a href="#转置数组" class="headerlink" title="转置数组"></a>转置数组</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重新排列数组维度</span></span><br><span class="line">i = np.transpose(b)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重新排列数组维度</span></span><br><span class="line">i.T</span><br></pre></td></tr></table></figure>
+<p>array([[1.5, 2. , 3. ],<br>[4. , 5. , 6. ]])</p>
+<h3 id="改变形状"><a href="#改变形状" class="headerlink" title="改变形状"></a>改变形状</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 展平数组</span></span><br><span class="line">b.ravel()</span><br></pre></td></tr></table></figure>
+<p>array([1.5, 2. , 3. , 4. , 5. , 6. ])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.reshape(<span class="number">3</span>, <span class="number">-2</span>)</span><br></pre></td></tr></table></figure>
+<p>array([[-0.5,  0. ],<br>[ 0. , -3. ],<br>[-3. , -3. ]])</p>
+<h3 id="添加-删除元素"><a href="#添加-删除元素" class="headerlink" title="添加 / 删除元素"></a>添加 / 删除元素</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 返回一个形状为新的数组（2,6）</span></span><br><span class="line">h = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">h.resize((<span class="number">2</span>, <span class="number">6</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将元素附加到数组</span></span><br><span class="line">np.append(h, g)</span><br></pre></td></tr></table></figure>
+<p>array([ 1. ,  2. ,  3. ,  0. ,  0. ,  0. ,  0. ,  0. ,  0. ,  0. ,  0. ,</p>
+<ol>
+<li>, -0.5,  0. ,  0. , -3. , -3. , -3. ])</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在数组中插入元素</span></span><br><span class="line">np.insert(a, <span class="number">1</span>, <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p>array([1, 5, 2, 3])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从数组中删除元素</span></span><br><span class="line">np.delete(a,[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p>array([1, 3])</p>
+<h3 id="结合数组"><a href="#结合数组" class="headerlink" title="结合数组"></a>结合数组</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接数组</span></span><br><span class="line">np.concatenate((a,d),axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>array([ 1,  2,  3, 10, 15, 20])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 垂直堆叠数组（逐行）</span></span><br><span class="line">np.vstack((a,b))</span><br></pre></td></tr></table></figure>
+<p>array([[1. , 2. , 3. ],<br>[1.5, 2. , 3. ],<br>[4. , 5. , 6. ]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 垂直堆叠数组（逐行）</span></span><br><span class="line">np.r_[e,f]</span><br></pre></td></tr></table></figure>
+<p>array([[7., 7.],<br>[7., 7.],<br>[1., 0.],<br>[0., 1.]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 水平堆叠阵列（逐列）</span></span><br><span class="line">np.hstack((e,f))</span><br></pre></td></tr></table></figure>
+<p>array([[7., 7., 1., 0.],<br>[7., 7., 0., 1.]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建堆叠的列式数组</span></span><br><span class="line">np.column_stack((a,d))</span><br></pre></td></tr></table></figure>
+<p>array([[ 1, 10],<br>[ 2, 15],<br>[ 3, 20]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建堆叠的列式数组</span></span><br><span class="line">np.c_[a,d]</span><br></pre></td></tr></table></figure>
+<p>array([[ 1, 10],<br>[ 2, 15],<br>[ 3, 20]])</p>
+<h3 id="分割数组"><a href="#分割数组" class="headerlink" title="分割数组"></a>分割数组</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在第3个索引处水平拆分数组</span></span><br><span class="line">np.hsplit(a,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p>[array([1]), array([2]), array([3])]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h</span><br><span class="line">h.resize(<span class="number">2</span>, <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在第 2 个索引处垂直拆分数组</span></span><br><span class="line">np.vsplit(c,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>[array([[[1.5, 2. , 1. ],<br>[4. , 5. , 6. ]]]), array([[[3., 2., 3.],<br>[4., 5., 6.]]])]</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/23/python-basic/" rel="next" title="Python 基础">
+                <i class="fa fa-chevron-left"></i> Python 基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/iOSDevLog/AIDevLog" title="GitHub &rarr; https://github.com/iOSDevLog/AIDevLog"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Numpy-简介"><span class="nav-number">1.</span> <span class="nav-text">Numpy 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#帮助"><span class="nav-number">2.</span> <span class="nav-text">帮助</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建数组"><span class="nav-number">3.</span> <span class="nav-text">创建数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始占位符"><span class="nav-number">3.1.</span> <span class="nav-text">初始占位符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件-I-O"><span class="nav-number">4.</span> <span class="nav-text">文件 I / O</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在磁盘上保存-amp-加载"><span class="nav-number">4.1.</span> <span class="nav-text">在磁盘上保存 &amp; 加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存-amp-加载文本文件"><span class="nav-number">4.2.</span> <span class="nav-text">保存 &amp; 加载文本文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">5.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检查数组"><span class="nav-number">6.</span> <span class="nav-text">检查数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学运算"><span class="nav-number">7.</span> <span class="nav-text">数学运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算术运算"><span class="nav-number">7.1.</span> <span class="nav-text">算术运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较"><span class="nav-number">7.2.</span> <span class="nav-text">比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合函数"><span class="nav-number">7.3.</span> <span class="nav-text">聚合函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制数组"><span class="nav-number">8.</span> <span class="nav-text">复制数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序数组"><span class="nav-number">9.</span> <span class="nav-text">排序数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切片与索引"><span class="nav-number">10.</span> <span class="nav-text">切片与索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下标"><span class="nav-number">10.1.</span> <span class="nav-text">下标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切片"><span class="nav-number">10.2.</span> <span class="nav-text">切片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔索引"><span class="nav-number">10.3.</span> <span class="nav-text">布尔索引</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组操作"><span class="nav-number">11.</span> <span class="nav-text">数组操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#转置数组"><span class="nav-number">11.1.</span> <span class="nav-text">转置数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变形状"><span class="nav-number">11.2.</span> <span class="nav-text">改变形状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加-删除元素"><span class="nav-number">11.3.</span> <span class="nav-text">添加 / 删除元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结合数组"><span class="nav-number">11.4.</span> <span class="nav-text">结合数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割数组"><span class="nav-number">11.5.</span> <span class="nav-text">分割数组</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/05/24/numpy/";
+    this.page.identifier = "2019/05/24/numpy/";
+    this.page.title = 'Numpy 基础';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
