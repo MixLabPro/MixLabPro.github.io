@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Matplotlib 是一个 Python 绘图库，可以跨平台生成各种硬拷贝格式和交互式环境的出版品质数据。">
+<meta name="keywords" content="ML,DL,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matplotlib 基础">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/26/matplotlib/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="Matplotlib 是一个 Python 绘图库，可以跨平台生成各种硬拷贝格式和交互式环境的出版品质数据。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://matplotlib.org/_static/logo2.png">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mpl_screenshot_figures_and_code.png/600px-Mpl_screenshot_figures_and_code.png">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/5/26/16af39b82c3cc2b2?w=1504&h=1366&f=png&s=312516">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-a7d9191341a6fd0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-17de9e32d5182e07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-33fe4b841317315d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-9ca0a21a2adbb164.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-b0da6f83423f7779.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-c63dd40934bac10c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-b38cf16582930eb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-93e81310477b26af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-99cbac47dfd84f32.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-6309df20317e2bb1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-720c0f3425c671f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-91becd3fd3092222.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-1f37d7ba93a5bb05.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-3423b435b1123291.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-4d50084ecfe19447.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-f40d5b046f629e7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-05-26T12:21:54.174Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Matplotlib 基础">
+<meta name="twitter:description" content="Matplotlib 是一个 Python 绘图库，可以跨平台生成各种硬拷贝格式和交互式环境的出版品质数据。">
+<meta name="twitter:image" content="https://matplotlib.org/_static/logo2.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/26/matplotlib/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Matplotlib 基础 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">AIDevLog</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/26/matplotlib/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Matplotlib 基础
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-26 20:19:40 / 修改时间：20:21:54" itemprop="dateCreated datePublished" datetime="2019-05-26T20:19:40+08:00">2019-05-26</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/05/26/matplotlib/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/26/matplotlib/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://matplotlib.org/_static/logo2.png" alt="Matplotlib"></p>
+<p>Matplotlib 是一个 Python 绘图库，可以跨平台生成各种硬拷贝格式和交互式环境的出版品质数据。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mpl_screenshot_figures_and_code.png/600px-Mpl_screenshot_figures_and_code.png" alt="Matplotlib"></p>
+<a id="more"></a>
+<h2 id="绘图解剖（Plot-Anatomy）"><a href="#绘图解剖（Plot-Anatomy）" class="headerlink" title="绘图解剖（Plot Anatomy）"></a>绘图解剖（Plot Anatomy）</h2><p><img src="https://user-gold-cdn.xitu.io/2019/5/26/16af39b82c3cc2b2?w=1504&amp;h=1366&amp;f=png&amp;s=312516" alt="Plot"></p>
+<h2 id="工作流程（Workflow）"><a href="#工作流程（Workflow）" class="headerlink" title="工作流程（Workflow）"></a>工作流程（Workflow）</h2><p>使用 matplotlib 创建绘图的基本步骤</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="comment"># 1. 准备数据</span></span><br><span class="line">x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">y = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">25</span>, <span class="number">30</span>]</span><br><span class="line"><span class="comment"># 2. 创建绘图</span></span><br><span class="line">fig = plt.figure()</span><br><span class="line"><span class="comment"># 3. 绘图</span></span><br><span class="line">ax = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line"><span class="comment"># 4. 自定义绘图</span></span><br><span class="line">ax.plot(x, y, color=<span class="string">'lightblue'</span>, linewidth=<span class="number">3</span>)</span><br><span class="line">ax.scatter([<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>],</span><br><span class="line">           [<span class="number">5</span>, <span class="number">15</span>, <span class="number">25</span>],</span><br><span class="line">           color=<span class="string">'darkgreen'</span>,</span><br><span class="line">           marker=<span class="string">'^'</span>)</span><br><span class="line">ax.set_xlim(<span class="number">1</span>, <span class="number">6.5</span>)</span><br><span class="line"><span class="comment"># 5. 保存图</span></span><br><span class="line">plt.savefig(<span class="string">'foo.png'</span>)</span><br><span class="line"><span class="comment"># 6. 显示图</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h2><h3 id="1D数据"><a href="#1D数据" class="headerlink" title="1D数据"></a>1D数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">x = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">y = np.cos(x)</span><br><span class="line">z = np.sin(x)</span><br></pre></td></tr></table></figure>
+<h3 id="2D数据-或-图像"><a href="#2D数据-或-图像" class="headerlink" title="2D数据 或 图像"></a>2D数据 或 图像</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib.cbook <span class="keyword">import</span> get_sample_data</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">data = <span class="number">2</span> * np.random.random((<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line">data2 = <span class="number">3</span> * np.random.random((<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line">Y, X = np.mgrid[<span class="number">-3</span>:<span class="number">3</span>:<span class="number">100j</span>, <span class="number">-3</span>:<span class="number">3</span>:<span class="number">100j</span>]</span><br><span class="line">U = <span class="number">-1</span> - X**<span class="number">2</span> + Y</span><br><span class="line">V = <span class="number">1</span> + X - Y**<span class="number">2</span></span><br><span class="line">img = np.load(get_sample_data(os.getcwd() + <span class="string">'/axes_grid/bivariate_normal.npy'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="创建图"><a href="#创建图" class="headerlink" title="创建图"></a>创建图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="comment"># 魔法函数（Magic Functions）功能是可以内嵌绘图，并且可以省略掉 plt.show()</span></span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
+<h3 id="图形（Figure）"><a href="#图形（Figure）" class="headerlink" title="图形（Figure）"></a>图形（Figure）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig = plt.figure()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig2 = plt.figure(figsize=plt.figaspect(<span class="number">2.0</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="轴（Axes）"><a href="#轴（Axes）" class="headerlink" title="轴（Axes）"></a>轴（Axes）</h3><p>所有绘图都是针对 Axes 完成的。 在大多数情况下，子图符合您的需求。子图是网格系统上的轴。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig.add_axes()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax1 = fig.add_subplot(<span class="number">221</span>)  <span class="comment"># 行-列-数字</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax3 = fig.add_subplot(<span class="number">212</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig3, axes = plt.subplots(nrows=<span class="number">2</span>, ncols=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-a7d9191341a6fd0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_24_0.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fig4, axes2 = plt.subplots(ncols=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-17de9e32d5182e07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_25_0.png"></p>
+<h2 id="常规绘制"><a href="#常规绘制" class="headerlink" title="常规绘制"></a>常规绘制</h2><h3 id="1D-数据"><a href="#1D-数据" class="headerlink" title="1D 数据"></a>1D 数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line"><span class="comment"># 用连接它们的线或标记绘制点</span></span><br><span class="line">lines = ax.plot(x, y)</span><br><span class="line"><span class="comment"># 绘制未连接的点，缩放或着色</span></span><br><span class="line">ax.scatter(x, y)</span><br><span class="line"><span class="comment"># 绘制垂直矩形（恒定宽度）</span></span><br><span class="line">axes[<span class="number">0</span>, <span class="number">0</span>].bar([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"><span class="comment"># 绘制horiontal矩形（恒定高度）</span></span><br><span class="line">axes[<span class="number">1</span>, <span class="number">0</span>].barh([<span class="number">0.5</span>, <span class="number">1</span>, <span class="number">2.5</span>], [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"><span class="comment"># 在轴上绘制一条水平线</span></span><br><span class="line">axes[<span class="number">1</span>, <span class="number">1</span>].axhline(<span class="number">0.45</span>)</span><br><span class="line"><span class="comment"># 在轴上绘制一条垂直线</span></span><br><span class="line">axes[<span class="number">0</span>, <span class="number">1</span>].axvline(<span class="number">0.65</span>)</span><br><span class="line"><span class="comment"># 绘制填充的多边形</span></span><br><span class="line">ax.fill(x, y, color=<span class="string">'blue'</span>)</span><br><span class="line"><span class="comment"># 在 y 值和 0 之间填充</span></span><br><span class="line">ax.fill_between(x, y, color=<span class="string">'yellow'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-33fe4b841317315d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_28_1.png"></p>
+<h3 id="2D数据-或-图像-1"><a href="#2D数据-或-图像-1" class="headerlink" title="2D数据 或 图像"></a>2D数据 或 图像</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line"><span class="comment"># 彩色贴图或 RGB 数组</span></span><br><span class="line">im = ax.imshow(img,</span><br><span class="line">               cmap=<span class="string">'gist_earth'</span>,</span><br><span class="line">               interpolation=<span class="string">'nearest'</span>,</span><br><span class="line">               vmin=<span class="number">-2</span>,</span><br><span class="line">               vmax=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-9ca0a21a2adbb164.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_30_0.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 二维数组的伪彩色图</span></span><br><span class="line">axes2[<span class="number">0</span>].pcolor(data2)</span><br><span class="line"><span class="comment"># 二维数组的伪彩色图</span></span><br><span class="line">axes2[<span class="number">0</span>].pcolormesh(data)</span><br><span class="line"><span class="comment"># 绘制轮廓</span></span><br><span class="line">CS = plt.contour(Y, X, U)</span><br><span class="line"><span class="comment"># 绘制填充轮廓</span></span><br><span class="line">axes2[<span class="number">2</span>].contourf(data)</span><br><span class="line"><span class="comment"># 标记等高线图</span></span><br><span class="line">axes2[<span class="number">2</span>] = ax.clabel(CS)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-b0da6f83423f7779.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_31_0.png"></p>
+<h3 id="向量字段"><a href="#向量字段" class="headerlink" title="向量字段"></a>向量字段</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 向轴添加箭头</span></span><br><span class="line">axes[<span class="number">0</span>, <span class="number">1</span>].arrow(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0.5</span>, <span class="number">0.5</span>)</span><br><span class="line"><span class="comment"># 绘制箭头的 2D 字段</span></span><br><span class="line">axes[<span class="number">1</span>, <span class="number">1</span>].quiver(y, z)</span><br><span class="line"><span class="comment"># 绘制箭头的 2D 字段</span></span><br><span class="line">axes[<span class="number">0</span>, <span class="number">1</span>].streamplot(X, Y, U, V)</span><br></pre></td></tr></table></figure>
+<h3 id="数据分布"><a href="#数据分布" class="headerlink" title="数据分布"></a>数据分布</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘制直方图</span></span><br><span class="line">ax1.hist(y)</span><br><span class="line"><span class="comment"># 制作一个箱图</span></span><br><span class="line">ax3.boxplot(y)</span><br><span class="line"><span class="comment"># 制作小提琴图</span></span><br><span class="line">ax3.violinplot(z)</span><br></pre></td></tr></table></figure>
+<h2 id="自定义绘图"><a href="#自定义绘图" class="headerlink" title="自定义绘图"></a>自定义绘图</h2><h3 id="颜色，彩条（Color-bars）和彩图（Color-maps）"><a href="#颜色，彩条（Color-bars）和彩图（Color-maps）" class="headerlink" title="颜色，彩条（Color bars）和彩图（Color maps）"></a>颜色，彩条（Color bars）和彩图（Color maps）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x, x, x, x**<span class="number">2</span>, x, x**<span class="number">3</span>)</span><br><span class="line">ax.plot(x, y, alpha=<span class="number">0.4</span>)</span><br><span class="line">ax.plot(x, y, c=<span class="string">'k'</span>)</span><br><span class="line">fig.colorbar(im, orientation=<span class="string">'horizontal'</span>)</span><br><span class="line">im = ax.imshow(img, cmap=<span class="string">'seismic'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-c63dd40934bac10c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_38_0.png"></p>
+<h3 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.scatter(x, y, marker=<span class="string">"."</span>)</span><br><span class="line">ax.plot(x, y, marker=<span class="string">"o"</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-b38cf16582930eb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_40_1.png"></p>
+<h3 id="线条样式"><a href="#线条样式" class="headerlink" title="线条样式"></a>线条样式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x, y, linewidth=<span class="number">4.0</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-93e81310477b26af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_42_1.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x, y, ls=<span class="string">'solid'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-99cbac47dfd84f32.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_43_1.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x, y, ls=<span class="string">'--'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-6309df20317e2bb1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_44_1.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x, y, <span class="string">'--'</span>, x**<span class="number">2</span>, y**<span class="number">2</span>, <span class="string">'-.'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-720c0f3425c671f7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_45_1.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.setp(lines, color=<span class="string">'r'</span>, linewidth=<span class="number">4.0</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="文字-amp-注释"><a href="#文字-amp-注释" class="headerlink" title="文字 &amp; 注释"></a>文字 &amp; 注释</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ax.text(<span class="number">1</span>,</span><br><span class="line">        <span class="number">-2.1</span>,</span><br><span class="line">        <span class="string">'Example Graph'</span>,</span><br><span class="line">        style=<span class="string">'italic'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ax.annotate(<span class="string">"Sine"</span>,</span><br><span class="line">            xy=(<span class="number">8</span>, <span class="number">0</span>),</span><br><span class="line">            xycoords=<span class="string">'data'</span>,</span><br><span class="line">            xytext=(<span class="number">10.5</span>, <span class="number">0</span>),</span><br><span class="line">            textcoords=<span class="string">'data'</span>,</span><br><span class="line">            arrowprops=dict(arrowstyle=<span class="string">"-&gt;"</span>,</span><br><span class="line">                            connectionstyle=<span class="string">"arc3"</span>),)</span><br></pre></td></tr></table></figure>
+<h3 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.title(<span class="string">r'$sigma_i=15$'</span>, fontsize=<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-91becd3fd3092222.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_51_1.png"></p>
+<h3 id="限制，图例-amp-布局（Limits-Legends-amp-Layouts）"><a href="#限制，图例-amp-布局（Limits-Legends-amp-Layouts）" class="headerlink" title="限制，图例 &amp; 布局（Limits, Legends &amp; Layouts）"></a>限制，图例 &amp; 布局（Limits, Legends &amp; Layouts）</h3><h4 id="限制-amp-自动缩放（Limits-amp-Autoscaling）"><a href="#限制-amp-自动缩放（Limits-amp-Autoscaling）" class="headerlink" title="限制 &amp; 自动缩放（Limits &amp; Autoscaling）"></a>限制 &amp; 自动缩放（Limits &amp; Autoscaling）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ax.margins(x=<span class="number">0.0</span>, y=<span class="number">0.1</span>)</span><br><span class="line">ax.axis(<span class="string">'equal'</span>)</span><br><span class="line">ax.set(xlim=[<span class="number">0</span>, <span class="number">10.5</span>], ylim=[<span class="number">-1.5</span>, <span class="number">1.5</span>])</span><br><span class="line">ax.set_xlim(<span class="number">0</span>, <span class="number">10.5</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="图例"><a href="#图例" class="headerlink" title="图例"></a>图例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置标题和x轴和y轴标签</span></span><br><span class="line">ax.set(title=<span class="string">'An Example Axes'</span>,</span><br><span class="line">       ylabel=<span class="string">'Y-Axis'</span>,</span><br><span class="line">       xlabel=<span class="string">'X-Axis'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不重叠的图元素</span></span><br><span class="line">ax.legend(loc=<span class="string">'best'</span>, labels=<span class="string">'No overlapping plot elements'</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="刻度（Ticks）"><a href="#刻度（Ticks）" class="headerlink" title="刻度（Ticks）"></a>刻度（Ticks）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 手动设置 x-ticks</span></span><br><span class="line">ax.xaxis.set(ticks=range(<span class="number">1</span>,<span class="number">5</span>),</span><br><span class="line">                 ticklabels=[<span class="number">3</span>,<span class="number">100</span>,<span class="number">-12</span>,<span class="string">"foo"</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># y-ticks 变长</span></span><br><span class="line">ax.tick_params(axis=<span class="string">'y'</span>,</span><br><span class="line">               direction=<span class="string">'inout'</span>,</span><br><span class="line">               length=<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="子图间距"><a href="#子图间距" class="headerlink" title="子图间距"></a>子图间距</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 调整子图之间的间距</span></span><br><span class="line">fig3.subplots_adjust(wspace=<span class="number">0.5</span>,</span><br><span class="line">                     hspace=<span class="number">0.3</span>,</span><br><span class="line">                     left=<span class="number">0.125</span>,</span><br><span class="line">                     right=<span class="number">0.9</span>,</span><br><span class="line">                     top=<span class="number">0.9</span>,</span><br><span class="line">                     bottom=<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 子图适配图区域</span></span><br><span class="line">fig.tight_layout()</span><br></pre></td></tr></table></figure>
+<h4 id="坐标轴（Axis-Spines）"><a href="#坐标轴（Axis-Spines）" class="headerlink" title="坐标轴（Axis Spines）"></a>坐标轴（Axis Spines）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 向下移动底部轴线</span></span><br><span class="line">ax1.spines[<span class="string">'top'</span>].set_visible(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使图的顶轴不可见</span></span><br><span class="line">ax1.spines[<span class="string">'bottom'</span>].set_position((<span class="string">'outward'</span>, <span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="保存图"><a href="#保存图" class="headerlink" title="保存图"></a>保存图</h2><h3 id="保存图片（Save-figures）"><a href="#保存图片（Save-figures）" class="headerlink" title="保存图片（Save figures）"></a>保存图片（Save figures）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.savefig(<span class="string">'bar.png'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="保存透明图（Save-transparent-figures）"><a href="#保存透明图（Save-transparent-figures）" class="headerlink" title="保存透明图（Save transparent figures）"></a>保存透明图（Save transparent figures）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.savefig(<span class="string">'bar_trans.png'</span>, transparent=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="显示图"><a href="#显示图" class="headerlink" title="显示图"></a>显示图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="关闭-amp-清除"><a href="#关闭-amp-清除" class="headerlink" title="关闭 &amp; 清除"></a>关闭 &amp; 清除</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清除轴</span></span><br><span class="line">plt.cla()</span><br><span class="line"><span class="comment"># 清除整个图</span></span><br><span class="line">plt.clf()</span><br><span class="line"><span class="comment"># 关闭一个窗口</span></span><br><span class="line">plt.close()</span><br></pre></td></tr></table></figure>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="折线图（Line-plot）"><a href="#折线图（Line-plot）" class="headerlink" title="折线图（Line plot）"></a>折线图（Line plot）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.linspace(<span class="number">0</span>, <span class="number">10</span>, <span class="number">100</span>)</span><br><span class="line">b = np.exp(-a)</span><br><span class="line">plt.plot(a, b)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-1f37d7ba93a5bb05.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_80_0.png"></p>
+<h3 id="直方图（-Histogram）"><a href="#直方图（-Histogram）" class="headerlink" title="直方图（ Histogram）"></a>直方图（ Histogram）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> numpy.random <span class="keyword">import</span> normal,rand</span><br><span class="line">x = normal(size=<span class="number">200</span>)</span><br><span class="line">plt.hist(x, bins=<span class="number">30</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-3423b435b1123291.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_82_0.png"></p>
+<h3 id="散点图（Scatter-plot）"><a href="#散点图（Scatter-plot）" class="headerlink" title="散点图（Scatter plot）"></a>散点图（Scatter plot）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> numpy.random <span class="keyword">import</span> rand</span><br><span class="line">a = rand(<span class="number">100</span>)</span><br><span class="line">b = rand(<span class="number">100</span>)</span><br><span class="line">plt.scatter(a, b)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-4d50084ecfe19447.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_84_0.png"></p>
+<h3 id="3D-图（3D-plot）"><a href="#3D-图（3D-plot）" class="headerlink" title="3D 图（3D plot）"></a>3D 图（3D plot）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = fig.gca(projection=<span class="string">'3d'</span>)</span><br><span class="line">X = np.arange(<span class="number">-5</span>, <span class="number">5</span>, <span class="number">0.25</span>)</span><br><span class="line">Y = np.arange(<span class="number">-5</span>, <span class="number">5</span>, <span class="number">0.25</span>)</span><br><span class="line">X, Y = np.meshgrid(X, Y)</span><br><span class="line">R = np.sqrt(X**<span class="number">2</span> + Y**<span class="number">2</span>)</span><br><span class="line">Z = np.sin(R)</span><br><span class="line">surf = ax.plot_surface(X, Y, Z, rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, cmap=cm.coolwarm)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-f40d5b046f629e7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="output_86_0.png"></p>
+<h2 id="在线预览"><a href="#在线预览" class="headerlink" title="在线预览"></a>在线预览</h2><p><a href="https://github.com/iOSDevLog/AIDevLog/blob/master/Python%20%E5%9F%BA%E7%A1%80/MatplotlibBasic.ipynb">https://github.com/iOSDevLog/AIDevLog/blob/master/Python%20%E5%9F%BA%E7%A1%80/MatplotlibBasic.ipynb</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/DL/" rel="tag"># DL</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/25/pandas/" rel="next" title="Pandas 基础">
+                <i class="fa fa-chevron-left"></i> Pandas 基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/iOSDevLog/AIDevLog" title="GitHub &rarr; https://github.com/iOSDevLog/AIDevLog"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图解剖（Plot-Anatomy）"><span class="nav-number">1.</span> <span class="nav-text">绘图解剖（Plot Anatomy）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作流程（Workflow）"><span class="nav-number">2.</span> <span class="nav-text">工作流程（Workflow）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备数据"><span class="nav-number">3.</span> <span class="nav-text">准备数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1D数据"><span class="nav-number">3.1.</span> <span class="nav-text">1D数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2D数据-或-图像"><span class="nav-number">3.2.</span> <span class="nav-text">2D数据 或 图像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建图"><span class="nav-number">4.</span> <span class="nav-text">创建图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图形（Figure）"><span class="nav-number">4.1.</span> <span class="nav-text">图形（Figure）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#轴（Axes）"><span class="nav-number">4.2.</span> <span class="nav-text">轴（Axes）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常规绘制"><span class="nav-number">5.</span> <span class="nav-text">常规绘制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1D-数据"><span class="nav-number">5.1.</span> <span class="nav-text">1D 数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2D数据-或-图像-1"><span class="nav-number">5.2.</span> <span class="nav-text">2D数据 或 图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向量字段"><span class="nav-number">5.3.</span> <span class="nav-text">向量字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据分布"><span class="nav-number">5.4.</span> <span class="nav-text">数据分布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义绘图"><span class="nav-number">6.</span> <span class="nav-text">自定义绘图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#颜色，彩条（Color-bars）和彩图（Color-maps）"><span class="nav-number">6.1.</span> <span class="nav-text">颜色，彩条（Color bars）和彩图（Color maps）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记"><span class="nav-number">6.2.</span> <span class="nav-text">标记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线条样式"><span class="nav-number">6.3.</span> <span class="nav-text">线条样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文字-amp-注释"><span class="nav-number">6.4.</span> <span class="nav-text">文字 &amp; 注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数学"><span class="nav-number">6.5.</span> <span class="nav-text">数学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#限制，图例-amp-布局（Limits-Legends-amp-Layouts）"><span class="nav-number">6.6.</span> <span class="nav-text">限制，图例 &amp; 布局（Limits, Legends &amp; Layouts）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#限制-amp-自动缩放（Limits-amp-Autoscaling）"><span class="nav-number">6.6.1.</span> <span class="nav-text">限制 &amp; 自动缩放（Limits &amp; Autoscaling）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图例"><span class="nav-number">6.6.2.</span> <span class="nav-text">图例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#刻度（Ticks）"><span class="nav-number">6.6.3.</span> <span class="nav-text">刻度（Ticks）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子图间距"><span class="nav-number">6.6.4.</span> <span class="nav-text">子图间距</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#坐标轴（Axis-Spines）"><span class="nav-number">6.6.5.</span> <span class="nav-text">坐标轴（Axis Spines）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存图"><span class="nav-number">7.</span> <span class="nav-text">保存图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#保存图片（Save-figures）"><span class="nav-number">7.1.</span> <span class="nav-text">保存图片（Save figures）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存透明图（Save-transparent-figures）"><span class="nav-number">7.2.</span> <span class="nav-text">保存透明图（Save transparent figures）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示图"><span class="nav-number">8.</span> <span class="nav-text">显示图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭-amp-清除"><span class="nav-number">8.1.</span> <span class="nav-text">关闭 &amp; 清除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">9.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#折线图（Line-plot）"><span class="nav-number">9.1.</span> <span class="nav-text">折线图（Line plot）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#直方图（-Histogram）"><span class="nav-number">9.2.</span> <span class="nav-text">直方图（ Histogram）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#散点图（Scatter-plot）"><span class="nav-number">9.3.</span> <span class="nav-text">散点图（Scatter plot）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3D-图（3D-plot）"><span class="nav-number">9.4.</span> <span class="nav-text">3D 图（3D plot）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在线预览"><span class="nav-number">10.</span> <span class="nav-text">在线预览</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/05/26/matplotlib/";
+    this.page.identifier = "2019/05/26/matplotlib/";
+    this.page.title = 'Matplotlib 基础';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
