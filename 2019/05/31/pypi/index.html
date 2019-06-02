@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="新建 GitHub 仓库打开 https://github.com/new，新建一个公共仓库。  仓库名为 slmethod, 统计学习方法（Statistical Learning Method）的简写 Public 公开仓库 勾选 Initialize this repository with a README .gitignore 选择 Python 添加 MIT License   源码地">
+<meta name="keywords" content="ML,DL,AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="统计学习方法 Python 库">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/31/pypi/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="新建 GitHub 仓库打开 https://github.com/new，新建一个公共仓库。  仓库名为 slmethod, 统计学习方法（Statistical Learning Method）的简写 Public 公开仓库 勾选 Initialize this repository with a README .gitignore 选择 Python 添加 MIT License   源码地">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-fc7d95d64d1af699.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-309a466c8d9fe26d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-06-02T15:40:53.737Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="统计学习方法 Python 库">
+<meta name="twitter:description" content="新建 GitHub 仓库打开 https://github.com/new，新建一个公共仓库。  仓库名为 slmethod, 统计学习方法（Statistical Learning Method）的简写 Public 公开仓库 勾选 Initialize this repository with a README .gitignore 选择 Python 添加 MIT License   源码地">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/910914-fc7d95d64d1af699.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/31/pypi/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>统计学习方法 Python 库 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">AIDevLog</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/05/31/pypi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">统计学习方法 Python 库
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-31 19:29:03" itemprop="dateCreated datePublished" datetime="2019-05-31T19:29:03+08:00">2019-05-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-02 23:40:53" itemprop="dateModified" datetime="2019-06-02T23:40:53+08:00">2019-06-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/05/31/pypi/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/31/pypi/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="新建-GitHub-仓库"><a href="#新建-GitHub-仓库" class="headerlink" title="新建 GitHub 仓库"></a>新建 GitHub 仓库</h2><p>打开 <a href="https://github.com/new">https://github.com/new</a>，新建一个公共仓库。</p>
+<ul>
+<li>仓库名为 <strong>slmethod</strong>, 统计学习方法（Statistical Learning Method）的简写</li>
+<li>Public 公开仓库</li>
+<li>勾选 Initialize this repository with a README</li>
+<li>.gitignore 选择 Python</li>
+<li>添加 MIT License</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-fc7d95d64d1af699.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="new"></p>
+<p>源码地址：<a href="https://github.com/iOSDevLog/slmethod">https://github.com/iOSDevLog/slmethod</a></p>
+<p>下载代码到本地，使用 <code>ssh</code> 协议。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:iOSDevLog/slmethod.git</span><br></pre></td></tr></table></figure>
+<p>使用 <strong><a href="https://github.com/commitizen/cz-cli">cz-cli</a></strong> 提交代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cz</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="打包-Python-项目"><a href="#打包-Python-项目" class="headerlink" title="打包 Python 项目"></a>打包 Python 项目</h2><h3 id="新建虚拟环境"><a href="#新建虚拟环境" class="headerlink" title="新建虚拟环境"></a>新建虚拟环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkvirtualenv slm</span><br></pre></td></tr></table></figure>
+<h3 id="创建以下文件结构："><a href="#创建以下文件结构：" class="headerlink" title="创建以下文件结构："></a>创建以下文件结构：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">slmethod</span><br><span class="line">├── LICENSE</span><br><span class="line">├── README.md</span><br><span class="line">└── slm</span><br><span class="line">    └── __init__.py</span><br></pre></td></tr></table></figure>
+<p>编辑 <code>slm/__init__.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">"slm"</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建-setup-py"><a href="#创建-setup-py" class="headerlink" title="创建 setup.py"></a>创建 <code>setup.py</code></h3><p><code>setup.py</code> 是 <a href="https://packaging.python.org/key_projects/#setuptools" target="_blank" rel="noopener">setuptools</a> 的构建脚本。它告诉 <code>setuptools</code> 你的包（例如名称和版本）以及要包含的代码文件。</p>
+<p>打开 <code>setup.py</code> 并输入以下内容，更新软件包名称以包含您的用户名。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> setuptools</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"README.md"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> fh:</span><br><span class="line">    long_description = fh.read()</span><br><span class="line"></span><br><span class="line">setuptools.setup(</span><br><span class="line">    name=<span class="string">"slm"</span>,</span><br><span class="line">    version=<span class="string">"0.0.1"</span>,</span><br><span class="line">    author=<span class="string">"iOSDevLog"</span>,</span><br><span class="line">    author_email=<span class="string">"iosdevlog@iosdevlog.com"</span>,</span><br><span class="line">    description=<span class="string">"Statistical Learning Method package"</span>,</span><br><span class="line">    long_description=long_description,</span><br><span class="line">    long_description_content_type=<span class="string">"text/markdown"</span>,</span><br><span class="line">    url=<span class="string">"https://github.com/iOSDevLog/slmethod"</span>,</span><br><span class="line">    packages=setuptools.find_packages(),</span><br><span class="line">    classifiers=[</span><br><span class="line">        <span class="string">"Programming Language :: Python :: 3"</span>,</span><br><span class="line">        <span class="string">"Programming Language :: Python :: 3.5"</span>,</span><br><span class="line">        <span class="string">"Programming Language :: Python :: 3.6"</span>,</span><br><span class="line">        <span class="string">"Programming Language :: Python :: 3.7"</span>,</span><br><span class="line">        <span class="string">"License :: OSI Approved :: MIT License"</span>,</span><br><span class="line">        <span class="string">"Operating System :: Microsoft :: Windows"</span>,</span><br><span class="line">        <span class="string">"Operating System :: POSIX"</span>,</span><br><span class="line">        <span class="string">"Operating System :: Unix"</span>,</span><br><span class="line">        <span class="string">"Operating System :: MacOS"</span>,</span><br><span class="line">    ],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p><code>setup()</code> 需要几个论点。此示例包使用相对最小的集：</p>
+<ul>
+<li><code>name</code> 是包的 <em>分发名称</em>。只要包含字母，数字 <code>_</code> 和，就可以是任何名称 <code>-</code>。它也不能在 pypi.org 上使用。<strong>请务必使用您的用户名更新此内容</strong>， 因为这样可确保您不会尝试上传与上传程序包时已存在的程序包相同的程序包。</li>
+<li><code>version</code> 是包版本看 <a href="https://www.python.org/dev/peps/pep-0440" target="_blank" rel="noopener"><strong>PEP 440</strong></a> 有关版本的更多详细信息。</li>
+<li><code>author</code> 和 <code>author_email</code> 用于识别包的作者。</li>
+<li><code>description</code> 是一个简短的，一句话的包的总结。</li>
+<li><code>long_description</code> 是包的详细说明。这显示在 Python Package Index 的包详细信息包中。在这种情况下，加载长描述 <code>README.md</code> 是一种常见模式。</li>
+<li><code>long_description_content_type</code> 告诉索引什么类型的标记用于长描述。这里是 Markdown 格式。</li>
+<li><code>url</code> 是项目主页的 URL。对于许多项目，这只是一个指向 GitHub，GitLab，Bitbucket 或类似代码托管服务的链接。</li>
+<li><code>packages</code> 是应包含在 <a href="https://packaging.python.org/glossary/#term-distribution-package" target="_blank" rel="noopener">分发包</a> 中的所有 Python <a href="https://packaging.python.org/glossary/#term-import-package" target="_blank" rel="noopener">导入包</a> 的列表。我们可以使用 自动发现所有包和子包，而不是手动列出每个包。在这种情况下，包列表将是 <code>slm</code> 因为它是唯一存在的包。<a href="https://packaging.python.org/glossary/#term-distribution-package" target="_blank" rel="noopener"><code>find_packages()</code></a></li>
+<li><code>classifiers</code> 给出了指数和 <a href="https://packaging.python.org/key_projects/#pip" target="_blank" rel="noopener">pip</a> 你的包一些额外的元数据。在这种情况下，该软件包仅与 Python 3 兼容，根据 MIT 许可证进行许可，并且与操作系统无关。您应始终至少包含您的软件包所使用的 Python 版本，软件包可用的许可证以及您的软件包将使用的操作系统。有关分类器的完整列表，请参阅 <a href="https://pypi.org/classifiers/" target="_blank" rel="noopener">https://pypi.org/classifiers/</a>。</li>
+</ul>
+<p>除了这里提到的还有很多。有关详细信息，请参阅 <a href="https://packaging.python.org/guides/distributing-packages-using-setuptools/" target="_blank" rel="noopener">打包和分发项目</a>。</p>
+<h2 id="生成分发档案"><a href="#生成分发档案" class="headerlink" title="生成分发档案 "></a>生成分发档案 <a href="https://packaging.python.org/tutorials/packaging-projects/#generating-distribution-archives" title="永久链接到这个标题" target="_blank" rel="noopener"></a></h2><p>下一步是为 <a href="https://packaging.python.org/glossary/#term-distribution-package" target="_blank" rel="noopener">包</a> 生<a href="https://packaging.python.org/glossary/#term-distribution-package" target="_blank" rel="noopener">成分发包</a>。这些是上传到包索引的档案，可以通过 <a href="https://packaging.python.org/key_projects/#pip" target="_blank" rel="noopener">pip</a> 安装。</p>
+<p>确保您拥有 <code>setuptools</code> 并 <code>wheel</code> 安装了最新版本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --user --upgrade setuptools wheel # 不在虚拟环境时</span><br><span class="line">python3 -m pip install --upgrade setuptools wheel # 在虚拟环境不需要 --user</span><br></pre></td></tr></table></figure>
+<p><strong>小提示</strong></p>
+<p>如果您在安装它们时遇到问题，请参阅 <a href="https://packaging.python.org/tutorials/installing-packages/" target="_blank" rel="noopener">安装包</a> 教程。</p>
+<p>现在从 <code>setup.py</code> 位于的同一目录运行此命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 setup.py sdist bdist_wheel</span><br></pre></td></tr></table></figure>
+<p>此命令应输出大量文本，一旦完成，应在 <code>dist</code> 目录中生成两个文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dist</span><br><span class="line">├── slm-0.0.1-py3-none-any.whl</span><br><span class="line">└── slm-0.0.1.tar.gz</span><br></pre></td></tr></table></figure>
+<p>注意</p>
+<p>如果您遇到麻烦，请复制输出并提出有关 <a href="https://github.com/pypa/packaging-problems/issues/new?title=Trouble+following+packaging+libraries+tutorial">包装问题的问题</a>，我们会尽力为您提供帮助！</p>
+<p>该 <code>tar.gz</code> 文件是 <a href="https://packaging.python.org/glossary/#term-source-archive" target="_blank" rel="noopener">源存档，</a> 而该 <code>.whl</code> 文件是 <a href="https://packaging.python.org/glossary/#term-built-distribution" target="_blank" rel="noopener">构建的分发</a>。较新的 <a href="https://packaging.python.org/key_projects/#pip" target="_blank" rel="noopener">pip</a> 版本优先安装构建的发行版，但如果需要，将回退到源代码存档。您应该始终上传源存档并为项目兼容的平台提供构建的存档。在这种情况下，我们的示例包在任何平台上都与 Python 兼容，因此只需要一个构建的发行版。</p>
+<h2 id="上传分发档案"><a href="#上传分发档案" class="headerlink" title="上传分发档案 "></a>上传分发档案 <a href="https://packaging.python.org/tutorials/packaging-projects/#uploading-the-distribution-archives" title="永久链接到这个标题" target="_blank" rel="noopener"></a></h2><p>最后，是时候将您的包上传到 Python Package Index 了！</p>
+<p>您需要做的第一件事是在 <em>Test PyPI</em> 上注册一个帐户。Test PyPI 是用于测试和实验的包索引的单独实例。这对于像我们不一定想要上传到真实索引的本教程这样的东西很棒。要注册帐户，请访问 <a href="https://test.pypi.org/account/register/" target="_blank" rel="noopener">https://test.pypi.org/account/register/</a> 并完成该页面上的步骤。在您上传任何套餐之前，您还需要验证您的电子邮件地址。有关 Test PyPI 的更多详细信息，请参阅 <a href="https://packaging.python.org/guides/using-testpypi/" target="_blank" rel="noopener">使用 TestPyPI</a>。</p>
+<p>现在您已注册，您可以使用 <a href="https://packaging.python.org/key_projects/#twine" target="_blank" rel="noopener">twine</a> 上传分发包。你需要安装 Twine：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --user --upgrade twine</span><br><span class="line">python3 -m pip install --upgrade twine #  虚拟环境不用 --user</span><br></pre></td></tr></table></figure>
+<p>安装完成后，运行 Twine 以上传所有存档 <code>dist</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*</span><br></pre></td></tr></table></figure>
+<p>系统将提示您输入使用 Test PyPI 注册的用户名和密码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*</span><br><span class="line">Enter your username: iOSDevLog</span><br><span class="line">Enter your password: </span><br><span class="line">Uploading distributions to https://test.pypi.org/legacy/</span><br><span class="line">Uploading slm-0.0.1-py3-none-any.whl</span><br><span class="line">100%|██████████████████████████████████████████████████████████████████████████████████| 5.95k/5.95k [00:00&lt;00:00, 12.2kB/s]</span><br><span class="line">NOTE: Try --verbose to see response content.</span><br><span class="line">HTTPError: 403 Client Error: Invalid or non-existent authentication information. for url: https://test.pypi.org/legacy/</span><br></pre></td></tr></table></figure>
+<p>错误的用户验证信息，你需要创建一个用户验证文件 <code>~/.pypirc</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[distutils]</span><br><span class="line">index-servers=pypi</span><br><span class="line"></span><br><span class="line">[pypi]</span><br><span class="line">repository = https://upload.pypi.org/legacy/</span><br><span class="line">username = </span><br><span class="line">password =</span><br></pre></td></tr></table></figure>
+<p>使用 <code>twine upload dist/*</code> 上传。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">twine upload dist/*</span><br><span class="line">Uploading distributions to https://upload.pypi.org/legacy/</span><br><span class="line">Uploading slm-0.0.1-py3-none-any.whl</span><br><span class="line">100%|███████████████████████████████████████████████████████████████████████████████| 5.95k/5.95k [00:01&lt;00:00, 3.11kB/s]</span><br><span class="line">NOTE: Try --verbose to see response content.</span><br><span class="line">HTTPError: 403 Client Error: The user &apos;iosdevlog&apos; isn&apos;t allowed to upload to project &apos;slm&apos;. See https://pypi.org/help/#project-name for more information. for url: https://upload.pypi.org/legacy/</span><br></pre></td></tr></table></figure>
+<p>可能有重名了，我改一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name=&quot;slm&quot;</span><br></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name=&quot;slmethod&quot;,</span><br></pre></td></tr></table></figure>
+<p>再试一次。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 setup.py sdist bdist_wheel</span><br><span class="line">twine upload dist/*</span><br></pre></td></tr></table></figure>
+<p>命令完成后，您应该看到与此类似的输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Uploading distributions to https://upload.pypi.org/legacy/</span><br><span class="line">Uploading slmethod-0.0.1-py3-none-any.whl</span><br><span class="line">100%|███████████████████████████████████████████████████████████████████████████████| 6.01k/6.01k [00:00&lt;00:00, 8.88kB/s]</span><br><span class="line">Uploading slmethod-0.0.1.tar.gz</span><br><span class="line">100%|███████████████████████████████████████████████████████████████████████████████| 4.91k/4.91k [00:01&lt;00:00, 4.19kB/s]</span><br></pre></td></tr></table></figure>
+<p>上传后，您的软件包应该可以在 TestPyPI 上查看，例如，<a href="https://pypi.org/project/slmethod/" target="_blank" rel="noopener">https://pypi.org/project/slmethod/</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-309a466c8d9fe26d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="pypi"></p>
+<h2 id="安装新上传的软件包"><a href="#安装新上传的软件包" class="headerlink" title="安装新上传的软件包"></a>安装新上传的软件包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pip install slmethod</span><br><span class="line">Collecting slmethod</span><br><span class="line">  Downloading https://files.pythonhosted.org/packages/14/ab/9cc45b2879bf1e37963c6d36007974b3f9519d6a83169fc4a94252ea9a7c/slmethod-0.0.1-py3-none-any.whl</span><br><span class="line">Installing collected packages: slmethod</span><br><span class="line">Successfully installed slmethod-0.0.1</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps slmethod</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Collecting slmethod</span><br><span class="line">  Downloading https://test-files.pythonhosted.org/packages/.../slmethod-0.0.1-py3-none-any.whl</span><br><span class="line">Installing collected packages: slmethod</span><br><span class="line">Successfully installed slmethod-0.0.1</span><br></pre></td></tr></table></figure>
+<p>确保在包名中指定您的用户名！</p>
+<p>pip 应该从 Test PyPI 安装包，输出应该如下所示：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps slmethod</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong></p>
+<p>此示例使用 <code>--index-url</code>flag 指定 TestPyPI 而不是实时 PyPI。另外，它指定 <code>--no-deps</code>。由于 TestPyPI 与实时 PyPI 没有相同的包，因此尝试安装依赖项可能会失败或安装意外的事情。虽然我们的示例包没有任何依赖关系，但在使用 TestPyPI 时避免安装依赖项是一种很好的做法。</p>
+<p>您可以通过导入模块并引用先前 <code>name</code> 放置的属性来测试它是否已正确安装 <code>__init__.py</code>。</p>
+<p>运行 Python 解释器（确保你仍然在你的 virtualenv 中）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python</span><br></pre></td></tr></table></figure>
+<p>然后导入模块并打印出 <code>name</code> 属性。这应该是一样的，不管你的名字你给您的 <a href="https://packaging.python.org/glossary/#term-distribution-package" target="_blank" rel="noopener">分发包</a> 中 <code>setup.py</code>（在这种情况下，<code>slm</code>），因为你的<a href="https://packaging.python.org/glossary/#term-import-package" target="_blank" rel="noopener">导入包</a> 是 <code>slm</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> slmethod</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(slmethod.name)</span><br><span class="line">slmethod</span><br></pre></td></tr></table></figure>
+<h2 id="后续步骤"><a href="#后续步骤" class="headerlink" title="后续步骤"></a>后续步骤</h2><p><strong>恭喜，您已经打包并分发了一个 Python 项目！</strong> ✨🍰✨</p>
+<p>请记住，本教程向您展示了如何将程序包上传到 Test PyPI，它不是永久存储。测试系统偶尔会删除软件包和帐户。最好使用 Test PyPI 进行测试和实验，如本教程。</p>
+<p>当您准备将真实包上传到 Python 包索引时，您可以像在本教程中那样执行相同操作，但具有以下重要差异：</p>
+<ul>
+<li>为您的包装选择一个令人难忘的独特名称。您不必像在教程中那样附加用户名。</li>
+<li>在 <a href="https://pypi.org/" target="_blank" rel="noopener">https://pypi.org</a> 上注册一个帐户 - 请注意，这些是两个独立的服务器，并且测试服务器的登录详细信息不与主服务器共享。</li>
+<li>使用上传你的包，并输入您的凭据为你真正的 PyPI 注册的账号。<code>twine upload dist/*</code></li>
+<li>使用真正的 PyPI 安装包。<code>pip install [your-package]</code></li>
+</ul>
+<p>在这一点上，如果你想阅读更多关于包装的 Python 库，你可以做以下事情：</p>
+<ul>
+<li>阅读有关使用 <a href="https://packaging.python.org/key_projects/#setuptools" target="_blank" rel="noopener">setuptools</a> 在<a href="https://packaging.python.org/guides/distributing-packages-using-setuptools/" target="_blank" rel="noopener">打包和分发项目中</a>打包库的 更多信息。</li>
+<li>阅读 <a href="https://packaging.python.org/guides/packaging-binary-extensions/" target="_blank" rel="noopener">包装二进制扩展</a>。</li>
+<li>考虑诸如 <a href="https://packaging.python.org/key_projects/#flit" target="_blank" rel="noopener">flit</a>，<a href="https://github.com/ofek/hatch">hatch</a> 和<a href="https://github.com/sdispater/poetry">poetry 之类的</a><a href="https://packaging.python.org/key_projects/#setuptools" target="_blank" rel="noopener">setuptools 的</a>替代方案。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/DL/" rel="tag"># DL</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/28/scikit-learn/" rel="next" title="scikit-learn">
+                <i class="fa fa-chevron-left"></i> scikit-learn
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/02/windows/" rel="prev" title="MacBook Pro 安装 Windows 10">
+                MacBook Pro 安装 Windows 10 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/iOSDevLog/AIDevLog" title="GitHub &rarr; https://github.com/iOSDevLog/AIDevLog"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#新建-GitHub-仓库"><span class="nav-number">1.</span> <span class="nav-text">新建 GitHub 仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包-Python-项目"><span class="nav-number">2.</span> <span class="nav-text">打包 Python 项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建虚拟环境"><span class="nav-number">2.1.</span> <span class="nav-text">新建虚拟环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建以下文件结构："><span class="nav-number">2.2.</span> <span class="nav-text">创建以下文件结构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-setup-py"><span class="nav-number">2.3.</span> <span class="nav-text">创建 setup.py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成分发档案"><span class="nav-number">3.</span> <span class="nav-text">生成分发档案 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传分发档案"><span class="nav-number">4.</span> <span class="nav-text">上传分发档案 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装新上传的软件包"><span class="nav-number">5.</span> <span class="nav-text">安装新上传的软件包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续步骤"><span class="nav-number">6.</span> <span class="nav-text">后续步骤</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/05/31/pypi/";
+    this.page.identifier = "2019/05/31/pypi/";
+    this.page.title = '统计学习方法 Python 库';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
