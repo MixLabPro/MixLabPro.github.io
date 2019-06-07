@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="源码：https://github.com/iOSDevLog/slmethod原理假设输入空间（特征空间）是 $\mathrm{x} \subseteq \mathrm{R}^{n}$，输出空间是$y={+1,-1}$ 模型 f(x)=\operatorname{sign}(w \cdot x+b)称为 感知机。">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《统计学习方法》第 2 章 感知机 可视化">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/05/perceptron/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="源码：https://github.com/iOSDevLog/slmethod原理假设输入空间（特征空间）是 $\mathrm{x} \subseteq \mathrm{R}^{n}$，输出空间是$y={+1,-1}$ 模型 f(x)=\operatorname{sign}(w \cdot x+b)称为 感知机。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-d3b3588f860886b1.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-85eff8e7dc8b090b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-06-07T19:35:17.396Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《统计学习方法》第 2 章 感知机 可视化">
+<meta name="twitter:description" content="源码：https://github.com/iOSDevLog/slmethod原理假设输入空间（特征空间）是 $\mathrm{x} \subseteq \mathrm{R}^{n}$，输出空间是$y={+1,-1}$ 模型 f(x)=\operatorname{sign}(w \cdot x+b)称为 感知机。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/910914-d3b3588f860886b1.gif?imageMogr2/auto-orient/strip">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/05/perceptron/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>《统计学习方法》第 2 章 感知机 可视化 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">AIDevLog</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/05/perceptron/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《统计学习方法》第 2 章 感知机 可视化
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-05 15:29:13" itemprop="dateCreated datePublished" datetime="2019-06-05T15:29:13+08:00">2019-06-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-08 03:35:17" itemprop="dateModified" datetime="2019-06-08T03:35:17+08:00">2019-06-08</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/统计学习方法/" itemprop="url" rel="index"><span itemprop="name">统计学习方法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/06/05/perceptron/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/05/perceptron/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/910914-d3b3588f860886b1.gif?imageMogr2/auto-orient/strip" alt="slmethod_perceprton.gif"></p>
+<h2 id="源码：https-github-com-iOSDevLog-slmethod"><a href="#源码：https-github-com-iOSDevLog-slmethod" class="headerlink" title="源码：https://github.com/iOSDevLog/slmethod"></a>源码：<a href="https://github.com/iOSDevLog/slmethod">https://github.com/iOSDevLog/slmethod</a></h2><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>假设输入空间（特征空间）是 $\mathrm{x} \subseteq \mathrm{R}^{n}$，输出空间是$y={+1,-1}$</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><script type="math/tex; mode=display">
+f(x)=\operatorname{sign}(w \cdot x+b)</script><p>称为 <strong>感知机</strong>。</p>
+<a id="more"></a>
+<ul>
+<li>$\mathrm{w}$ 和 $\mathrm{b}$ 为感知机模型参数</li>
+<li>$\mathrm{w} \subseteq \mathrm{R}^{n}$叫作权重/权值（weight）或权值向量（weight vector）</li>
+<li>$\mathrm{b} \in \mathrm{R}$ 叫作偏置（bias）</li>
+<li>$\mathbf{w} \cdot \mathbf{x}$ 表示 $\mathbf{w}$ 和 $\mathbf{x}$ 的内积</li>
+<li>$sign$ 是符号函数</li>
+</ul>
+<script type="math/tex; mode=display">
+\operatorname{sign}(x)=\left\{\begin{array}{ll}{+1,} & {x \geqslant 0} \\ {-1,} & {x<0}\end{array}\right.</script><h3 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h3><p><strong>假设训练数据集是线性可分的</strong> 感知机学习的目标是求得一个能够将训练集正实例点和负实例点完全正确分开的分离超平面。为了找出这样的超平面，即确定感知机模型参数$\mathrm{w}$ 和 $\mathrm{b}$ ，需要确定一个学习策略，即定义（经验）损失函数并将损失函数极小化。</p>
+<p>损失函数的一个自然选择是误分类点的总数。<br>但是，这样的损失函数不是参数 w,b 的连续可导函数，不易优化。<br>损失函数的另一个选择是误分类点到超平面 S 的总距离，这是感知机所采用的。</p>
+<p>所有误分类点到超平面 S 的总距离为</p>
+<script type="math/tex; mode=display">
+-\frac{1}{\|w\|} \sum_{x_{i} \in M} y_{i}\left(w \cdot x_{i}+b\right)</script><p>不考虑$\frac{1}{|w|}$，就得到感知机学习的损失函数。</p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><h3 id="原始形式"><a href="#原始形式" class="headerlink" title="原始形式"></a>原始形式</h3><p>输入：训练数据集 $\mathrm{T}=\left{\left(\mathrm{x}<em>{1}, \mathrm{y}</em>{1}\right),\left(\mathrm{x}<em>{2}, \mathrm{y}</em>{2}\right), \ldots,\left(\mathrm{x}<em>{\mathrm{N}}, \mathrm{y}</em>{\mathrm{N}}\right)\right}$，其中 $\mathrm{x}<em>{\mathrm{i}} \in \mathrm{x}=\mathrm{R}</em>{\mathrm{n}}, \quad \mathrm{y}_{\mathrm{i}} \in \mathcal{Y}={-1,+1},  \quad  \mathrm{i}=1,2\ldots, \mathbf{N}$；学习率$\eta(0&lt;\eta \leq 1)$；</p>
+<p>输出：$\mathrm{w}, \mathrm{b}$；感知机模型 $f(x)=\operatorname{sign}(w \cdot x+b)$。</p>
+<ol>
+<li>选取初值 $\mathbf{w}<em>{0}, \mathbf{b}</em>{0}$</li>
+<li>在训练集中选取数据 $\left(\mathrm{x}<em>{\mathrm{i}}, \mathrm{y}</em>{\mathrm{i}}\right)$</li>
+<li>如果 $\mathrm{y}<em>{\mathrm{i}}\left(\mathrm{y} \cdot \mathrm{x}</em>{\mathrm{i}}+\mathrm{b}\right) \leq 0$</li>
+</ol>
+<script type="math/tex; mode=display">
+\begin{array}{l}{w \leftarrow w+\eta y_{i} x_{i}} \\ {b \leftarrow b+\eta y_{i}}\end{array}</script><ol>
+<li>转至 2，直至训练集中没有误分类点。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原始</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_fit</span><span class="params">(self)</span>:</span></span><br><span class="line">    n_samples, n_features = self.X.shape</span><br><span class="line">    <span class="comment"># 选取初值 w0,b0</span></span><br><span class="line">    self.w = np.zeros(n_features, dtype=np.float64)</span><br><span class="line">    self.b = <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line">    is_finished = <span class="literal">False</span></span><br><span class="line">    <span class="comment"># 一直循环</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> is_finished:</span><br><span class="line">        count = <span class="number">0</span>  <span class="comment"># 记录误分类点的数目</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n_samples):</span><br><span class="line">            <span class="comment"># 如果 yi(w·xi+b)≤0</span></span><br><span class="line">            <span class="keyword">if</span> self.y[i] * self.sign(self.w, self.X[i], self.b) &lt;= <span class="number">0</span>:</span><br><span class="line">                self.w += self.l_rate * np.dot(self.y[i], self.X[i])</span><br><span class="line">                self.b += self.l_rate * self.y[i]</span><br><span class="line">                self._wbs.append((i, self.w, self.b))</span><br><span class="line">                count += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 直至训练集中没有误分类点</span></span><br><span class="line">            <span class="keyword">if</span> count == <span class="number">0</span>:</span><br><span class="line">                is_finished = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>这种学习算法直观上有如下解释：</p>
+<blockquote>
+<p>当一个实例点被误分类，即位于分离超平面的错误一侧时，则调整 w,b 的值，使分离超平面向该误分类点的一侧移动，以减少该误分类点与超平面间的距离，直至超平面越过该误分类点使其被正确分类。</p>
+</blockquote>
+<p>算法是感知机学习的基本算法，对应于后面的对偶形式，称为原始形式。</p>
+<p>感知机学习算法简单且易于实现。</p>
+<h4 id="感知机学习算法的对偶形式"><a href="#感知机学习算法的对偶形式" class="headerlink" title="感知机学习算法的对偶形式"></a>感知机学习算法的对偶形式</h4><ol>
+<li>$a \leftarrow 0, \quad b \leftarrow 0$</li>
+<li>在训练集中选取数据 $\left(x<em>{i}, y</em>{i}\right)$</li>
+<li>如果 $ y<em>{i}\left(\sum</em>{j=1}^{N} \alpha<em>{j} y</em>{j} x<em>{j} \cdot x</em>{i}+b\right) \leqslant 0 $</li>
+</ol>
+<script type="math/tex; mode=display">
+\begin{array}{l}{\alpha_{i} \leftarrow \alpha_{i}+\eta} \\ {b \leftarrow b+\eta y_{i}}\end{array}</script><ol>
+<li>转至 2 直到没有误分类数据。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对偶形式</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_fit_dual</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    对偶形式中训练实例仅以内积的形式出现</span></span><br><span class="line"><span class="string">    先求出 Gram 矩阵，能大大减少计算量</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    n_samples, n_features = self.X.shape</span><br><span class="line">    self._alpha = np.zeros(n_samples, dtype=np.float64)</span><br><span class="line">    self.w = np.zeros(n_features, dtype=np.float64)</span><br><span class="line">    self.b = <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line">    self._cal_gram_matrix()</span><br><span class="line"></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; n_samples:</span><br><span class="line">        <span class="keyword">if</span> self._dual_judge(i) &lt;= <span class="number">0</span>:</span><br><span class="line">            self._alpha[i] += self.l_rate</span><br><span class="line">            self.b += self.l_rate * self.y[i]</span><br><span class="line">            i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n_samples):</span><br><span class="line">        self.w += self._alpha[i] * self.X[i] * self.y[i]</span><br></pre></td></tr></table></figure>
+<p>对偶形式中训练实例仅以内积的形式出现。为了方便，可以预先将训练集中实例间的内积计算出来并以矩阵的形式存储，这个矩阵就是所谓的 Gram 矩阵（Gram matrix）。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><code>pytest fixture</code> 中的 <code>pytest.mark.parametrize</code> 装饰器可以实现用例参数化。<br>这里直接传进 5 组参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pytest</span><br><span class="line"><span class="keyword">from</span> slmethod.perceptron <span class="keyword">import</span> Perceptron</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="meta">@pytest.mark.parametrize("dual, l_rate", [(True, None), (False, None),</span></span><br><span class="line">                                          (<span class="literal">False</span>, <span class="number">1</span>), (<span class="literal">False</span>, <span class="number">0.1</span>),</span><br><span class="line">                                          (<span class="literal">False</span>, <span class="number">0.01</span>)])</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_perceptron</span><span class="params">(dual, l_rate)</span>:</span></span><br><span class="line">    train_X = np.array([ ... ])</span><br><span class="line">    train_y = np.array([ ... ])</span><br><span class="line"></span><br><span class="line">    clf = Perceptron(dual=dual, l_rate=l_rate)</span><br><span class="line">    clf.fit(train_X, train_y)</span><br><span class="line">    test_X = np.array([[<span class="number">10</span>, <span class="number">3</span>], [<span class="number">-29</span>, <span class="number">5</span>]])</span><br><span class="line">    test_y = np.array([<span class="number">1</span>, <span class="number">-1</span>])</span><br><span class="line">    predict_y = clf.predict(test_X)</span><br><span class="line">    <span class="keyword">assert</span> np.array_equal(test_y, predict_y)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-85eff8e7dc8b090b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="pytest.png"></p>
+<p>具体代码可查看 GitHub: <a href="https://github.com/iOSDevLog/slmethod/blob/master/slmethod/test/test_perceptron.py">https://github.com/iOSDevLog/slmethod/blob/master/slmethod/test/test_perceptron.py</a></p>
+<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><p><a href="https://matplotlib.org/api/animation_api.html" target="_blank" rel="noopener">https://matplotlib.org/api/animation_api.html</a></p>
+<h3 id="只展示-2D-数据"><a href="#只展示-2D-数据" class="headerlink" title="只展示 2D 数据"></a>只展示 2D 数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show2d</span><span class="params">(self, name=None)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> (self.X.shape[<span class="number">1</span>] != <span class="number">2</span>):</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">"X must have 2d array."</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="取-X-最小值与最大值用于画直线"><a href="#取-X-最小值与最大值用于画直线" class="headerlink" title="取 X 最小值与最大值用于画直线"></a>取 X 最小值与最大值用于画直线</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">minX = np.min(self.X[:, <span class="number">0</span>])</span><br><span class="line">maxX = np.max(self.X[:, <span class="number">0</span>])</span><br><span class="line">x_points = np.array([minX, maxX])</span><br></pre></td></tr></table></figure>
+<h3 id="导入相关库"><a href="#导入相关库" class="headerlink" title="导入相关库"></a>导入相关库</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> animation</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+<h3 id="静态图"><a href="#静态图" class="headerlink" title="静态图"></a>静态图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.scatter(self.X[:, <span class="number">0</span>], self.X[:, <span class="number">1</span>], c=self.y, s=<span class="number">1</span>, marker=<span class="string">"o"</span>)</span><br><span class="line">line, = ax.plot(x_points,</span><br><span class="line">                np.zeros(len(x_points)),</span><br><span class="line">                <span class="string">"r-"</span>,</span><br><span class="line">                linewidth=<span class="number">2</span>,</span><br><span class="line">                label=<span class="string">"slmethod perceptron"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="更新动画"><a href="#更新动画" class="headerlink" title="更新动画"></a>更新动画</h3><p>接着，构造自定义动画函数 <code>update</code>，用来更新每一帧上各个 x 对应的 y 坐标值，参数表示第 i 帧：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update</span><span class="params">(iter)</span>:</span></span><br><span class="line">    (index, w, b) = self._wbs[iter]</span><br><span class="line">    <span class="comment"># title</span></span><br><span class="line">    title = <span class="string">"iter: &#123;&#125;, index: &#123;&#125;"</span>.format(iter, index)</span><br><span class="line">    plt.title(title)</span><br><span class="line">    <span class="comment"># show w and b</span></span><br><span class="line">    wb = <span class="string">"w0: &#123;&#125;, w1: &#123;&#125;, b: &#123;&#125;"</span>.format(w[<span class="number">0</span>], w[<span class="number">1</span>], b)</span><br><span class="line">    ax.set_xlabel(wb)</span><br><span class="line">    <span class="comment"># update y</span></span><br><span class="line">    y_points = -(w[<span class="number">0</span>] * x_points + b) / w[<span class="number">1</span>]</span><br><span class="line">    line.set_ydata(y_points)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> line, ax</span><br></pre></td></tr></table></figure>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>然后，构造开始帧函数 <code>init</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init</span><span class="params">()</span>:</span></span><br><span class="line">    line.set_ydata(np.zeros(len(x_points)))</span><br><span class="line">    <span class="keyword">return</span> line,</span><br></pre></td></tr></table></figure>
+<h3 id="生成动画"><a href="#生成动画" class="headerlink" title="生成动画"></a>生成动画</h3><p>接下来，我们调用 FuncAnimation 函数生成动画。</p>
+<p>参数说明：</p>
+<ul>
+<li>fig 进行动画绘制的 figure</li>
+<li>func 自定义动画函数，即传入刚定义的函数 update</li>
+<li>frames 动画长度，一次循环包含的帧数</li>
+<li>init_func 自定义开始帧，即传入刚定义的函数 init</li>
+<li>interval 更新频率 ms</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">anim = FuncAnimation(fig,</span><br><span class="line">                     update,</span><br><span class="line">                     init_func=init,</span><br><span class="line">                     frames=len(self._wbs),</span><br><span class="line">                     interval=<span class="number">200</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="显示动画"><a href="#显示动画" class="headerlink" title="显示动画"></a>显示动画</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="保存-gif"><a href="#保存-gif" class="headerlink" title="保存 gif"></a>保存 <code>gif</code></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">anim.save(name, writer=<span class="string">"imagemagick"</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>保存和显示不能同时，不知道为什么？</p>
+</blockquote>
+<p>具体代码请查看：<a href="https://github.com/iOSDevLog/slmethod/blob/master/slmethod/perceptron.py">https://github.com/iOSDevLog/slmethod/blob/master/slmethod/perceptron.py</a></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><code>pip</code> 安装</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install slmethod</span><br></pre></td></tr></table></figure>
+<p>使用方法和 <code>sklearn</code> 非常相似，以下步骤可省略部分。</p>
+<ol>
+<li>获取数据</li>
+<li>数据预处理</li>
+<li>划分测试集与训练集</li>
+<li>估计器拟合</li>
+<li>可视化</li>
+<li>预测测试集</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_blobs</span><br><span class="line"><span class="keyword">from</span> slmethod.perceptron <span class="keyword">import</span> Perceptron</span><br><span class="line"></span><br><span class="line">X, y = make_blobs(n_samples=<span class="number">500</span>,</span><br><span class="line">                  n_features=<span class="number">2</span>,</span><br><span class="line">                  centers=<span class="number">2</span>,</span><br><span class="line">                  cluster_std=<span class="number">0.2</span>,</span><br><span class="line">                  random_state=<span class="number">59</span>)</span><br><span class="line"></span><br><span class="line">y = np.where(y == <span class="number">1</span>, <span class="number">1</span>, <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始感知机</span></span><br><span class="line">origin_cls = Perceptron(dual=<span class="literal">False</span>)</span><br><span class="line">origin_cls.fit(X, y)</span><br><span class="line">origin_cls.show_anim()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对偶形式</span></span><br><span class="line">dual_cls = Perceptron(dual=<span class="literal">True</span>)</span><br><span class="line">dual_cls.fit(X, y)</span><br><span class="line">dual_cls.show2d()</span><br></pre></td></tr></table></figure>
+<p>代码：<a href="https://github.com/iOSDevLog/slmethod/blob/master/example/perceptron.py">https://github.com/iOSDevLog/slmethod/blob/master/example/perceptron.py</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/03/issue-template/" rel="next" title="《统计学习方法》slmethod GitHub 模板">
+                <i class="fa fa-chevron-left"></i> 《统计学习方法》slmethod GitHub 模板
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/05/perceptron-vc-sklearn/" rel="prev" title="《统计学习方法》第 2 章 感知机 与 sklearn 对比">
+                《统计学习方法》第 2 章 感知机 与 sklearn 对比 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/iOSDevLog/AIDevLog" title="GitHub &rarr; https://github.com/iOSDevLog/AIDevLog"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码：https-github-com-iOSDevLog-slmethod"><span class="nav-number">1.</span> <span class="nav-text">源码：https://github.com/iOSDevLog/slmethod</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">2.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#策略"><span class="nav-number">2.2.</span> <span class="nav-text">策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">2.3.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原始形式"><span class="nav-number">2.4.</span> <span class="nav-text">原始形式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习算法的对偶形式"><span class="nav-number">2.4.1.</span> <span class="nav-text">感知机学习算法的对偶形式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">3.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动画"><span class="nav-number">4.</span> <span class="nav-text">动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#只展示-2D-数据"><span class="nav-number">4.1.</span> <span class="nav-text">只展示 2D 数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取-X-最小值与最大值用于画直线"><span class="nav-number">4.2.</span> <span class="nav-text">取 X 最小值与最大值用于画直线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入相关库"><span class="nav-number">4.3.</span> <span class="nav-text">导入相关库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态图"><span class="nav-number">4.4.</span> <span class="nav-text">静态图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新动画"><span class="nav-number">4.5.</span> <span class="nav-text">更新动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">4.6.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成动画"><span class="nav-number">4.7.</span> <span class="nav-text">生成动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示动画"><span class="nav-number">4.8.</span> <span class="nav-text">显示动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存-gif"><span class="nav-number">4.9.</span> <span class="nav-text">保存 gif</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">5.</span> <span class="nav-text">使用</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/06/05/perceptron/";
+    this.page.identifier = "2019/06/05/perceptron/";
+    this.page.title = '《统计学习方法》第 2 章 感知机 可视化';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
