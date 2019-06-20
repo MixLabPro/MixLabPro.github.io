@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原文：Learn SwiftUI with free tutorials作者：Paul Hudson  SwiftUI 是在 WWDC19 的主题演讲期间宣布的，我们已经看过大量的免费教程，如文章，YouTube 视频，书籍等等 - 可以肯定的是，人们很兴奋，并且热衷于分享这种兴奋。世界！ 我自己一直在创建很多 SwiftUI 教程，但我也一直在阅读许多其他开发人员的教程。在本文中，我试图将来自各">
+<meta name="keywords" content="SwiftUI,Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="免费学习 SwiftUI">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/20/SwiftUI/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="原文：Learn SwiftUI with free tutorials作者：Paul Hudson  SwiftUI 是在 WWDC19 的主题演讲期间宣布的，我们已经看过大量的免费教程，如文章，YouTube 视频，书籍等等 - 可以肯定的是，人们很兴奋，并且热衷于分享这种兴奋。世界！ 我自己一直在创建很多 SwiftUI 教程，但我也一直在阅读许多其他开发人员的教程。在本文中，我试图将来自各">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-3b94b699012672f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-06-20T14:18:38.782Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="免费学习 SwiftUI">
+<meta name="twitter:description" content="原文：Learn SwiftUI with free tutorials作者：Paul Hudson  SwiftUI 是在 WWDC19 的主题演讲期间宣布的，我们已经看过大量的免费教程，如文章，YouTube 视频，书籍等等 - 可以肯定的是，人们很兴奋，并且热衷于分享这种兴奋。世界！ 我自己一直在创建很多 SwiftUI 教程，但我也一直在阅读许多其他开发人员的教程。在本文中，我试图将来自各">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/910914-3b94b699012672f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/20/SwiftUI/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>免费学习 SwiftUI | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">AIDevLog</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/20/SwiftUI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">免费学习 SwiftUI
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-20 14:35:49 / 修改时间：22:18:38" itemprop="dateCreated datePublished" datetime="2019-06-20T14:35:49+08:00">2019-06-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/06/20/SwiftUI/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/20/SwiftUI/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文：<a href="https://www.hackingwithswift.com/articles/196/learn-swiftui-with-free-tutorials" target="_blank" rel="noopener">Learn SwiftUI with free tutorials</a><br>作者：<a href="https://www.hackingwithswift.com/about" target="_blank" rel="noopener">Paul Hudson</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/910914-3b94b699012672f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p>SwiftUI 是在 WWDC19 的主题演讲期间宣布的，我们已经看过大量的免费教程，如文章，YouTube 视频，书籍等等 - 可以肯定的是，人们很兴奋，并且热衷于分享这种兴奋。世界！</p>
+<p>我自己一直在创建很多 SwiftUI 教程，但我也一直在阅读许多其他开发人员的教程。在本文中，我试图将来自各个人的教程汇集在一起 ​​，因为每个人都学到了不同的东西 - 希望你能找到一个以适合你的方式教授 SwiftUI 的教程。</p>
+<a id="more"></a>
+<h3 id="SwiftUI-示例"><a href="#SwiftUI-示例" class="headerlink" title="SwiftUI 示例"></a>SwiftUI 示例</h3><p>在 SwiftUI 发布后不久，我发布了一篇名为 <a href="https://www.hackingwithswift.com/articles/194/get-started-with-swiftui" target="_blank" rel="noopener">Get starts with SwiftUI</a> 的文章，其中概述了创建视图，堆栈，列表等的基础知识。</p>
+<p>从那时起，我已经制作了大量的 SwiftUI 示例代码和视频：</p>
+<ul>
+<li><a href="https://www.hackingwithswift.com/quick-start/swiftui" target="_blank" rel="noopener">SwiftUI 示例在线</a> - 我的 SwiftUI 示例代码集的免费在线版。</li>
+<li><a href="https://gumroad.com/l/swiftui/" target="_blank" rel="noopener">SwiftUI 示例电子书 - 本书</a> 的下载版本。</li>
+<li><a href="https://www.youtube.com/watch?v=TpdMJBSBvEg&amp;list=PLuoeXyslFTubw4NtepDCis5tTqK37zT3Q&amp;index=2" target="_blank" rel="noopener">SwiftUI by Example 视频播放列表</a> - YouTube <a href="https://www.youtube.com/watch?v=TpdMJBSBvEg&amp;list=PLuoeXyslFTubw4NtepDCis5tTqK37zT3Q&amp;index=2" target="_blank" rel="noopener">视频播放</a> 列表，可帮助您解决常见问题。</li>
+</ul>
+<p>最近，我一直致力于在 SwiftUI 中创建完整应用程序的视频，以便人们可以看到行动中的概念，而不是孤立的例子。例如：</p>
+<ul>
+<li><a href="https://youtu.be/VGJBLlfSN-Y" target="_blank" rel="noopener">使用导航和图像构建动态列表应用程序</a></li>
+<li><a href="https://youtu.be/iaWrJCjAEyw" target="_blank" rel="noopener">用 VStack，图像和警报构建一个标志猜谜游戏</a></li>
+<li><a href="https://youtu.be/lCNpEaZiKqU" target="_blank" rel="noopener">使用对象绑定和自定义修改器构建 iBeacon 检测器</a></li>
+<li><a href="https://youtu.be/_AVr0tlPxHw" target="_blank" rel="noopener">使用堆栈，步进器和日期选择器构建 Core ML 应用程序</a></li>
+</ul>
+<p>这些视频不是太长，但仍然有足够的空间来真实展示 SwiftUI 的强大和简洁。这是一个让你入门的例子：</p>
+<p><a href="https://www.youtube.com/watch?v=VGJBLlfSN-Y" target="_blank" rel="noopener">SwiftUI Tutorial: Build a dynamic list app with navigation and images – SwiftUI Complete Apps #1</a></p>
+<h3 id="开始使用-SwiftUI"><a href="#开始使用-SwiftUI" class="headerlink" title="开始使用 SwiftUI"></a>开始使用 SwiftUI</h3><p>有很多人在编写教程，旨在帮助您开始使用 SwiftUI。他们在构建内容方面遇到各种难度级别 - 它们都旨在帮助您入门，但有些比其他人更容易！</p>
+<p>当然，我应该通过说 <a href="https://developer.apple.com/tutorials/swiftui/tutorials" target="_blank" rel="noopener">Apple 自己的 SwiftUI 教程</a> 非常出色来开始这个列表 - 大量的代码，大量的屏幕截图，甚至测验问题来帮助测试你的学习。</p>
+<h4 id="对于绝对的初学者"><a href="#对于绝对的初学者" class="headerlink" title="对于绝对的初学者"></a>对于绝对的初学者</h4><ul>
+<li><a href="https://medium.com/@santoshbotre01/playing-with-swiftui-part-1-61e763f68e38" target="_blank" rel="noopener">Santosh Botre</a> 为各种 SwiftUI 组件提供了一些很好的示例代码。</li>
+<li><a href="https://www.appcoda.com/swiftui-first-look/" target="_blank" rel="noopener">Sai Kambampati</a> 有一个很好的教程，建立一个有剪裁和阴影的漂亮的列表应用程序。</li>
+<li><a href="https://medium.com/@martinlasek/swiftui-getting-started-372389fff423" target="_blank" rel="noopener">Martin Lasek</a> 撰写了一篇非常轻松的介绍，其中包含大量截图和实验空间。</li>
+<li><a href="https://wwdcbysundell.com/2019/swiftui-first-look/" target="_blank" rel="noopener">John Sundell</a> 撰写了一篇精彩的初学者教程，向您介绍了各种 SwiftUI 组件的基础知识。</li>
+</ul>
+<h4 id="走得更远"><a href="#走得更远" class="headerlink" title="走得更远"></a>走得更远</h4><ul>
+<li><a href="https://medium.com/@PhiJay/whats-this-some-in-swiftui-34e2c126d4c4" target="_blank" rel="noopener">Mischa Hildebrand</a> 编写了一个教程，专注于 SwiftUI 背后的 Swift 语法的一个特定部分：<code>some</code> 关键字。</li>
+<li><a href="https://mecid.github.io/2019/06/05/swiftui-making-real-world-app/" target="_blank" rel="noopener">Majid Jabrayilov</a> 写了一个教程，引导您构建一个用于搜索 GitHub repos 的应用程序。</li>
+<li><a href="https://medium.com/@rorogadget/swiftui-for-react-native-developers-2072a21c22fb" target="_blank" rel="noopener">Rohan Panchal</a> 从 React Native 的角度编写了一个接近 SwiftUI 的教程。</li>
+<li><a href="https://www.raywenderlich.com/3715234-swiftui-getting-started" target="_blank" rel="noopener">Audrey Tam</a> 有一个非常简单的教程，但随后会通过状态，组合，警报等向上移动。</li>
+<li><a href="https://appventure.me/guides/swiftui/overview.html" target="_blank" rel="noopener">Benedikt Terhechte</a> 写了一篇文章，从游戏引擎的角度探索 SwiftUI，直接进入堆栈和状态。</li>
+</ul>
+<h3 id="影片"><a href="#影片" class="headerlink" title="影片"></a>影片</h3><p>我们在 Swift 社区拥有各种各样的视频创作者，很高兴看到他们对 SwiftUI 如此兴奋！</p>
+<p>以下是已有的许多 SwiftUI 视频的选择：</p>
+<ul>
+<li><a href="https://nsscreencast.com/episodes/396-hello-swift-ui" target="_blank" rel="noopener">你好 SwiftUI！</a> 作者 Ben Scheirman。</li>
+<li><a href="https://www.youtube.com/watch?v=AWPiup9fE2c" target="_blank" rel="noopener">SwiftUI 简介：</a> Kilo Loco 的 <a href="https://www.youtube.com/watch?v=AWPiup9fE2c" target="_blank" rel="noopener">简单状态管理</a></li>
+<li><a href="https://www.youtube.com/watch?v=nljm495-hIc" target="_blank" rel="noopener">MohamUI</a> Azam <a href="https://www.youtube.com/watch?v=nljm495-hIc" target="_blank" rel="noopener">对 SwiftUI 中绑定的介绍</a></li>
+<li><a href="https://www.youtube.com/watch?v=BCSP_uh0co0" target="_blank" rel="noopener">MohamUI</a> Azam <a href="https://www.youtube.com/watch?v=BCSP_uh0co0" target="_blank" rel="noopener">在 SwiftUI 中传递视图之间的数据</a></li>
+<li><a href="https://www.youtube.com/watch?v=Pfw7zWxchQc" target="_blank" rel="noopener"></a>Brian Advent 的 <a href="https://www.youtube.com/watch?v=Pfw7zWxchQc" target="_blank" rel="noopener">简单 SwiftUI 应用程序</a></li>
+<li><a href="https://www.youtube.com/watch?v=7QgPpvqTfeo" target="_blank" rel="noopener">SwiftUI：Facebook 复杂布局 -</a> Brian Voong 的 <a href="https://www.youtube.com/watch?v=7QgPpvqTfeo" target="_blank" rel="noopener">横向滚动视图</a>。</li>
+<li><a href="https://www.youtube.com/watch?v=zsk-c_ySHYI" target="_blank" rel="noopener">SwiftUI：@state 和 @Binding</a> 由斯科特 · 史密斯</li>
+<li><a href="https://www.youtube.com/watch?v=ZrTHzu3Hkio" target="_blank" rel="noopener">SwiftUI - 理解绑定</a> - Martin Lasek</li>
+<li><a href="https://www.youtube.com/watch?v=xkclf3Alz8M" target="_blank" rel="noopener">SwiftUI 初学者 - 构建您的第一个应用程序！</a> 加里 · 托克曼</li>
+<li><a href="https://www.youtube.com/watch?v=EDkJoV9oEiE" target="_blank" rel="noopener"></a>Caleb Wells 的 <a href="https://www.youtube.com/watch?v=EDkJoV9oEiE" target="_blank" rel="noopener">SwiftUI 教程＃1</a></li>
+<li><a href="https://nsscreencast.com/episodes/397-swiftui-tip-calculator" target="_blank" rel="noopener"></a> 由 Ben <a href="https://nsscreencast.com/episodes/397-swiftui-tip-calculator" target="_blank" rel="noopener">Scheirman 在 SwiftUI 中提示计算器</a></li>
+<li><a href="https://www.youtube.com/watch?v=ch_vKP9vlgk" target="_blank" rel="noopener">在</a> Kilo Loco 的 <a href="https://www.youtube.com/watch?v=ch_vKP9vlgk" target="_blank" rel="noopener">项目中同时使用 UIKit 和 SwiftUI</a></li>
+</ul>
+<p>每天都会出现包含更多主题的新视频，因此如果您需要定期更新，可能需要订阅其中一些频道。</p>
+<h3 id="一般讨论-一般交流"><a href="#一般讨论-一般交流" class="headerlink" title="一般讨论; 一般交流"></a>一般讨论; 一般交流</h3><p>SwiftUI 上没有结束热门话题，但是少数特别有经验的人花了很多时间从各种角度编写一个更加深思熟虑的视图。</p>
+<p>特别是，我喜欢这些：</p>
+<ul>
+<li><a href="https://www.cocoawithlove.com/blog/swiftui.html" target="_blank" rel="noopener"></a>Matt Gallagher <a href="https://www.cocoawithlove.com/blog/swiftui.html" target="_blank" rel="noopener">对 SwiftUI</a>的 <a href="https://www.cocoawithlove.com/blog/swiftui.html" target="_blank" rel="noopener">第一印象</a> 将 SwiftUI 与他自己的声明性 UI 工作进行了比较。</li>
+<li><a href="https://medium.com/gett-engineering/rxswift-to-apples-combine-cheat-sheet-e9ce32b14c5b" target="_blank" rel="noopener">RxSwift 与</a> Shai Mishali 的 <a href="https://medium.com/gett-engineering/rxswift-to-apples-combine-cheat-sheet-e9ce32b14c5b" target="_blank" rel="noopener">Apple 合并 “Cheat Sheet”</a></li>
+<li><a href="https://www.dcordero.me/posts/swiftui_personal_thoughts_and_mvp.html" target="_blank" rel="noopener">SwiftUI，个人想法和</a> David Cordero 的 <a href="https://www.dcordero.me/posts/swiftui_personal_thoughts_and_mvp.html" target="_blank" rel="noopener">Model-View-Presenter</a></li>
+<li><a href="https://ruiper.es/2019/06/09/understanding-the-swiftui-sample/" target="_blank" rel="noopener">了解 SwiftUI 样品</a> 由锐佩雷斯着眼于 SwiftUI 一小段代码，侧重于语言如何 Swift 的特点使它发挥作用。</li>
+</ul>
+<p>虽然几乎每个人都对 SwiftUI 持肯定态度，但值得加入一点怀疑 - 请参阅 Jille van der <a href="https://medium.com/@JillevdWeerd/a-skeptics-view-on-swiftui-cc6636b6fd3b" target="_blank" rel="noopener">Weerd 对 SwiftUI</a> 的 <a href="https://medium.com/@JillevdWeerd/a-skeptics-view-on-swiftui-cc6636b6fd3b" target="_blank" rel="noopener">Skeptics 观点</a>。</p>
+<h3 id="现在在哪里？"><a href="#现在在哪里？" class="headerlink" title="现在在哪里？"></a>现在在哪里？</h3><p>像 <a href="https://github.com/Juanpe/About-SwiftUI">JuanpeCatalán 关于 SwiftUI</a> 和 Yogesh Singh 的 <a href="https://github.com/ygit/swiftui">Awesome SwiftUI</a> 这样的网站正在出现，以帮助我们跟踪 SwiftUI 可用的许多资源 - 如果你渴望获得更多的 SwiftUI，你应该从那里开始。</p>
+<p>但最终，我们只是在 SwiftUI 的早期阶段，我们仍然可以期待在 Xcode 11 GM 的 1.0 版本之前进行大量的更改。我不了解你，但我特别期待 Forms 代码，更多关于常见 UIKit 控件的包装器，以及其余的 Combine 框架掉线！</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SwiftUI/" rel="tag"># SwiftUI</a>
+          
+            <a href="/tags/Swift/" rel="tag"># Swift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/11/kmeans/" rel="next" title="《统计学习方法》第 14 章 聚类方法 KMeans">
+                <i class="fa fa-chevron-left"></i> 《统计学习方法》第 14 章 聚类方法 KMeans
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/20/alert/" rel="prev" title="升级 hexo 解决 Upgrade braces to version 2.3.1">
+                升级 hexo 解决 Upgrade braces to version 2.3.1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/iOSDevLog/AIDevLog" title="GitHub &rarr; https://github.com/iOSDevLog/AIDevLog"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SwiftUI-示例"><span class="nav-number">1.</span> <span class="nav-text">SwiftUI 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始使用-SwiftUI"><span class="nav-number">2.</span> <span class="nav-text">开始使用 SwiftUI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对于绝对的初学者"><span class="nav-number">2.1.</span> <span class="nav-text">对于绝对的初学者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#走得更远"><span class="nav-number">2.2.</span> <span class="nav-text">走得更远</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#影片"><span class="nav-number">3.</span> <span class="nav-text">影片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般讨论-一般交流"><span class="nav-number">4.</span> <span class="nav-text">一般讨论; 一般交流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#现在在哪里？"><span class="nav-number">5.</span> <span class="nav-text">现在在哪里？</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/06/20/SwiftUI/";
+    this.page.identifier = "2019/06/20/SwiftUI/";
+    this.page.title = '免费学习 SwiftUI';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

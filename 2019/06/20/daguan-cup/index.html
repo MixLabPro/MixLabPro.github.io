@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="任务建立模型通过长文本数据正文(article)，预测文本对应的类别(class)">
+<meta name="keywords" content="ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="“达观杯”文本分类挑战赛新手入门代码">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/20/daguan-cup/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="任务建立模型通过长文本数据正文(article)，预测文本对应的类别(class)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://third.datacastle.cn/pkbigdata/master.other.img/7774acd5-8ff9-4d83-b40a-2236cc5807fb.png">
+<meta property="og:image" content="http://third.datacastle.cn/pkbigdata/master.other.img/c866e103-47f8-4a56-bcf4-2d4bff7d4082.png">
+<meta property="og:updated_time" content="2019-06-20T14:29:46.336Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="“达观杯”文本分类挑战赛新手入门代码">
+<meta name="twitter:description" content="任务建立模型通过长文本数据正文(article)，预测文本对应的类别(class)">
+<meta name="twitter:image" content="http://third.datacastle.cn/pkbigdata/master.other.img/7774acd5-8ff9-4d83-b40a-2236cc5807fb.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/20/daguan-cup/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>“达观杯”文本分类挑战赛新手入门代码 | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">AIDevLog</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/20/daguan-cup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">“达观杯”文本分类挑战赛新手入门代码
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-20 22:19:22 / 修改时间：22:29:46" itemprop="dateCreated datePublished" datetime="2019-06-20T22:19:22+08:00">2019-06-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/06/20/daguan-cup/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/20/daguan-cup/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://third.datacastle.cn/pkbigdata/master.other.img/7774acd5-8ff9-4d83-b40a-2236cc5807fb.png" alt="image"></p>
+<h2 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h2><p>建立模型通过长文本数据正文(article)，预测文本对应的类别(class)</p>
+<a id="more"></a>
+<h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><blockquote>
+<p>注 : 报名参赛或加入队伍后，可获取数据下载权限。</p>
+</blockquote>
+<p>数据包含 2 个 csv 文件：</p>
+<p><strong>train_set.csv</strong>：此数据集用于训练模型，每一行对应一篇文章。<br>文章分别在“字”和“词”的级别上做了脱敏处理。<br>共有四列：</p>
+<ol>
+<li>第一列是文章的索引(id)，</li>
+<li>第二列是文章正文在“字”级别上的表示，即字符相隔正文(article)；</li>
+<li>第三列是在“词”级别上的表示，即词语相隔正文(word_seg)；</li>
+<li>第四列是这篇文章的标注(class)。</li>
+</ol>
+<blockquote>
+<p>注：每一个数字对应一个“字”，或“词”，或“标点符号”。“字”的编号与“词”的编号是独立的！</p>
+</blockquote>
+<p><strong>test_set.csv</strong>：此数据用于测试。<br>数据格式同 <code>train_set.csv</code>，但不包含 <code>class</code>。</p>
+<blockquote>
+<p>注：test_set与train_test中文章id的编号是独立的。 友情提示：请不要尝试用excel打开这些文件！由于一篇文章太长，excel可能无法完整地读入某一行！</p>
+</blockquote>
+<h3 id="评分标准"><a href="#评分标准" class="headerlink" title="评分标准"></a>评分标准</h3><h4 id="评分算法"><a href="#评分算法" class="headerlink" title="评分算法"></a>评分算法</h4><p><strong>binary-classification</strong></p>
+<p>采用各个品类F1指标的算术平均值，它是 <code>Precision</code> 和 <code>Recall</code> 的调和平均数。</p>
+<p> <img src="http://third.datacastle.cn/pkbigdata/master.other.img/c866e103-47f8-4a56-bcf4-2d4bff7d4082.png" alt="image"></p>
+<p>其中，<code>Pi</code> 是表示第 <code>i</code> 个种类对应的 <code>Precision</code>， <code>Ri</code> 是表示第 <code>i</code> 个种类对应 <code>Recall</code>。 <code>AB</code> 榜的划分方式和比例：<br>【1】评分采用AB榜形式，提交文件必须包含测试集中所有用户的预测值。排行榜显示A榜成绩，竞赛结束后2小时切换成B榜单。B榜成绩以选定的两次提交或者默认的最后两次提交的最高分为准，最终比赛成绩以B榜单为准。<br>【2】此题目的AB榜是随机划分，A榜数据占50%，B榜使用全量测试集，即占100%。</p>
+<h2 id="挑战赛任务背景"><a href="#挑战赛任务背景" class="headerlink" title="挑战赛任务背景"></a>挑战赛任务背景</h2><h3 id="文本分类"><a href="#文本分类" class="headerlink" title="文本分类"></a>文本分类</h3><ul>
+<li>这个比赛的任务就是文本分类，是自然语言处理 (NLP) 领域里一项 最最基本的任务。</li>
+<li>但这个任务的难点就是在于，文本的长度非常长， 大约3000个词，一般任务也就300词。</li>
+<li>而文本的长度过长对文本的 智能解析带来了很多挑战。</li>
+</ul>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ol>
+<li>字</li>
+<li>词</li>
+<li>中文分词</li>
+</ol>
+<h2 id="用传统的监督学习模型对一段文-本进行分类的基本过程"><a href="#用传统的监督学习模型对一段文-本进行分类的基本过程" class="headerlink" title="用传统的监督学习模型对一段文 本进行分类的基本过程"></a>用传统的监督学习模型对一段文 本进行分类的基本过程</h2><p>这里提前假设:<br>已经有了一个学习的机器学习模型 <code>f</code>，供你使用</p>
+<blockquote>
+<p>注:函数输出的类别是我们事先人为约定好，比如我让数字4代表政治类， 数字3代表科技类，…</p>
+</blockquote>
+<h2 id="比赛数据"><a href="#比赛数据" class="headerlink" title="比赛数据"></a>比赛数据</h2><h3 id="训练数据集"><a href="#训练数据集" class="headerlink" title="训练数据集"></a>训练数据集</h3><h3 id="测试数据集"><a href="#测试数据集" class="headerlink" title="测试数据集"></a>测试数据集</h3><h2 id="求解问题的本质"><a href="#求解问题的本质" class="headerlink" title="求解问题的本质"></a>求解问题的本质</h2><p>求一个数学函数(又可称为机器学习模型):</p>
+<script type="math/tex; mode=display">
+y=f\left(x_{1}, x_{2}, x_{3}, \ldots, x_{6}\right)</script><p>使模型预测能力更强</p>
+<h2 id="哪些机器学习算法"><a href="#哪些机器学习算法" class="headerlink" title="哪些机器学习算法"></a>哪些机器学习算法</h2><ul>
+<li>传统的监督学习算法(西瓜书各章节都有对应)<ul>
+<li>比如，<strong>对数几率回归/支持向量机/朴素贝叶斯/决策树/集成学习</strong> 等</li>
+</ul>
+</li>
+<li>深度学习 <ul>
+<li>比如 <strong>cnn/rnn/attention</strong> 等模型</li>
+</ul>
+</li>
+</ul>
+<h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Created on Thu Jun 20 21:17:51 2019</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@author: iosdevlog</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="string">""" 导入所需要的软件包 """</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd </span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression <span class="comment">#导入线性回归库</span></span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer <span class="comment">#导入特征提取库</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(<span class="string">"开始"</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@ 代码功能简介： 从硬盘上读取已下载好的数据，并进行简单处理</span></span><br><span class="line"><span class="string">@ 知识点定位：数据预处理</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment">#读取文件，并且删除无关东西</span></span><br><span class="line">df_train = pd.read_csv(<span class="string">"./train_set.csv"</span>)</span><br><span class="line">df_test = pd.read_csv(<span class="string">"./test_set.csv"</span>)</span><br><span class="line">df_train.drop(columns =[<span class="string">"article"</span>, <span class="string">"id"</span>], inplace = <span class="literal">True</span> ) <span class="comment"># 为什么要删除这两个列? id 列无意义，不需要用 article，可直接删除</span></span><br><span class="line">df_test.drop(columns =[<span class="string">"article"</span>], inplace = <span class="literal">True</span> ) </span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@ 代码功能简介：将数据集中的字符文本转换成数字向量，以便计算机能够进行处理</span></span><br><span class="line"><span class="string">  （一段数字 ---&gt; 一个向量）</span></span><br><span class="line"><span class="string">@ 知识点定位：特征工程</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment"># 获取特征向量</span></span><br><span class="line">vectorizer = CountVectorizer(ngram_range = (<span class="number">1</span>,<span class="number">2</span>), min_df = <span class="number">3</span>, max_df = <span class="number">0.9</span>, max_features = <span class="number">100000</span>) <span class="comment"># 特征提取</span></span><br><span class="line">vectorizer.fit(df_train[<span class="string">"word_seg"</span>]) <span class="comment"># 为什么要训练这一列内容? 要先学习整个数据集的词的 DF（文档词频）</span></span><br><span class="line">x_train = vectorizer.transform(df_train[<span class="string">"word_seg"</span>]) <span class="comment">#特征转为特征向量</span></span><br><span class="line">x_test = vectorizer.transform(df_test[<span class="string">"word_seg"</span>])</span><br><span class="line">y_train = df_train[<span class="string">"class"</span>] - <span class="number">1</span>  <span class="comment"># 这里为啥要给所有的类别都减去 1? 减 1 是代码习惯问题，让 class 从 0 计数</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@ 代码功能简介：训练一个分类器</span></span><br><span class="line"><span class="string">@ 知识点定位：传统坚督学习 之 线性逻辑回归模型</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">lg = LogisticRegression(C = <span class="number">4</span>, dual = <span class="literal">True</span>) <span class="comment"># 逻辑回归初始化</span></span><br><span class="line">lg.fit(x_train, y_train) <span class="comment"># 进行训练，模型保存在 lg 里面</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">根据上面训练好的分类器对测试集的每个样本进行预测</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">y_test = lg.predict(x_test) <span class="comment"># 用模型进行测试</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">将测试集的预测结果保存至本地</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="comment"># 根据上面训练好的分类器对测试集的每个样本进行预测</span></span><br><span class="line">df_test[<span class="string">"class"</span>] = y_test.tolist() <span class="comment"># 测试结果转为列表，并且放入测试文档的类别里面。问题5：测试文档没有类别这个列。这行代码会自动给测试文档添加一个类别列。</span></span><br><span class="line">df_test[<span class="string">"class"</span>] = df_test[<span class="string">"class"</span>] + <span class="number">1</span>  <span class="comment"># 为什么又要给所有类别分别加 1</span></span><br><span class="line">df_result = df_test.loc[:, [<span class="string">"id"</span>, <span class="string">"class"</span>]]  <span class="comment"># 从测试集里面拿到 ["id", "class"] 列的内容</span></span><br><span class="line">df_result.to_csv(<span class="string">"./result.csv"</span>, index = <span class="literal">False</span>) <span class="comment">#测试结果转为提交的CSV格式</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">"结束"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="如何提高模型性能"><a href="#如何提高模型性能" class="headerlink" title="如何提高模型性能"></a>如何提高模型性能</h2><ol>
+<li>数据预处理</li>
+<li>特征工程</li>
+<li>机器学习算法</li>
+<li>模型集成</li>
+</ol>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><ol>
+<li><a href="https://www.dcjingsai.com/common/cmpt/" target="_blank" rel="noopener">“达观杯”文本智能处理挑战赛_赛体与数据</a></li>
+<li><a href="https://www.kaggle.com/mldatabase/starter" target="_blank" rel="noopener">Kaggle: Starter:“达观杯”文本分类挑战赛新手入门代码</a></li>
+<li><a href="http://www.deepshare.net" target="_blank" rel="noopener">深度之眼</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/20/alert/" rel="next" title="升级 hexo 解决 Upgrade braces to version 2.3.1">
+                <i class="fa fa-chevron-left"></i> 升级 hexo 解决 Upgrade braces to version 2.3.1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/iOSDevLog/AIDevLog" title="GitHub &rarr; https://github.com/iOSDevLog/AIDevLog"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#任务"><span class="nav-number">1.</span> <span class="nav-text">任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据"><span class="nav-number">1.1.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评分标准"><span class="nav-number">1.2.</span> <span class="nav-text">评分标准</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#评分算法"><span class="nav-number">1.2.1.</span> <span class="nav-text">评分算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挑战赛任务背景"><span class="nav-number">2.</span> <span class="nav-text">挑战赛任务背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文本分类"><span class="nav-number">2.1.</span> <span class="nav-text">文本分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">2.2.</span> <span class="nav-text">概念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用传统的监督学习模型对一段文-本进行分类的基本过程"><span class="nav-number">3.</span> <span class="nav-text">用传统的监督学习模型对一段文 本进行分类的基本过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比赛数据"><span class="nav-number">4.</span> <span class="nav-text">比赛数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#训练数据集"><span class="nav-number">4.1.</span> <span class="nav-text">训练数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试数据集"><span class="nav-number">4.2.</span> <span class="nav-text">测试数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求解问题的本质"><span class="nav-number">5.</span> <span class="nav-text">求解问题的本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哪些机器学习算法"><span class="nav-number">6.</span> <span class="nav-text">哪些机器学习算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码解析"><span class="nav-number">7.</span> <span class="nav-text">源码解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何提高模型性能"><span class="nav-number">8.</span> <span class="nav-text">如何提高模型性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考："><span class="nav-number">9.</span> <span class="nav-text">参考：</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/06/20/daguan-cup/";
+    this.page.identifier = "2019/06/20/daguan-cup/";
+    this.page.title = '“达观杯”文本分类挑战赛新手入门代码';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
