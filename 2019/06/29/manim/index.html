@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="这篇文章的目的是给出另一个关于如何让 Manim 使用 Python 3.7 在 Mac 上 工作的帐户，仅此而已。我花了几个令人沮丧的夜晚试图让事情发挥作用，我想把我的经验添加到 Manim 不断增长的资源中。我强烈建议将此帖与 Todd Zimmerman 的博客 结合使用，学习如何使用 Grant Sanderson 的代码。 我提前道歉包含了许多更简单的步骤，但这篇文章旨在 让没有编程背">
+<meta name="keywords" content="ML,Python,math">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macOS 安装解释性数学视频的动画引擎 Manim">
+<meta property="og:url" content="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/29/manim/index.html">
+<meta property="og:site_name" content="2019">
+<meta property="og:description" content="这篇文章的目的是给出另一个关于如何让 Manim 使用 Python 3.7 在 Mac 上 工作的帐户，仅此而已。我花了几个令人沮丧的夜晚试图让事情发挥作用，我想把我的经验添加到 Manim 不断增长的资源中。我强烈建议将此帖与 Todd Zimmerman 的博客 结合使用，学习如何使用 Grant Sanderson 的代码。 我提前道歉包含了许多更简单的步骤，但这篇文章旨在 让没有编程背">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/3b1b/manim/raw/master/logo/cropped.png">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-960cfbfc64a0f7b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-5b6f6e833b8c4711.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-4643ae2a63c2b176.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-83bb3bfd1b5a8afc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-a2a320f82e5ea32f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-9035308d978c6ed1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/910914-d2346d845892a67d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-06-29T10:52:36.753Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="macOS 安装解释性数学视频的动画引擎 Manim">
+<meta name="twitter:description" content="这篇文章的目的是给出另一个关于如何让 Manim 使用 Python 3.7 在 Mac 上 工作的帐户，仅此而已。我花了几个令人沮丧的夜晚试图让事情发挥作用，我想把我的经验添加到 Manim 不断增长的资源中。我强烈建议将此帖与 Todd Zimmerman 的博客 结合使用，学习如何使用 Grant Sanderson 的代码。 我提前道歉包含了许多更简单的步骤，但这篇文章旨在 让没有编程背">
+<meta name="twitter:image" content="https://github.com/3b1b/manim/raw/master/logo/cropped.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/29/manim/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>macOS 安装解释性数学视频的动画引擎 Manim | 2019</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">2019</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">AIDevLog</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/MixLabPro/MixLabPro.github.io/2019/06/29/manim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="iOSDevLog">
+      <meta itemprop="description" content="及时当勉励，岁月不待人   -- AI">
+      <meta itemprop="image" content="/uploads/iOSDevLog.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="2019">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">macOS 安装解释性数学视频的动画引擎 Manim
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-29 18:47:16 / 修改时间：18:52:36" itemprop="dateCreated datePublished" datetime="2019-06-29T18:47:16+08:00">2019-06-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/06/29/manim/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/29/manim/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://github.com/3b1b/manim/raw/master/logo/cropped.png" alt="Manim"></p>
+<p>这篇文章的目的是给出另一个关于如何让 Manim <strong>使用 Python 3.7</strong> 在 <strong>Mac 上</strong> 工作的帐户，仅此而已。我花了几个令人沮丧的夜晚试图让事情发挥作用，我想把我的经验添加到 Manim 不断增长的资源中。我强烈建议将此帖与 <a href="https://talkingphysics.wordpress.com/2018/06/11/learning-how-to-animate-videos-using-manim-series-a-journey/" target="_blank" rel="noopener">Todd Zimmerman 的博客</a> 结合使用，学习如何使用 Grant Sanderson 的代码。</p>
+<p>我提前道歉包含了许多更简单的步骤，但这篇文章旨在 <strong>让没有编程背景的人可以访问 Manim。</strong> 我认为一旦将 Manim 安装到您的计算机上，Manim 相对容易学习，所以我希望那些没有太多编程背景的人不会因为让这个库工作而感到沮丧而且可以专注于做出很棒的内容。</p>
+<p>如果按顺序进行，这个过程应该相对简单。<strong>一般过程将涉及：</strong></p>
+<ol>
+<li>下载并安装 Homebrew 包管理器和 Python 3.7</li>
+<li>在整个系统中安装必要的软件包</li>
+<li>下载并安装 MacTex</li>
+<li>克隆 Manim 库并创建虚拟环境</li>
+<li>修改代码</li>
+<li>运行测试</li>
+</ol>
+<a id="more"></a>
+<h2 id="第-1-步：下载并安装-Hombrew-和-Python3"><a href="#第-1-步：下载并安装-Hombrew-和-Python3" class="headerlink" title="第 1 步：下载并安装 Hombrew 和 Python3"></a>第 1 步：下载并安装 Hombrew 和 Python3</h2><p>首先需要的是程序包管理器 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a>，它将帮助我们安装一些 pip 无法正确安装的软件包。您可以通过打开终端并运行以下代码行来安装 Homebrew：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br></pre></td></tr></table></figure>
+<p>安装 Homebrew 后，可以通过运行安装 Python：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python3</span><br></pre></td></tr></table></figure>
+<p>如果在此过程中出现任何问题，我建议您转到此视频：</p>
+<p><a href="https://youtu.be/XqADAxr7LzI" target="_blank" rel="noopener">https://youtu.be/XqADAxr7LzI</a></p>
+<p>一旦安装了 python，我们需要获得一些软件包。返回终端并运行以下代码行，以获取安装所需的软件包（cairo，pkg-config，virtualenv）。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install cairo</span><br><span class="line">brew install pkg-config</span><br><span class="line">pip3 install virtualenv</span><br></pre></td></tr></table></figure>
+<p><strong>virtualenv</strong> 是获得 Manim 库之前唯一绝对需要的软件包，但是我个人在安装或推出将上述项目安装到虚拟环境中时遇到了麻烦（稍后会介绍）。这就是为什么我建议在继续本教程之前将它们直接安装到您的系统上。</p>
+<p>下一步需要花费大量的试验和错误来解决，特别是因为 <a href="https://github.com/3b1b/manim/issues">3b1b 的 GitHub</a> 上没有文档。Manim 使用不同的 LaTeX 子包，因此 <code>pip3 install latex</code> 可能无法获得所需的所有必需子包。我认为主要的问题是许多人已经在他们的计算机上使用了不同形式的 LaTeX，所以当你认为你已经掌握了所有东西时，很难确保一切都在那里。经过多次安装和卸载后，我发现 MacTex 的完整安装可以解决问题，可以在这里找到：</p>
+<p><a href="http://www.tug.org/mactex/mactex-download.html" target="_blank" rel="noopener">http://www.tug.org/mactex/mactex-download.html</a></p>
+<p>确保你安装了所有东西 - 我尝试了几次快捷方式，并没有结束工作。</p>
+<p>现在已经安装了 LaTeX，您可以继续开始获取 Manim 库。通常，在虚拟环境中运行项目是一种很好的做法，这样您就可以轻松控制所有文件和其他软件包的安装位置。以下是我推荐的步骤：</p>
+<h2 id="第-2-步：为动画创建文件夹"><a href="#第-2-步：为动画创建文件夹" class="headerlink" title="第 2 步：为动画创建文件夹"></a>第 2 步：为动画创建文件夹</h2><p>创建您希望存储 Manim 库的文件夹。我在我的主目录中创建了一个名为 animation 的文件夹：</p>
+<p><a href="http://bhowell4.com/wp-content/uploads/2018/10/Screen-Shot-2018-10-02-at-9.33.35-PM.png" target="_blank" rel="noopener"><img src="https://upload-images.jianshu.io/upload_images/910914-960cfbfc64a0f7b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></a></p>
+<h2 id="第-3-步：导航终端"><a href="#第-3-步：导航终端" class="headerlink" title="第 3 步：导航终端"></a>第 3 步：导航终端</h2><p>前往 <a href="https://github.com/3b1b/manim">Manim GitHub</a> 并获取要克隆的 URL。复制后，前往终端并导航到刚刚创建的文件夹。导航到终端内的特定文件夹非常简单。您可以通过键入以下内容找到当前目录（当前文件路径）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
+<p>您可以通过键入以下内容找到当前目录中的文件夹：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure>
+<p>并且您可以通过运行以下命令更改目录以输入其中一个文件夹：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> folder/subfolder/subsubfolder</span><br></pre></td></tr></table></figure>
+<h2 id="第-4-步：克隆-Manim-存储库"><a href="#第-4-步：克隆-Manim-存储库" class="headerlink" title="第 4 步：克隆 Manim 存储库"></a>第 4 步：克隆 Manim 存储库</h2><p>现在在 Terminal 中运行以下命令将 Manim 存储库克隆到您的文件夹中：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/3b1b/manim.git</span><br></pre></td></tr></table></figure>
+<p><a href="http://bhowell4.com/wp-content/uploads/2018/10/Screen-Shot-2018-10-02-at-9.36.04-PM.png" target="_blank" rel="noopener"><img src="https://upload-images.jianshu.io/upload_images/910914-5b6f6e833b8c4711.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></a></p>
+<p>您的文件夹现在看起来应该是这样的（我将文件夹重命名为 manim37）：</p>
+<p><a href="http://bhowell4.com/wp-content/uploads/2018/10/Screen-Shot-2018-10-02-at-9.48.26-PM.png" target="_blank" rel="noopener"><img src="https://upload-images.jianshu.io/upload_images/910914-4643ae2a63c2b176.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></a></p>
+<h2 id="第-5-步：设置虚拟环境"><a href="#第-5-步：设置虚拟环境" class="headerlink" title="第 5 步：设置虚拟环境"></a>第 5 步：设置虚拟环境</h2><p>现在我们需要建立一个虚拟环境。基本上这将是在 Manim 文件夹中重新安装单独版本的 Python3。在虚拟环境中运行时，您将能够运行 Python 并将软件包安装到该特定文件夹而不是整个系统。这些通常用于确保可以逐个项目地维护特定版本的包。</p>
+<p>要创建虚拟环境，请转到终端并导航到 Manim 文件夹。现在继续并将以下命令运行到终端：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virtualenv venv</span><br></pre></td></tr></table></figure>
+<p><code>virtualenv</code> 指的是我们之前安装的软件包。<code>venv</code> 是您将安装虚拟环境的文件夹的名称。</p>
+<p>现在，如果您查看 Manim37 文件夹，应该有一个名为 <code>venv</code> 的文件夹。如果没有，并且 <code>venv</code> 文件夹在其他地方结束，您只需单击并将其拖动到 <code>Manim37</code> 文件夹即可。</p>
+<h2 id="第-6-步：激活虚拟环境"><a href="#第-6-步：激活虚拟环境" class="headerlink" title="第 6 步：激活虚拟环境"></a>第 6 步：激活虚拟环境</h2><p>现在您已经设置了虚拟环境，现在需要从终端输入。确保您当前的工作目录是 Manim37，然后运行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> venv/bin/activate</span><br></pre></td></tr></table></figure>
+<p>您的终端线将更改，并且 <strong>（venv）</strong> 将出现在提示的开头：</p>
+<p><a href="http://bhowell4.com/wp-content/uploads/2018/10/Screen-Shot-2018-10-02-at-10.12.44-PM.png" target="_blank" rel="noopener"><img src="https://upload-images.jianshu.io/upload_images/910914-83bb3bfd1b5a8afc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></a> </p>
+<p>使用 Manim 所做的一切都需要在这个虚拟环境中完成，这意味着安装其他软件包，运行动画代码等。如果重新打开终端，则必须再次激活虚拟环境文件夹。您可以通过执行 <code>deactivate</code> 随时退出虚拟环境。</p>
+<h2 id="第-7-步：pip3-安装包"><a href="#第-7-步：pip3-安装包" class="headerlink" title="第 7 步：pip3 安装包"></a>第 7 步：pip3 安装包</h2><p>现在我们需要获得更多的软件包：<strong>sox</strong>，<strong>ffmepg</strong>，<strong>latex，pycairo</strong> 等。继续运行以下各项：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pip3 install sox</span><br><span class="line">pip3 install ffmpeg</span><br><span class="line">pip3 install latex</span><br><span class="line">pip3 install pycairo</span><br><span class="line">pip3 install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>最后一行代码将运行所需的更多软件包的安装。你可以看看的 requirements.txt 的 Manim37 文件夹内的文件，看看到底需要什么，但是一旦这个过程完成后，你将不需要任何更多的包。</p>
+<h2 id="第-8-步：修改代码"><a href="#第-8-步：修改代码" class="headerlink" title="第 8 步：修改代码"></a>第 8 步：修改代码</h2><p>现在已经下载了所有软件包，我们可以开始修复一些与您的计算机相匹配的代码。首先需要做的是在 Manim37 目录中添加一个名为 “output” 的文件夹。</p>
+<p>然后我们需要更改位于 Manim37 文件夹中的文件 constants.py 中的一行代码。</p>
+<p>打开后，转到第 23 行，找到 “Dropbox（3Blue1Brown）/ 3Blue1Brown Team Folder” 的行</p>
+<p><a href="http://bhowell4.com/wp-content/uploads/2018/10/Screen-Shot-2018-09-26-at-8.18.32-AM.png" target="_blank" rel="noopener"><img src="https://upload-images.jianshu.io/upload_images/910914-a2a320f82e5ea32f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></a></p>
+<p>我们需要更改此行以匹配刚刚创建的  输出 文件夹。在我的例子中，我用 “animation/manim37/output” 替换了那一行。您应该用您的文件路径替换它（请记住，上面一行中的 <code>〜</code> 是主目录的文件路径的缩写）。</p>
+<h2 id="第-9-步：测试"><a href="#第-9-步：测试" class="headerlink" title="第 9 步：测试"></a>第 9 步：测试</h2><p>现在我们需要运行一个快速测试来查看某些动画是否正常工作。仍在虚拟环境中，运行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 extract_scene.py example_scenes.py SquareToCircle -pl</span><br></pre></td></tr></table></figure>
+<p>这应该会启动 QuickTime 来运行您的示例视频。如果您此时遇到问题，我建议您搜索 Manim GitHub 的 <a href="https://github.com/3b1b/manim/issues">问题</a> 部分。</p>
+<h2 id="第-10-步：LaTeX"><a href="#第-10-步：LaTeX" class="headerlink" title="第 10 步：LaTeX"></a>第 10 步：LaTeX</h2><p>所有形状和动画都应该在这一点上起作用。但是，要使单词起作用，我们需要对几个文件进行一些修改。这些变化对我有用。</p>
+<p>打开   <strong>utils/tex_file_writing.py</strong> 并向下滚动到最后两个函数，然后更改它们，使它们看起来像这样（对于截图感到抱歉 - 目前在保持格式化的同时发布代码时出现问题）：</p>
+<p><a href="http://bhowell4.com/wp-content/uploads/2018/10/Screen-Shot-2018-10-02-at-10.51.06-PM.png" target="_blank" rel="noopener"><img src="https://upload-images.jianshu.io/upload_images/910914-9035308d978c6ed1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></a> </p>
+<p>需要修改的最后一个文件是 <strong>tex_template.tex</strong>。继续前进，让你看起来像：</p>
+<p><a href="http://bhowell4.com/wp-content/uploads/2018/10/Screen-Shot-2018-10-02-at-10.56.02-PM.png" target="_blank" rel="noopener"><img src="https://upload-images.jianshu.io/upload_images/910914-d2346d845892a67d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></a></p>
+<h2 id="第-11-步：最终测试"><a href="#第-11-步：最终测试" class="headerlink" title="第 11 步：最终测试"></a>第 11 步：最终测试</h2><p>既然已经进行了这些更改，请继续尝试运行：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 extract_scene.py example_scenes.py WriteStuff -pl</span><br></pre></td></tr></table></figure>
+<p>希望所有人都为你工作！</p>
+<p>如果有问题，我建议在 3b1b 的 GitHub 上发布一个问题。那里有更多知识渊博的人，并且通过综合帮助你解决问题的机会更大。</p>
+<p>原文：<a href="http://bhowell4.com/manic-install-tutorial-for-mac/" target="_blank" rel="noopener">MANIM FOR MAC</a></p>
+<p>作者：<a href="http://bhowell4.com/wp-content/uploads/2017/09/curriculum-vitae-graduate-school.pdf" target="_blank" rel="noopener">Brian M. Howell</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center;">
+  <img id="wechat_subscriber_qcode" src="/uploads/AIDevLog.jpg" alt="iOSDevLog wechat" style="width: 200px; max-width: 100%;">
+  <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/math/" rel="tag"># math</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/21/zhihu/" rel="next" title="我的知乎帐号无故被限制使用">
+                <i class="fa fa-chevron-left"></i> 我的知乎帐号无故被限制使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/iOSDevLog.png" alt="iOSDevLog">
+            
+              <p class="site-author-name" itemprop="name">iOSDevLog</p>
+              <p class="site-description motion-element" itemprop="description">及时当勉励，岁月不待人   -- AI</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">83</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/iOSDevLog/AIDevLog" title="GitHub &rarr; https://github.com/iOSDevLog/AIDevLog"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/iOSDevLog" title="Twitter &rarr; https://twitter.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="http://weibo.com/iOSDevLog" title="微博 &rarr; http://weibo.com/iOSDevLog" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>微博</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://iosdevlog.com" title="http://iosdevlog.com" rel="noopener" target="_blank">iOSDevLog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第-1-步：下载并安装-Hombrew-和-Python3"><span class="nav-number">1.</span> <span class="nav-text">第 1 步：下载并安装 Hombrew 和 Python3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-2-步：为动画创建文件夹"><span class="nav-number">2.</span> <span class="nav-text">第 2 步：为动画创建文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-3-步：导航终端"><span class="nav-number">3.</span> <span class="nav-text">第 3 步：导航终端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-4-步：克隆-Manim-存储库"><span class="nav-number">4.</span> <span class="nav-text">第 4 步：克隆 Manim 存储库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-5-步：设置虚拟环境"><span class="nav-number">5.</span> <span class="nav-text">第 5 步：设置虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-6-步：激活虚拟环境"><span class="nav-number">6.</span> <span class="nav-text">第 6 步：激活虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-7-步：pip3-安装包"><span class="nav-number">7.</span> <span class="nav-text">第 7 步：pip3 安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-8-步：修改代码"><span class="nav-number">8.</span> <span class="nav-text">第 8 步：修改代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-9-步：测试"><span class="nav-number">9.</span> <span class="nav-text">第 9 步：测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-10-步：LaTeX"><span class="nav-number">10.</span> <span class="nav-text">第 10 步：LaTeX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-11-步：最终测试"><span class="nav-number">11.</span> <span class="nav-text">第 11 步：最终测试</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iOSDevLog</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+  
+  <script id="dsq-count-scr" src="https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/count.js" async></script>
+
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://github.com/MixLabPro/MixLabPro.github.io/2019/06/29/manim/";
+    this.page.identifier = "2019/06/29/manim/";
+    this.page.title = 'macOS 安装解释性数学视频的动画引擎 Manim';
+    };
+  function loadComments() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-github-com-mixlabpro-mixlabpro-github-io.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', '' + +new Date());
+    (d.head || d.body).appendChild(s);
+  }
+  
+    loadComments();
+  
+</script>
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
